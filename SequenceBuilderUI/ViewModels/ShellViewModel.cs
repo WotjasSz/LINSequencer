@@ -11,20 +11,43 @@ using System.Threading.Tasks;
 
 namespace SequenceBuilderUI.ViewModels
 {
-    public class ShellViewModel : Conductor<object>
+    public class ShellViewModel : Conductor<Screen>.Collection.AllActive
     {
-        private SequencePanelViewModel _seqNaviVM;
+        #region Fields
+        private readonly IWindowManager _windowManager;
+        private readonly IEventAggregator _eventAggregator;
+        private SequencePanelViewModel _sequencePanel;
+        #endregion
 
-        public ShellViewModel(SequencePanelViewModel seqNaviVM)
+        #region Properties
+        public SequencePanelViewModel SequencePanel
         {
-            _seqNaviVM = seqNaviVM;
-            ActivateItemAsync(_seqNaviVM);
+            get {  return _sequencePanel; }
+        }
+
+        #endregion
+        public ShellViewModel(IWindowManager windowManager, IEventAggregator eventAggregator, SequencePanelViewModel seqNaviVM)
+        {
+            _windowManager = windowManager;
+            _eventAggregator = eventAggregator;
+            _sequencePanel = seqNaviVM;
+            SequencePanel.ConductWith(this);
+        }
+
+        public Task CloseWidnow()
+        {
+            return TryCloseAsync();
         }
 
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
             LinSequencer.InitializeLinSequencer();
             return base.OnActivateAsync(cancellationToken);
+        }
+
+        public Task About()
+        {
+            return _windowManager.ShowDialogAsync(IoC.Get<AboutViewModel>());
         }
     }
 }

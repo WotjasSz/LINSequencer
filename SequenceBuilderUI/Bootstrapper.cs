@@ -16,6 +16,7 @@ namespace SequenceBuilderUI
         public Bootstrapper()
         {
             Initialize();
+            LogManager.GetLog = type => new DebugLog(type);
         }
 
         protected override void Configure()

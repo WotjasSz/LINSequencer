@@ -6,6 +6,7 @@ using SequenceBuilderUI.Helpers;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace SequenceBuilderUI.ViewModels
 {
@@ -17,6 +18,8 @@ namespace SequenceBuilderUI.ViewModels
 
         private BindableCollection<SequenceModel> _sequences;
         private BindableCollection<DeviceModel> _devices;
+        private SequenceModel _selectedSequence;
+        private DeviceModel _selectedDevice;
         #endregion
 
         #region Properties
@@ -28,7 +31,6 @@ namespace SequenceBuilderUI.ViewModels
                 Set(ref _sequences, value); 
             }
         }     
-
         public BindableCollection<DeviceModel> Devices
         {
             get { return _devices; }
@@ -37,7 +39,31 @@ namespace SequenceBuilderUI.ViewModels
                 Set(ref _devices, value); 
             }
         }
-
+        public SequenceModel SelectedSequence
+        {
+            get { return _selectedSequence; }
+            set 
+            { 
+                Set(ref _selectedSequence,value);
+                NotifyOfPropertyChange(() => CanLoadSequence);
+            }
+        }
+        public DeviceModel SelectedDevice
+        {
+            get { return _selectedDevice; }
+            set 
+            { 
+                Set(ref _selectedDevice, value);
+                NotifyOfPropertyChange(() => CanLoadSequence);
+            }
+        }
+        public bool CanLoadSequence
+        {
+            get
+            {
+                return SelectedSequence != null & SelectedDevice != null;
+            }
+        }
         #endregion
 
 
@@ -45,12 +71,6 @@ namespace SequenceBuilderUI.ViewModels
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
-        }
-
-        public bool CanLoadSequence()
-        {
-            // Make sure something is selected in both comboboxes
-            return true;
         }
 
         public void LoadSequence(string sequence)

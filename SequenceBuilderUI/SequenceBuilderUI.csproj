@@ -78,8 +78,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\BindableCollectionHelper.cs" />
+    <Compile Include="Models\AboutModel.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\SequencePanelViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SequencePanelView.xaml.cs">
       <DependentUpon>SequencePanelView.xaml</DependentUpon>
     </Compile>
@@ -116,11 +121,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Resources\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\ComboBox_Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SequencePanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

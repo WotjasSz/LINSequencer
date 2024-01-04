@@ -9,9 +9,9 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem x:Name="ExitApp" Header="_Exit"/>
+                <MenuItem x:Name="CloseWidnow" Header="_Exit"/>
             </MenuItem>
-            <MenuItem Header="_About"/>
+            <MenuItem x:Name="About" Header="_About"/>
         </Menu>
         
         <StatusBar DockPanel.Dock="Bottom">
@@ -29,8 +29,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
-            <ContentControl Grid.Row="1" Grid.Column="1" x:Name="ActiveItem" Margin="5"/>
-            <TabControl Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=Sequences}"/>
+            <ContentControl Grid.Row="1" Grid.Column="1" x:Name="SequencePanel" Margin="5"/>
+            <TextBlock Grid.Row="1" Grid.Column="2">Test text</TextBlock>
         </Grid>
     </DockPanel>    
 </Window>

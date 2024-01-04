@@ -5,14 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SequenceBuilderUI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="500">
     <StackPanel>
         <TextBlock HorizontalAlignment="Center">Select sequence</TextBlock>
-        <ComboBox ItemsSource="{Binding Path=Sequences}" MinWidth="200">
-            
+        <ComboBox ItemsSource="{Binding Sequences, NotifyOnSourceUpdated=True}"
+                  SelectedItem="{Binding SelectedSequence}" 
+                  Style="{StaticResource CmBxSeqPanel}">
+        <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="DemiBold" TextAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">                            
+                            <TextBlock Text="SDF:" FontSize="14" FontWeight="DemiBold" TextAlignment="Center" Margin="5 0"/>    
+                            <TextBlock Text="{Binding SdfName}" FontSize="14" FontWeight="Light" TextAlignment="Center"/>    
+                        </StackPanel>                        
+                    </StackPanel>                    
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBlock HorizontalAlignment="Center">Select BabyLIN</TextBlock>
-        <ComboBox ItemsSource="{Binding Path=Devices}" MinWidth="200"/>
+        <ComboBox ItemsSource="{Binding Devices, NotifyOnSourceUpdated=True}"
+                  SelectedItem="{Binding SelectedDevice}" 
+                  Style="{StaticResource CmBxSeqPanel}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="DemiBold" TextAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="SN:" FontSize="14" FontWeight="DemiBold" TextAlignment="Center" Margin="5 0"/>    
+                            <TextBlock Text="{Binding SerialNumber}" FontSize="14" FontWeight="Light" TextAlignment="Center"/>    
+                        </StackPanel>                        
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+            
         <Button x:Name="LoadSequence" Content="Load"/>
     </StackPanel>
 </UserControl>
