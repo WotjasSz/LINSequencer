@@ -16,7 +16,7 @@
         
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock>Status bar</TextBlock>
-        </StatusBar>
+        </StatusBar>        
         <Grid DockPanel.Dock="Bottom">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5"/>
@@ -29,8 +29,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
-            <ContentControl Grid.Row="1" Grid.Column="1" x:Name="SequencePanel" Margin="5"/>
-            <TextBlock Grid.Row="1" Grid.Column="2">Test text</TextBlock>
+            <Expander Grid.Row="1" Grid.Column="1" 
+                      ExpandDirection="Right" 
+                      IsExpanded="True">
+                <!-- TODO Add Popup to overlay rest of the screen--> 
+                <ContentControl x:Name="SidePanel" Margin="5"/>
+            </Expander>
+            <ContentControl Grid.Row="1" Grid.Column="2"
+                            x:Name="MainPanel"/>
         </Grid>
     </DockPanel>    
 </Window>

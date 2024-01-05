@@ -32,8 +32,7 @@ namespace SequenceBuilderUI
                 .Where(type => type.Name.EndsWith("ViewModel"))
                 .ToList()
                 .ForEach(viewModelType => _container.RegisterPerRequest(
-                    viewModelType, viewModelType.ToString(), viewModelType));
-            
+                    viewModelType, viewModelType.ToString(), viewModelType));            
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)

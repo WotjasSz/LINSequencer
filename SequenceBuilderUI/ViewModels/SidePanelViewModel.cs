@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace SequenceBuilderUI.ViewModels
 {
-    public  class SequencePanelViewModel : Screen
+    public  class SidePanelViewModel : Screen
     {
         #region Fields
         private readonly IEventAggregator _eventAggregator;
@@ -67,7 +67,7 @@ namespace SequenceBuilderUI.ViewModels
         #endregion
 
 
-        public SequencePanelViewModel(IEventAggregator eventAggregator, IWindowManager windowManager)
+        public SidePanelViewModel(IEventAggregator eventAggregator, IWindowManager windowManager)
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
@@ -75,13 +75,20 @@ namespace SequenceBuilderUI.ViewModels
 
         public void LoadSequence(string sequence)
         {
-            Debug.WriteLine("Przycisk zadziałał");
+            _eventAggregator.PublishOnUIThreadAsync(SelectedSequence);
+        }
+
+        public void RefreshDeviceList()
+        {
+            LinSequencer.CheckAvailableDevice();
+            Devices = null;
+            Devices = new BindableCollection<DeviceModel>(LinSequencer.DeviceList);
         }
 
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
-            Sequences = BindableCollectionHelper.ListToBindableCollection(LinSequencer.SequenceList);
-            Devices = BindableCollectionHelper.ListToBindableCollection(LinSequencer.DeviceList);
+            Sequences = new BindableCollection<SequenceModel>(LinSequencer.SequenceList);
+            Devices = new BindableCollection<DeviceModel>(LinSequencer.DeviceList);
             return base.OnActivateAsync(cancellationToken);
         }
     }

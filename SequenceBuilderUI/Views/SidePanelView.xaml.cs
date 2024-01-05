@@ -18,9 +18,9 @@ namespace SequenceBuilderUI.Views
     /// <summary>
     /// Interaction logic for SequencePanelView.xaml
     /// </summary>
-    public partial class SequencePanelView : UserControl
+    public partial class SidePanelView : UserControl
     {
-        public SequencePanelView()
+        public SidePanelView()
         {
             InitializeComponent();
         }

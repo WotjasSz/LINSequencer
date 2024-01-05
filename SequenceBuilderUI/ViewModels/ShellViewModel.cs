@@ -2,6 +2,7 @@
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
 using SequenceBuilderUI.Helpers;
+using SequenceBuilderUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,22 +17,32 @@ namespace SequenceBuilderUI.ViewModels
         #region Fields
         private readonly IWindowManager _windowManager;
         private readonly IEventAggregator _eventAggregator;
-        private SequencePanelViewModel _sequencePanel;
+        private SidePanelViewModel _sidePanel;
+        private MainPanelViewModel _mainPanel;
         #endregion
 
         #region Properties
-        public SequencePanelViewModel SequencePanel
+        public SidePanelViewModel SidePanel
         {
-            get {  return _sequencePanel; }
+            get {  return _sidePanel; }
         }
 
-        #endregion
-        public ShellViewModel(IWindowManager windowManager, IEventAggregator eventAggregator, SequencePanelViewModel seqNaviVM)
+        public MainPanelViewModel MainPanel
         {
+            get { return _mainPanel; }
+        }        
+
+        #endregion
+        public ShellViewModel(IWindowManager windowManager, IEventAggregator eventAggregator, SidePanelViewModel seqNaviVM, MainPanelViewModel mainPanel)
+        {
+            LinSequencer.InitializeLinSequencer();
             _windowManager = windowManager;
             _eventAggregator = eventAggregator;
-            _sequencePanel = seqNaviVM;
-            SequencePanel.ConductWith(this);
+            _sidePanel = seqNaviVM;            
+            _mainPanel = mainPanel;
+
+            SidePanel.ConductWith(this);
+            MainPanel.ConductWith(this);
         }
 
         public Task CloseWidnow()
@@ -40,8 +51,7 @@ namespace SequenceBuilderUI.ViewModels
         }
 
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
-        {
-            LinSequencer.InitializeLinSequencer();
+        {            
             return base.OnActivateAsync(cancellationToken);
         }
 

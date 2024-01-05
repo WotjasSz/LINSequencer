@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SequenceBuilderUI.Views.SequencePanelView"
+﻿<UserControl x:Class="SequenceBuilderUI.Views.SidePanelView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -32,14 +32,17 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="DemiBold" TextAlignment="Center"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="SN:" FontSize="14" FontWeight="DemiBold" TextAlignment="Center" Margin="5 0"/>    
-                            <TextBlock Text="{Binding SerialNumber}" FontSize="14" FontWeight="Light" TextAlignment="Center"/>    
+                            <TextBlock Text="SN:" FontSize="14" FontWeight="DemiBold" TextAlignment="Center" Margin="5 0"/>
+                            <TextBlock Text="{Binding SerialNumber}" FontSize="14" FontWeight="Light" TextAlignment="Center"/>
+                            <TextBlock Text=" " FontSize="14" FontWeight="Light" TextAlignment="Center"/>
+                            <TextBlock Text="Usage:" FontSize="14" FontWeight="DemiBold" TextAlignment="Center" Margin="5 0"/>
+                            <TextBlock Text="{Binding Usage}" FontSize="14" FontWeight="Light" TextAlignment="Center"/>
                         </StackPanel>                        
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-            
+        <Button x:Name="RefreshDeviceList" Content="Refresh"/>    
         <Button x:Name="LoadSequence" Content="Load"/>
     </StackPanel>
 </UserControl>
