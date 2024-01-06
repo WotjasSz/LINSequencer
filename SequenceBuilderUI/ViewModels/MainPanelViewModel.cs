@@ -16,6 +16,7 @@ namespace SequenceBuilderUI.ViewModels
         private readonly IWindowManager _windowManager;
 
         private BindableCollection<SequenceModel> _activatedSequences;
+        private SequenceViewModel _sequenceView;
         #endregion
 
         #region Properties
@@ -26,17 +27,29 @@ namespace SequenceBuilderUI.ViewModels
             { 
                 Set(ref _activatedSequences, value); 
             }
+        }        
+
+        public SequenceViewModel SequenceView
+        {
+            get { return _sequenceView; }
+            set 
+            { 
+                Set(ref _sequenceView, value); 
+            }
         }
+
         #endregion
 
-        public MainPanelViewModel(IEventAggregator eventAggregator, IWindowManager windowManager)
+        public MainPanelViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, SequenceViewModel sequenceView)
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
+            _sequenceView = sequenceView;
 
             _eventAggregator.SubscribeOnPublishedThread(this);
 
             ActivatedSequences = new BindableCollection<SequenceModel>();
+            SequenceView.ConductWith(this);
         }
 
         protected override Task OnActivateAsync(CancellationToken cancellationToken)

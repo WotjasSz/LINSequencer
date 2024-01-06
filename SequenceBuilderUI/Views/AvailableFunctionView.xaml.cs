@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SequenceBuilderUI.Views
 {
     /// <summary>
-    /// Interaction logic for RunnerView.xaml
+    /// Interaction logic for AvailableFunctionView.xaml
     /// </summary>
-    public partial class RunnerView : UserControl
+    public partial class AvailableFunctionView : UserControl
     {
-        public RunnerView()
+        public AvailableFunctionView()
         {
             InitializeComponent();
         }

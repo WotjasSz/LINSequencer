@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SequenceBuilderUI.Views
 {
     /// <summary>
-    /// Interaction logic for EditorView.xaml
+    /// Interaction logic for PropertiesView.xaml
     /// </summary>
-    public partial class EditorView : UserControl
+    public partial class PropertiesView : UserControl
     {
-        public EditorView()
+        public PropertiesView()
         {
             InitializeComponent();
         }

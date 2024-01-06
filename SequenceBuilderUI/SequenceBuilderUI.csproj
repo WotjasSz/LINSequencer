@@ -80,22 +80,30 @@
     <Compile Include="Helpers\BindableCollectionHelper.cs" />
     <Compile Include="Models\AboutModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
-    <Compile Include="ViewModels\EditorViewModel.cs" />
+    <Compile Include="ViewModels\AvailableFunctionViewModel.cs" />
+    <Compile Include="ViewModels\EditorFeatureViewModel.cs" />
     <Compile Include="ViewModels\MainPanelViewModel.cs" />
-    <Compile Include="ViewModels\RunnerViewModel.cs" />
+    <Compile Include="ViewModels\PropertiesViewModel.cs" />
+    <Compile Include="ViewModels\SequenceViewModel.cs" />
     <Compile Include="ViewModels\SidePanelViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditorView.xaml.cs">
-      <DependentUpon>EditorView.xaml</DependentUpon>
+    <Compile Include="Views\AvailableFunctionView.xaml.cs">
+      <DependentUpon>AvailableFunctionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditorFeatureView.xaml.cs">
+      <DependentUpon>EditorFeatureView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPanelView.xaml.cs">
       <DependentUpon>MainPanelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RunnerView.xaml.cs">
-      <DependentUpon>RunnerView.xaml</DependentUpon>
+    <Compile Include="Views\PropertiesView.xaml.cs">
+      <DependentUpon>PropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SequenceView.xaml.cs">
+      <DependentUpon>SequenceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SidePanelView.xaml.cs">
       <DependentUpon>SidePanelView.xaml</DependentUpon>
@@ -145,7 +153,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditorView.xaml">
+    <Page Include="Views\AvailableFunctionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditorFeatureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,7 +165,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RunnerView.xaml">
+    <Page Include="Views\PropertiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SequenceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SequenceBuilderUI.Views"
-             mc:Ignorable="d" Background="Aqua"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,11 +18,12 @@
                     <DataTemplate>
                         <StackPanel>
                             <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding CreationDate}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>        
-        <ContentControl Grid.Column="1" x:Name="ActiveItem"/>
+        <ContentControl Grid.Column="1" x:Name="SequenceView"/>
     </Grid>
 </UserControl>
