@@ -11,7 +11,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>            
         </Grid.RowDefinitions>
-        <ContentControl x:Name="PropertiesVm"/>
-        <ContentControl x:Name="FunctionVm"/>
+        <ContentControl Grid.Row="0" x:Name="PropertiesVm"/>
+        <ContentControl Grid.Row="1" x:Name="FunctionVm"/>
     </Grid>
 </UserControl>

@@ -3,6 +3,8 @@ using LINSequencerLib;
 using LINSequencerLib.BabyLinWrapper;
 using LINSequencerLib.Sequence;
 using SequenceBuilderUI.Helpers;
+using SequenceBuilderUI.Models;
+using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -71,11 +73,18 @@ namespace SequenceBuilderUI.ViewModels
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
+        } 
+
+        public void AddSequence()
+        {
+            int counter = Sequences.Count + 1;
+            SequenceModel seq = new SequenceModel(counter, DateTime.Now, "New sequence", "");
+            _eventAggregator.PublishOnUIThreadAsync(new SequenceMessage(this, seq)); ;
         }
 
         public void LoadSequence(string sequence)
-        {
-            _eventAggregator.PublishOnUIThreadAsync(SelectedSequence);
+        {    
+            _eventAggregator.PublishOnUIThreadAsync(new SequenceMessage(this, SelectedSequence));
         }
 
         public void RefreshDeviceList()

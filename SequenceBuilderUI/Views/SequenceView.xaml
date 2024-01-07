@@ -45,7 +45,8 @@
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="SDF"/>
                     <ComboBox ItemsSource="{Binding SdfList}"
-                              SelectedItem="{Binding SelectedSdf}"/>
+                              SelectedItem="{Binding SdfName}"
+                              Style="{StaticResource CmBxSeqPanel}"/>
                 </StackPanel>
             </StackPanel>      
             <!--#endregion-->

@@ -13,7 +13,8 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
             <TextBlock Text="Lista aktywnych sekwencji"/>
-            <ListView ItemsSource="{Binding ActivatedSequences}" >
+            <ListView ItemsSource="{Binding ActivatedSequences}" 
+                      SelectedItem="{Binding SelectedSequence}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
