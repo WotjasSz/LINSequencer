@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using LINSequencerLib.Sequence;
+using SequenceBuilderUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,24 +15,56 @@ namespace SequenceBuilderUI.ViewModels
         private IEventAggregator _eventAggregator;
         private IWindowManager _windowManager;
 
-        private SequenceStepModel _stepProperties;
-        private BindableCollection<Dictionary<string, string>> _parameters;
+        private string _name;
+        private string _comment;
+
+        private SequenceStepModel _seqStep;
+        private BindableCollection<ParameterModel> _inputParameters;
+        private BindableCollection<ParameterModel> _outputParameters;
+
+        public string Name
+        {
+            get { return _name; }
+            private set 
+            { 
+                Set(ref _name, value);
+            }
+        }
+
+        public string Comment
+        {
+            get { return _comment; }
+            set 
+            {
+                Set(ref _comment, value);
+                _seqStep.Comment = value;
+            }
+        }
 
         public SequenceStepModel StepProperties
         {
-            get { return _stepProperties; }
+            get { return _seqStep; }
             set 
             { 
-                Set(ref _stepProperties, value); 
+                Set(ref _seqStep, value); 
             }
         }       
 
-        public BindableCollection<Dictionary<string,string>> Parameters
+        public BindableCollection<ParameterModel> InputParameters
         {
-            get { return _parameters; }
+            get { return _inputParameters; }
             set 
             { 
-                Set(ref _parameters, value); 
+                Set(ref _inputParameters, value);                
+            }
+        }
+
+        public BindableCollection<ParameterModel> OutputParameters
+        {
+            get { return _outputParameters; }
+            set
+            {
+                Set(ref _outputParameters, value);
             }
         }
 
@@ -39,14 +72,23 @@ namespace SequenceBuilderUI.ViewModels
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
+
+            _eventAggregator.SubscribeOnPublishedThread(this);
         }
 
         public Task HandleAsync(SequenceStepModel message, CancellationToken cancellationToken)
         {
+
             return Task.Run(() =>
             {
-                _stepProperties = message;
-                //Parameters = new BindableCollection<Dictionary<string, string>>(message.ParameterList);
+                _seqStep = message;
+                Name = message.Name;
+                Comment = message.Comment;
+                InputParameters = new BindableCollection<ParameterModel>();
+                foreach (KeyValuePair<string, string> pair in message.InputParameterList)
+                {
+                    InputParameters.Add(new ParameterModel(pair.Key, pair.Value));
+                }
             });
         }
     }

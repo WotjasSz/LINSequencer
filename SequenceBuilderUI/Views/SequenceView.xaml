@@ -63,7 +63,18 @@
             <!--#endregion-->
             
             <!--#region Step list-->
-            <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding StepList}"/>
+            <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" 
+                      ItemsSource="{Binding StepList}"
+                      SelectedItem="{Binding SelectedItem}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Id}"/>
+                            <Label Content="{Binding Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <!--#endregion-->
         </Grid>
         <!--#endregion-->

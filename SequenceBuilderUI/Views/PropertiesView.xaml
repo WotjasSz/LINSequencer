@@ -9,9 +9,31 @@
     <StackPanel>
         <TextBlock Text="Name"/>
         <TextBlock Text="{Binding Name}"/>
-        <TextBlock Text="User name"/>
-        <TextBox Text="{Binding UserName}"/>
-        <DataGrid ItemsSource="{Binding ParameterList}"
-                  SelectedItem="{Binding SelectedParameter}" AutoGenerateColumns="True"/>
+        <TextBlock Text="Comment"/>
+        <TextBox Text="{Binding Comment}"/>
+        <TextBlock Text="Input"/>
+        <ListView ItemsSource="{Binding InputParameters}"
+          SelectedItem="{Binding SelectedInputParameter}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Name}"/>
+                        <TextBox Text="{Binding Value}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <TextBlock Text="Output"/>
+        <ListView ItemsSource="{Binding OutputParameters}"
+            SelectedItem="{Binding SelectedOutputParameter}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Name}"/>
+                        <TextBox Text="{Binding Value}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackPanel>
 </UserControl>

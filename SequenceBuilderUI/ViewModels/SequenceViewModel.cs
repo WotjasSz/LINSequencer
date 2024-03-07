@@ -27,6 +27,18 @@ namespace SequenceBuilderUI.ViewModels
         private BindableCollection<string> _sdfList;
         private string _sdfName;
         private BindableCollection<SequenceStepModel> _stepList;
+        private SequenceStepModel _selectedItem;
+
+        public SequenceStepModel SelectedItem
+        {
+            get { return _selectedItem; }
+            set 
+            { 
+                Set(ref _selectedItem, value);
+                _eventAggregator.PublishOnUIThreadAsync(_selectedItem);
+            }
+        }
+
         #endregion
 
         #region Properties

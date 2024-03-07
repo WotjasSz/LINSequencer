@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="Helpers\BindableCollectionHelper.cs" />
     <Compile Include="Models\AboutModel.cs" />
+    <Compile Include="Models\ParameterModel.cs" />
     <Compile Include="Models\SequenceMessage.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\AvailableFunctionViewModel.cs" />
