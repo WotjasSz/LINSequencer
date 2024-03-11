@@ -13,6 +13,6 @@
         </Grid.RowDefinitions>
         <ContentControl Grid.Row="0" x:Name="PropertiesVm"/>        
         <ContentControl Grid.Row="1" x:Name="FunctionVm"/>
-        <GridSplitter Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" ResizeDirection="Rows" BorderThickness="2" BorderBrush="#999999"/>
+        <GridSplitter Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" ResizeDirection="Rows" BorderThickness="1" BorderBrush="#999999"/>
     </Grid>
 </UserControl>

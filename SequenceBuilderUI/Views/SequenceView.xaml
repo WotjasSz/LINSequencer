@@ -80,6 +80,7 @@
         <!--#endregion-->
         
         <!--#region Tools panel-->
+        <GridSplitter VerticalAlignment="Stretch" HorizontalAlignment="Right" ResizeDirection="Columns" BorderThickness="1" BorderBrush="#999999"/>
         <ContentControl x:Name="EditorFeatureVm" Grid.Column="1"/>
         <!--#endregion -->
     </Grid>

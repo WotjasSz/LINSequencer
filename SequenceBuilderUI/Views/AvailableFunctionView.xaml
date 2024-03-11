@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SequenceBuilderUI.Views"
+             xmlns:cm="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300">
     <Grid>
         <ListView ItemsSource="{Binding SequenceFunction}"
                   SelectedItem="{Binding SelectedFunction}"
-                  Width="300"/>
+                  cm:Message.Attach="[Event SelectionChanged] = [Action DragSelectedFunction($eventArgs)]"
+                  Width="300" AllowDrop="True"/>
     </Grid>
 </UserControl>

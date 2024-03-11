@@ -18,6 +18,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="5">Program name:</TextBlock>
@@ -25,7 +27,11 @@
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="5">Program version:</TextBlock>
             <TextBlock x:Name="AboutData_Version" Grid.Row="1" Grid.Column="1" Margin="5"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Margin="5">Author:</TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding AboutData.Author}"/>           
+            <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding AboutData.Author}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Margin="5">DLL Version:</TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding AboutData.DllVersion}"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Margin="5">Wrapper version:</TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding AboutData.WrapperVersion}"/>
         </Grid>
 
         <Button x:Name="CloseForm" Margin="5" HorizontalAlignment="Right" Width="80">Close</Button>

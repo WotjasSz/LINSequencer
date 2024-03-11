@@ -16,6 +16,7 @@ namespace SequenceBuilderUI.ViewModels
         private IWindowManager _windowManager;
 
         private BindableCollection<SeqFunction> _sequenceFunction;
+        private SeqFunction _selectedFunction;
 
         public BindableCollection<SeqFunction> SequenceFunction
         {
@@ -24,13 +25,27 @@ namespace SequenceBuilderUI.ViewModels
             { 
                 Set(ref _sequenceFunction, value); 
             }
-        }
+        }       
 
+        public SeqFunction SelectedFunction
+        {
+            get { return _selectedFunction; }
+            set 
+            {
+                Set(ref _selectedFunction, value);
+            }
+        }
 
         public AvailableFunctionViewModel(IEventAggregator eventAggregator, IWindowManager windowManager)
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
+        }
+
+        public void DragSelectedFunction(EventArgs eventArgs)
+        {
+            if (_selectedFunction == null) { return; }
+            Console.WriteLine("Jest git!!!");
         }
 
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
