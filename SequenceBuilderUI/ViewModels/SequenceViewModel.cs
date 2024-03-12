@@ -136,6 +136,11 @@ namespace SequenceBuilderUI.ViewModels
             _eventAggregator.SubscribeOnPublishedThread(this);
         }
 
+        public void DropFunction(object sender, EventArgs e)
+        {
+            return;
+        }
+
         public Task HandleAsync(SequenceMessage message, CancellationToken cancellationToken)
         {
             return Task.Run(() =>

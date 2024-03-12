@@ -10,7 +10,7 @@
     <Grid>
         <ListView ItemsSource="{Binding SequenceFunction}"
                   SelectedItem="{Binding SelectedFunction}"
-                  cm:Message.Attach="[Event SelectionChanged] = [Action DragSelectedFunction($eventArgs)]"
+                  cm:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action DragSelectedFunction($source, $eventArgs)]"                                  
                   Width="300" AllowDrop="True"/>
     </Grid>
 </UserControl>
