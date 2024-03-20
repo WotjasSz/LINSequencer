@@ -15,6 +15,6 @@ namespace SequenceBuilderUI.Models
         {
             Name = name;
             Value = value;
-        }
+        }        
     }
 }

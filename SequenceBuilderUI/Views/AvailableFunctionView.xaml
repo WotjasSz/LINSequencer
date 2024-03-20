@@ -8,9 +8,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300">
     <Grid>
-        <ListView ItemsSource="{Binding SequenceFunction}"
-                  SelectedItem="{Binding SelectedFunction}"
-                  cm:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action DragSelectedFunction($source, $eventArgs)]"                                  
-                  Width="300" AllowDrop="True"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" 
+                  ItemsSource="{Binding SequenceFunction}"
+                  SelectedItem="{Binding SelectedFunction}"                                                                    
+                  Width="300" AllowDrop="True" Grid.RowSpan="2"/>
+        <StackPanel Grid.Row="1">
+            <Button x:Name="AddSequenceStep" 
+                    Content="Add"/>
+        </StackPanel>
     </Grid>
 </UserControl>
+
+<!--cm:Message.Attach="[Event SelectionChanged] = [Action FunctionList_SelectionChanged($dataContext)]"-->
+<!--[Event PreviewMouseLeftButtonDown] = [Action DragSelectedFunction($source, $eventArgs)]"-->
+<!--cm:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action DragSelectedFunction($source, $eventArgs)];
+[Event PreviewMouseMove] = [Action MoveSelectedFunction ($source, $eventArgs)]"--> 

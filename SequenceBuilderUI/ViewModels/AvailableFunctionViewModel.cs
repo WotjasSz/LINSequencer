@@ -18,6 +18,7 @@ namespace SequenceBuilderUI.ViewModels
         private IEventAggregator _eventAggregator;
         private IWindowManager _windowManager;
 
+        private Point _startPosition = new Point();
         private BindableCollection<SeqFunction> _sequenceFunction;
         private SeqFunction _selectedFunction;
 
@@ -43,37 +44,55 @@ namespace SequenceBuilderUI.ViewModels
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
+        }        
+
+        public void AddSequenceStep()
+        {
+            _eventAggregator.PublishOnUIThreadAsync(SelectedFunction);
         }
 
         public void DragSelectedFunction(object sender, MouseButtonEventArgs e)
         {
-            if (sender is ListView) 
+            if (e.Source is ListView)
             {
-                ListView draggedItem = (ListView)sender;
-                DragDrop.DoDragDrop(draggedItem, draggedItem.DataContext, DragDropEffects.Copy);
+                //ListView draggedItem = (ListView)sender;
+                //DragDrop.DoDragDrop(draggedItem, draggedItem.DataContext, DragDropEffects.Copy);
+                _startPosition = e.GetPosition(null);
             }
         }
 
-        //public void MoveSelectedFunction(object sender, MouseEventArgs e)
-        //{
-        //    // Zacznij operację przeciągania, gdy użytkownik przesunie mysz podczas naciśnięcia lewego przycisku myszy
-        //    if (e.LeftButton == MouseButtonState.Pressed)
-        //    {
-        //        Point position = e.GetPosition(null);
-        //        //Vector diff = _startPoint - position;
+        public void FunctionList_SelectionChanged(object sender)
+        {
+            if (sender is AvailableFunctionViewModel)
+            {
+                return;
+            }
+        }
 
-        //        if (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
-        //            Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
-        //        {
-        //            if ((sender as ListView).Items.CurrentItem != null)
-        //            {
-        //                //string item = (string)listBox1.ItemContainerGenerator.ItemFromContainer(listBoxItem);
-        //                //DataObject dragData = new DataObject("myFormat", item);
-        //                //DragDrop.DoDragDrop(listBoxItem, dragData, DragDropEffects.Move);
-        //            }
-        //        }
-        //    }
-        //}        
+        public void MoveSelectedFunction(object sender, MouseEventArgs e)
+        {
+            // Zacznij operację przeciągania, gdy użytkownik przesunie mysz podczas naciśnięcia lewego przycisku myszy
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Point position = e.GetPosition(null);
+                Vector diff = _startPosition - position;
+
+                if (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                    Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
+                {
+                    //Console.WriteLine(e.OriginalSource.GetType());
+                    
+                    if (e.OriginalSource is TextBlock)
+                    {
+                        Console.WriteLine((e.OriginalSource as TextBlock).DataContext.GetType());
+                        //string item = (string)listBox1.ItemContainerGenerator.ItemFromContainer(listBoxItem);
+                        //DataObject dragData = new DataObject("myFormat", item);
+                        //DragDrop.DoDragDrop(listBoxItem, dragData, DragDropEffects.Move);
+                        //Console.WriteLine((sender as ListView).Items.CurrentItem);
+                    }
+                }
+            }
+        }
 
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {

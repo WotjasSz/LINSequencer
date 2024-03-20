@@ -37,25 +37,25 @@ namespace SequenceBuilderUI.ViewModels
             set 
             {
                 Set(ref _comment, value);
-                _seqStep.Comment = value;
+                SeqStep.Comment = value;
             }
         }
 
-        public SequenceStepModel StepProperties
+        public SequenceStepModel SeqStep
         {
             get { return _seqStep; }
-            set 
-            { 
-                Set(ref _seqStep, value); 
+            set
+            {
+                Set(ref _seqStep, value);
             }
-        }       
+        }
 
         public BindableCollection<ParameterModel> InputParameters
         {
             get { return _inputParameters; }
             set 
             { 
-                Set(ref _inputParameters, value);                
+                Set(ref _inputParameters, value);
             }
         }
 

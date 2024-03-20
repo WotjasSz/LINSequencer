@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SequenceBuilderUI.ViewModels
 {
-    public class SequenceViewModel : Conductor<Screen>.Collection.OneActive, IHandle<SequenceMessage>
+    public class SequenceViewModel : Conductor<Screen>.Collection.OneActive, IHandle<SequenceMessage>, IHandle<SeqFunction>
     {
         #region Fields
         private readonly IEventAggregator _eventAggregator;
@@ -121,8 +121,14 @@ namespace SequenceBuilderUI.ViewModels
                 Set(ref _stepList, value);
             }
         }
+        #endregion
 
-
+        #region Methods
+        public void Save()
+        {
+            Sequence.StepList = StepList.ToList();
+            LinSequencer.SaveSequence(Sequence);
+        }
         #endregion
 
         public SequenceViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, EditorFeatureViewModel editorFeatureViewModel)
@@ -153,10 +159,20 @@ namespace SequenceBuilderUI.ViewModels
              });
         }
 
+        public Task HandleAsync(SeqFunction message, CancellationToken cancellationToken)
+        {
+            return Task.Run(() =>
+            {
+                StepList.Add(new SequenceStepModel(StepList.Count, message));                
+            });
+        }
+
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
             List<string> list = new List<string>(LinSequencer.SdfList.Select(x => x.Name).ToList());
             return Task.Run(() => SdfList = new BindableCollection<string>(list));
         }
+
+        
     }
 }
