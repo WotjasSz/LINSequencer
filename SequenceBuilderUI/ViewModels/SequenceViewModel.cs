@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SequenceBuilderUI.ViewModels
 {
-    public class SequenceViewModel : Conductor<Screen>.Collection.OneActive, IHandle<SequenceMessage>, IHandle<SeqFunction>
+    public class SequenceViewModel : Conductor<Screen>.Collection.OneActive, IHandle<SequenceMessage>, IHandle<SeqFunction>, IHandle<ParameterMessage>
     {
         #region Fields
         private readonly IEventAggregator _eventAggregator;
@@ -27,17 +28,7 @@ namespace SequenceBuilderUI.ViewModels
         private BindableCollection<string> _sdfList;
         private string _sdfName;
         private BindableCollection<SequenceStepModel> _stepList;
-        private SequenceStepModel _selectedItem;
-
-        public SequenceStepModel SelectedItem
-        {
-            get { return _selectedItem; }
-            set 
-            { 
-                Set(ref _selectedItem, value);
-                _eventAggregator.PublishOnUIThreadAsync(_selectedItem);
-            }
-        }
+        private SequenceStepModel _selectedItem;        
 
         #endregion
 
@@ -121,6 +112,16 @@ namespace SequenceBuilderUI.ViewModels
                 Set(ref _stepList, value);
             }
         }
+
+        public SequenceStepModel SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                Set(ref _selectedItem, value);
+                _eventAggregator.PublishOnUIThreadAsync(_selectedItem);
+            }
+        }
         #endregion
 
         #region Methods
@@ -173,6 +174,16 @@ namespace SequenceBuilderUI.ViewModels
             return Task.Run(() => SdfList = new BindableCollection<string>(list));
         }
 
-        
+        public Task HandleAsync(ParameterMessage message, CancellationToken cancellationToken)
+        {
+            return Task.Run(() =>
+            {
+                if (SelectedItem != null)
+                {
+                    SelectedItem = message.SequenceStep;
+                }
+            });
+            
+        }
     }
 }

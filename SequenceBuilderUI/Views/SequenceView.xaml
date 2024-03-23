@@ -40,7 +40,9 @@
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Description"/>
                     <TextBox x:Name="Description"
-                             Width="300" Height="100" ScrollViewer.CanContentScroll="True"
+                             Width="300" Height="100" 
+                             TextWrapping="Wrap"
+                             ScrollViewer.CanContentScroll="True"
                              />
                 </StackPanel>
                 <StackPanel Orientation="Vertical">

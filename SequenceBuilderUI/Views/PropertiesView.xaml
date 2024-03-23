@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SequenceBuilderUI.Views"
+             xmlns:cm="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="200">
     <StackPanel>
@@ -13,12 +14,13 @@
         <TextBox Text="{Binding Comment}"/>
         <TextBlock Text="Input"/>
         <ListView ItemsSource="{Binding InputParameters}"
-          SelectedItem="{Binding SelectedInputParameter}">
+             SelectedItem="{Binding SelectedInputParameter}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="{Binding Name}"/>
-                        <TextBox Text="{Binding Value}"/>
+                        <TextBox Text="{Binding Value}"
+                                 Width="50"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -35,5 +37,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button x:Name="Confirm" Content="Confirm" VerticalAlignment="Bottom"/>
     </StackPanel>
 </UserControl>
+
+<!--cm:Message.Attach="[Event KeyDown] = [Action InputParameterChanged($dataContext, $eventArgs)]"-->
