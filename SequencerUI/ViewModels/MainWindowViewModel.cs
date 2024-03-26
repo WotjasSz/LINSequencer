@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SequencerUI.ViewModels
 {
@@ -11,6 +12,7 @@ namespace SequencerUI.ViewModels
     public partial class MainWindowViewModel
     {
         [ObservableProperty]
-        private string? _title = "Główne okno...";
+        private string? _title = "Sequencer";
+
     }
 }

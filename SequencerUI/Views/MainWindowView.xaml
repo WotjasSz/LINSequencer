@@ -5,8 +5,77 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SequencerUI.Views"
         mc:Ignorable="d"
-        Title="Sequencer" Height="450" Width="800">
+        Height="800" Width="1200"
+        Background="#36393f"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
     <Grid>
-        <TextBlock Text="{Binding Title}" FontSize="20"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--#region Window bar -->
+        <Border Grid.ColumnSpan="2"
+                Style="{StaticResource WidnowBar}"
+                MouseDown="Border_MouseDown">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Label Content="{Binding Title}"
+                       Style="{StaticResource TitleLabel}"/>
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <Button Style="{StaticResource WindowStateBtn}" 
+                            x:Name="btnMinimize"
+                            FontFamily="{StaticResource FontAwesome}"
+                            Content="&#xf2d1;"
+                            Click="btnMinimize_Click"/>
+                    <Button Style="{StaticResource WindowStateBtn}" 
+                            x:Name="btnMaximize"    
+                            FontFamily="{StaticResource FontAwesome}"
+                            Content="&#xf065;"                            
+                            Click="btnMaximize_Click"/>
+                    <Button Style="{StaticResource WindowStateCloseBtn}" 
+                            x:Name="btnCloseWindow"
+                            FontFamily="{StaticResource FontAwesome}"
+                            Content="&#xf00d;"     
+                            Click="btnCloseWindow_Click"/>                    
+                </StackPanel>
+            </Grid>               
+        </Border>
+        <!--#endregion-->
+        
+        <!--#region Left side -->
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--#region Menu buttons -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="&#xf0c9;" 
+                        FontFamily="{StaticResource FontAwesome}"
+                        Style="{StaticResource FuncCallBtn}"/>
+                <Button Content="&#xf013;"
+                        FontFamily="{StaticResource FontAwesome}"
+                        Style="{StaticResource FuncCallBtn}"/>
+                <Button Content="&#xf129;"
+                        FontFamily="{StaticResource FontAwesome}"
+                        Style="{StaticResource FuncCallBtn}"/>
+            </StackPanel>
+            <!--#endregion-->
+
+            <!--#region ListView -->
+
+            <!--#endregion-->
+        </Grid>
+
+        <!--#endregion-->
     </Grid>
 </Window>
