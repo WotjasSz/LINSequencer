@@ -8,6 +8,7 @@
         Height="800" Width="1200"
         Background="#36393f"
         WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip">
     <Grid>
@@ -49,12 +50,13 @@
         <!--#endregion-->
         
         <!--#region Left side -->
-        <Grid Grid.Row="1" Grid.Column="0">
+        <Grid Grid.Row="1" Grid.Column="0" Style="{StaticResource NavGrid}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="70"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--#region Menu buttons -->
@@ -70,10 +72,40 @@
                         Style="{StaticResource FuncCallBtn}"/>
             </StackPanel>
             <!--#endregion-->
+            
+            <!--#region Label-->
+            <Label Grid.Row="1"
+                   Style="{StaticResource ListLabel}"
+                   Content="Sequence list"/>
+            <!--#endregion-->
 
             <!--#region ListView -->
-
+            <ListView Grid.Row="2"
+                      Style="{StaticResource ActiveSequenceList}"
+                      ItemContainerStyle="{StaticResource SequenceListItem}"/>
             <!--#endregion-->
+            
+            <!-- Sequence selection -->
+            <StackPanel Grid.Row="2" >
+                <Label Content="Select sequence"
+                       Style="{StaticResource ListLabel}"/>
+                <!--<ComboBox Style="{StaticResource ComboBoxFlatStyle}"/>-->
+                <Label Content="Or"
+                       Style="{StaticResource ListLabel}"/>
+                <Button Grid.Row="4"                        
+                        FontSize="20"
+                        Height="40"
+                        Content="Add new"
+                        Style="{StaticResource GenericButton}"/>
+            </StackPanel>
+            
+            
+            <!-- Add button -->
+            <Button Grid.Row="4"
+                    FontFamily="{StaticResource FontAwesome}"
+                    FontSize="30"
+                    Content="&#x2b;"
+                    Style="{StaticResource GenericButton}"/>
         </Grid>
 
         <!--#endregion-->

@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--#region Colors-->
+    <Color x:Key="ColorPrimary1_Light">#FFF0FFFF</Color>     <!--Główny kolor tła-->
+    <Color x:Key="ColorPrimary2_Light">#FFecfbfb</Color>
+    <Color x:Key="ColorPrimary3_Middle">#FFe7f5f5</Color>    <!--ColorPrimary3_Middle-->
+    <Color x:Key="ColorPrimary4_Dark">#FF333333</Color>      <!--ColorPrimary4_Dark-->
+    <Color x:Key="ColorSecondary1_DodgerBlueLight">#FFb3d9ff</Color>    <!--ColorSecondary1_DodgerBlueLight-->
+    <Color x:Key="ColorSecondary2_DodgerBlue">#FF1E90FF</Color>    <!--ColorSecondary2_DodgerBlue-->
+    <Color x:Key="ColorSecondary3_DodgerBlueDark">#FF004080</Color>    <!--ColorSecondary3_DodgerBlueDark-->
+    <!--#endregion-->
+
+    <!--#region Brushes-->
+    <SolidColorBrush x:Key="BrushPrimary1_Light" Color="{StaticResource ColorPrimary1_Light}"/>
+    <SolidColorBrush x:Key="BrushPrimary2_Light" Color="{StaticResource ColorPrimary2_Light}"/>
+    <SolidColorBrush x:Key="BrushPrimary3_Middle" Color="{StaticResource ColorPrimary3_Middle}"/>
+    <SolidColorBrush x:Key="BrushPrimary4_Dark" Color="{StaticResource ColorPrimary4_Dark}"/>
+    <SolidColorBrush x:Key="BrushSecondary1_DodgerBlueLight" Color="{StaticResource ColorSecondary1_DodgerBlueLight}"/>
+    <SolidColorBrush x:Key="BrushSecondary2_DodgerBlue" Color="{StaticResource ColorSecondary2_DodgerBlue}"/>
+    <SolidColorBrush x:Key="BrushSecondary3_DodgerBlueDark" Color="{StaticResource ColorSecondary3_DodgerBlueDark}"/>
+    <!--#endregion-->
+
+</ResourceDictionary>

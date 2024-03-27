@@ -14,5 +14,6 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private string? _title = "Sequencer";
 
+        
     }
 }
