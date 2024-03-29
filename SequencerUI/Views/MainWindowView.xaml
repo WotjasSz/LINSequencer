@@ -82,20 +82,26 @@
             <!--#region ListView -->
             <ListView Grid.Row="2"
                       Style="{StaticResource ActiveSequenceList}"
-                      ItemContainerStyle="{StaticResource SequenceListItem}"/>
+                      ItemContainerStyle="{StaticResource SequenceListItem}"
+                      ItemsSource="{Binding ActiveSequences}"/>
             <!--#endregion-->
             
             <!-- Sequence selection -->
-            <StackPanel Grid.Row="2" >
+            <StackPanel Grid.Row="3">
                 <Label Content="Select sequence"
+                       HorizontalAlignment="Center"
                        Style="{StaticResource ListLabel}"/>
-                <!--<ComboBox Style="{StaticResource ComboBoxFlatStyle}"/>-->
+                <ComboBox ItemsSource="{Binding AvailableSequences}" 
+                          SelectedItem="{Binding AvailableSeqSelected}"
+                          Style="{StaticResource ComboBoxFlatStyle}"/>
                 <Label Content="Or"
+                       HorizontalAlignment="Center"
                        Style="{StaticResource ListLabel}"/>
                 <Button Grid.Row="4"                        
                         FontSize="20"
                         Height="40"
                         Content="Add new"
+                        Command="{Binding AddSequenceCommand}"
                         Style="{StaticResource GenericButton}"/>
             </StackPanel>
             

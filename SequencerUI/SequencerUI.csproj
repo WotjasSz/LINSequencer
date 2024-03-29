@@ -15,12 +15,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Resources\Themes\DarkModeColors.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LINSequencerLib\LINSequencerLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +41,7 @@
     <Resource Include="Resources\Fonts\Awesome_6_Free_Solid.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Themes\DarkModeColors.xaml" />
   </ItemGroup>
 
 </Project>

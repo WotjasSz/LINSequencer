@@ -10,14 +10,4 @@
     <Color x:Key="ColorSecondary3_DodgerBlueDark">#FF004080</Color>    <!--ColorSecondary3_DodgerBlueDark-->
     <!--#endregion-->
 
-    <!--#region Brushes-->
-    <SolidColorBrush x:Key="BrushPrimary1_Light" Color="{StaticResource ColorPrimary1_Light}"/>
-    <SolidColorBrush x:Key="BrushPrimary2_Light" Color="{StaticResource ColorPrimary2_Light}"/>
-    <SolidColorBrush x:Key="BrushPrimary3_Middle" Color="{StaticResource ColorPrimary3_Middle}"/>
-    <SolidColorBrush x:Key="BrushPrimary4_Dark" Color="{StaticResource ColorPrimary4_Dark}"/>
-    <SolidColorBrush x:Key="BrushSecondary1_DodgerBlueLight" Color="{StaticResource ColorSecondary1_DodgerBlueLight}"/>
-    <SolidColorBrush x:Key="BrushSecondary2_DodgerBlue" Color="{StaticResource ColorSecondary2_DodgerBlue}"/>
-    <SolidColorBrush x:Key="BrushSecondary3_DodgerBlueDark" Color="{StaticResource ColorSecondary3_DodgerBlueDark}"/>
-    <!--#endregion-->
-
 </ResourceDictionary>
