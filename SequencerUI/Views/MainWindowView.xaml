@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toolkit="using:Microsoft.Toolkit.Mvvm.UI.Behaviors"
         xmlns:local="clr-namespace:SequencerUI.Views"
         mc:Ignorable="d"
         Height="800" Width="1200"
@@ -33,17 +34,17 @@
                             x:Name="btnMinimize"
                             FontFamily="{StaticResource FontAwesome}"
                             Content="&#xf2d1;"
-                            Click="btnMinimize_Click"/>
+                            Command="{Binding MinimizeWindowCommand}"/>
                     <Button Style="{StaticResource WindowStateBtn}" 
                             x:Name="btnMaximize"    
                             FontFamily="{StaticResource FontAwesome}"
                             Content="&#xf065;"                            
-                            Click="btnMaximize_Click"/>
+                            Command="{Binding MaximizeWindowCommand}"/>
                     <Button Style="{StaticResource WindowStateCloseBtn}" 
                             x:Name="btnCloseWindow"
                             FontFamily="{StaticResource FontAwesome}"
                             Content="&#xf00d;"     
-                            Click="btnCloseWindow_Click"/>                    
+                            Command="{Binding CloseWidnowCommand}"/>                    
                 </StackPanel>
             </Grid>               
         </Border>
@@ -114,6 +115,13 @@
                     Style="{StaticResource GenericButton}"/>
         </Grid>
 
+        <!--#endregion-->
+        
+        <!--region Main content -->
+        <Grid Grid.Column="1" Grid.Row="2">
+            <ContentControl x:Name="Pages"
+                            Content="{Binding CurrentView}"/>
+        </Grid>
         <!--#endregion-->
     </Grid>
 </Window>

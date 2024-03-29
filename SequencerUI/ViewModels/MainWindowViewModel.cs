@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
+using SequencerUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,8 +18,12 @@ namespace SequencerUI.ViewModels
 {
     public partial class MainWindowViewModel : ObservableObject
     {
+        #region Properties
         [ObservableProperty]
         private string? _title = "Sequencer";
+
+        [ObservableProperty]
+        private object _currentView;
 
         [ObservableProperty]
         private ObservableCollection<SequenceModel>? _availableSequences;
@@ -29,7 +34,7 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private ObservableCollection<SequenceModel>? _activeSequences;
 
-        //public ICommand AddSequenceCommand { get; }
+        #endregion
 
 
         public MainWindowViewModel()
@@ -40,7 +45,11 @@ namespace SequencerUI.ViewModels
 
             _availableSequences = new ObservableCollection<SequenceModel>(LinSequencer.SequenceList);
             _activeSequences = new ObservableCollection<SequenceModel>();
+
+            CurrentView = new AboutView() { DataContext = new AboutViewModel() };
         }
+
+        #region Commands
 
         [RelayCommand]
         private void AddSequence()
@@ -48,14 +57,44 @@ namespace SequencerUI.ViewModels
             if(AvailableSeqSelected != null)
             {
                 ActiveSequences.Add(AvailableSeqSelected);
-            }            
-            //Debug.WriteLine("Dobra jestem tutaj..........");
+            }
         }
 
         private bool CanExeuteAddSequence()
         {
             return AvailableSeqSelected != null;
         }
+
+        #endregion
+
+        #region Window actions
+
+        [RelayCommand]
+        private void MinimizeWindow()
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
+        [RelayCommand]
+        private void MaximizeWindow()
+        {
+            if (Application.Current.MainWindow.WindowState != WindowState.Maximized)
+            {
+                Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                Application.Current.MainWindow.WindowState = WindowState.Normal;
+            }
+        }
+
+        [RelayCommand]
+        private void CloseWidnow()
+        {
+            Application.Current.Shutdown();
+        }
+
+        #endregion
 
     }
 }
