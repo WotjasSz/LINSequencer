@@ -50,7 +50,6 @@
     </Style>
     <!--#endregion-->
         
-    
     <!--#region Left side -->
     <!-- Menu button -->
     <Style TargetType="Grid" x:Key="NavGrid">
@@ -92,7 +91,8 @@
     <!-- ListView -->
     <Style TargetType="ListView" x:Key="ActiveSequenceList">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>        
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
     </Style>
     <Style TargetType="ListViewItem" x:Key="SequenceListItem">
         <Style.Triggers>
@@ -104,18 +104,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
-                    <Border Background="{TemplateBinding Background}"
-                            Height="60"
+                    <Border Background="{TemplateBinding Background}"                            
                             CornerRadius="4"
                             Margin="10 3 10 3">
                         <StackPanel Orientation="Horizontal"
                                     Margin="5 2">
                             <Label Content="{Binding Id}"
-                                   Foreground="White"/>
+                                   FontSize="30"
+                                   Foreground="White"
+                                   Width="40"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"/>
                             <StackPanel>
                                 <Label Content="{Binding Name}"
                                        Foreground="White"
-                                       FontSize="16"/>
+                                       FontSize="18"/>
                                 <Label Content="{Binding CreationDate}"
                                        Foreground="#c4c4c7"
                                        FontSize="14"/>
@@ -129,7 +132,34 @@
     <!--#endregion-->
     
     <!--#region Sequence slection -->
-    
+    <Style TargetType="StackPanel" x:Key="SequenceSelector">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard Name="SlideInStoryboard">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="225" Duration="0:0:0.4"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <StopStoryboard BeginStoryboardName="SlideInStoryboard"/>
+                </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Trigger.EnterActions>
+                    <BeginStoryboard Name="SlideOutStoryboard">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Height" From="225" To="0" Duration="0:0:0.4"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <StopStoryboard BeginStoryboardName="SlideOutStoryboard"/>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     <!--#endregion-->
     
     <!--#region Add Button -->

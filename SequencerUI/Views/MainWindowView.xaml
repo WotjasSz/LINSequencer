@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:toolkit="using:Microsoft.Toolkit.Mvvm.UI.Behaviors"
         xmlns:local="clr-namespace:SequencerUI.Views"
+        xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+        xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
         mc:Ignorable="d"
         Height="800" Width="1200"
         Background="#36393f"
@@ -12,6 +14,9 @@
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityCoverter"/>        
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
@@ -55,11 +60,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="70"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
             <!--#region Menu buttons -->
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button Content="&#xf0c9;" 
@@ -70,7 +75,8 @@
                         Style="{StaticResource FuncCallBtn}"/>
                 <Button Content="&#xf129;"
                         FontFamily="{StaticResource FontAwesome}"
-                        Style="{StaticResource FuncCallBtn}"/>
+                        Style="{StaticResource FuncCallBtn}"
+                        Command="{Binding ShowAboutControlCommand}"/>
             </StackPanel>
             <!--#endregion-->
             
@@ -87,14 +93,23 @@
                       ItemsSource="{Binding ActiveSequences}"/>
             <!--#endregion-->
             
-            <!-- Sequence selection -->
-            <StackPanel Grid.Row="3">
+            <!--#region Sequence selection -->
+            <StackPanel Grid.Row="3"
+                        x:Name="spAddSeqView"
+                        IsEnabled="{Binding IsAddSeqVisible}"
+                        Style="{StaticResource SequenceSelector}">
                 <Label Content="Select sequence"
                        HorizontalAlignment="Center"
                        Style="{StaticResource ListLabel}"/>
                 <ComboBox ItemsSource="{Binding AvailableSequences}" 
                           SelectedItem="{Binding AvailableSeqSelected}"
                           Style="{StaticResource ComboBoxFlatStyle}"/>
+                <Button Grid.Row="4"                        
+                        FontSize="20"
+                        Height="40"
+                        Content="Add"
+                        Command="{Binding AddSequenceCommand}"
+                        Style="{StaticResource GenericButton}"/>
                 <Label Content="Or"
                        HorizontalAlignment="Center"
                        Style="{StaticResource ListLabel}"/>
@@ -102,17 +117,19 @@
                         FontSize="20"
                         Height="40"
                         Content="Add new"
-                        Command="{Binding AddSequenceCommand}"
+                        Command="{Binding AddNewSequenceCommand}"
                         Style="{StaticResource GenericButton}"/>
             </StackPanel>
+            <!--#endregion-->
             
-            
-            <!-- Add button -->
+            <!--#region Add button -->
             <Button Grid.Row="4"
                     FontFamily="{StaticResource FontAwesome}"
                     FontSize="30"
                     Content="&#x2b;"
-                    Style="{StaticResource GenericButton}"/>
+                    Style="{StaticResource GenericButton}"
+                    Command="{Binding ToggleAddSeqVisibilityCommand}"/>
+            <!--#endregion-->
         </Grid>
 
         <!--#endregion-->

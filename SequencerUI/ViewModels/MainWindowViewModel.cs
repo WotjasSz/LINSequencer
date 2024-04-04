@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,13 @@ namespace SequencerUI.ViewModels
         private object _currentView;
 
         [ObservableProperty]
+        private bool _isAddSeqVisible;
+
+        [ObservableProperty]
         private ObservableCollection<SequenceModel>? _availableSequences;
         
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(AddSequenceCommand))]
         private SequenceModel? _availableSeqSelected;
 
         [ObservableProperty]
@@ -45,24 +50,39 @@ namespace SequencerUI.ViewModels
 
             _availableSequences = new ObservableCollection<SequenceModel>(LinSequencer.SequenceList);
             _activeSequences = new ObservableCollection<SequenceModel>();
-
-            CurrentView = new AboutView() { DataContext = new AboutViewModel() };
         }
 
         #region Commands
 
         [RelayCommand]
+        private void ShowAboutControl()
+        {
+            CurrentView = new AboutView() { DataContext = new AboutViewModel() };
+        }
+
+        [RelayCommand(CanExecute = nameof(CanExeuteAddSequence))]
         private void AddSequence()
         {
-            if(AvailableSeqSelected != null)
-            {
-                ActiveSequences.Add(AvailableSeqSelected);
-            }
+            ActiveSequences.Add(AvailableSeqSelected);
+            IsAddSeqVisible = !IsAddSeqVisible;
+        }
+
+        [RelayCommand]
+        private void AddNewSequence()
+        {
+            Debug.WriteLine("Tymczosowo");
+            IsAddSeqVisible = !IsAddSeqVisible;
         }
 
         private bool CanExeuteAddSequence()
         {
             return AvailableSeqSelected != null;
+        }
+
+        [RelayCommand]
+        private void ToggleAddSeqVisibility()
+        {
+            IsAddSeqVisible = !IsAddSeqVisible;
         }
 
         #endregion

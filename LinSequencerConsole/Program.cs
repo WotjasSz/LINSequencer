@@ -68,9 +68,9 @@ namespace LinSequencerConsole
                 Console.WriteLine("Seq start");
                 List<Task> tasks = new List<Task>
                 {
-                    LinSequencer.RunSequenceAsync(bl, LinSequencer.SequenceList[0]),
-                    LinSequencer.RunSequenceAsync(bl, LinSequencer.SequenceList[1]),
-                    LinSequencer.RunSequenceAsync(bl, LinSequencer.SequenceList[2])
+                    //LinSequencer.RunSequenceAsync(bl, LinSequencer.SequenceList[0]),
+                    //LinSequencer.RunSequenceAsync(bl, LinSequencer.SequenceList[1]),
+                    //LinSequencer.RunSequenceAsync(bl, LinSequencer.SequenceList[2])
                 };
 
                 var watch = System.Diagnostics.Stopwatch.StartNew();
