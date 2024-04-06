@@ -8,7 +8,7 @@
         xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
         xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
         mc:Ignorable="d"
-        Height="800" Width="1200"
+        Height="800" Width="1200" MinHeight="510" MinWidth="850"
         Background="#36393f"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -26,6 +26,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
         <!--#region Window bar -->
         <Border Grid.ColumnSpan="2"
                 Style="{StaticResource WidnowBar}"
@@ -62,17 +63,20 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             
             <!--#region Menu buttons -->
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <!-- MENU -->
                 <Button Content="&#xf0c9;" 
                         FontFamily="{StaticResource FontAwesome}"
                         Style="{StaticResource FuncCallBtn}"/>
+                <!-- SETTINGS -->
                 <Button Content="&#xf013;"
                         FontFamily="{StaticResource FontAwesome}"
                         Style="{StaticResource FuncCallBtn}"/>
+                <!-- ABOUT -->
                 <Button Content="&#xf129;"
                         FontFamily="{StaticResource FontAwesome}"
                         Style="{StaticResource FuncCallBtn}"
@@ -90,20 +94,39 @@
             <ListView Grid.Row="2"
                       Style="{StaticResource ActiveSequenceList}"
                       ItemContainerStyle="{StaticResource SequenceListItem}"
-                      ItemsSource="{Binding ActiveSequences}"/>
+                      ItemsSource="{Binding ActiveSequences}" d:ItemsSource="{d:SampleData ItemCount=5}"/>
             <!--#endregion-->
             
             <!--#region Sequence selection -->
             <StackPanel Grid.Row="3"
                         x:Name="spAddSeqView"
-                        IsEnabled="{Binding IsAddSeqVisible}"
+                        IsEnabled="{Binding IsAddSeqPanelEnable}"
                         Style="{StaticResource SequenceSelector}">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <!-- REFRESH -->
+                    <Button Content="&#xf021;" 
+                            FontFamily="{StaticResource FontAwesome}"
+                            Style="{StaticResource SeqSelectActionButton}"/>
+                    <!-- CANCEL -->
+                    <Button Content="&#xf00d;"
+                            FontFamily="{StaticResource FontAwesome}"
+                            Style="{StaticResource SeqSelectActionButton}"/>
+                </StackPanel>
                 <Label Content="Select sequence"
                        HorizontalAlignment="Center"
                        Style="{StaticResource ListLabel}"/>
                 <ComboBox ItemsSource="{Binding AvailableSequences}" 
                           SelectedItem="{Binding AvailableSeqSelected}"
-                          Style="{StaticResource ComboBoxFlatStyle}"/>
+                          Foreground="{StaticResource Foreground_1}"
+                          ItemContainerStyle="{StaticResource SequenceSelectorItem}"
+                          FontSize="15">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <Button Grid.Row="4"                        
                         FontSize="20"
                         Height="40"
@@ -127,8 +150,9 @@
                     FontFamily="{StaticResource FontAwesome}"
                     FontSize="30"
                     Content="&#x2b;"
-                    Style="{StaticResource GenericButton}"
-                    Command="{Binding ToggleAddSeqVisibilityCommand}"/>
+                    IsEnabled="{Binding IsPanelButtonEnabled}"
+                    Style="{StaticResource CollapsingButton}"
+                    Command="{Binding ToggleSeqPanelCommand}"/>
             <!--#endregion-->
         </Grid>
 

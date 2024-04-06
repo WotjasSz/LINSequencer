@@ -2,13 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!--#region Widnow bar-->
     <Style TargetType="Border" x:Key="WidnowBar">
-        <Setter Property="Background" Value="#252525"/>
+        <Setter Property="Background" Value="{StaticResource Background_1}"/>
         <Setter Property="Padding" Value="5 0 0 0"/>
         <Setter Property="VerticalAlignment" Value="Center"/>        
     </Style>
     <Style TargetType="Label" x:Key="TitleLabel">
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Foreground" Value="#c4c4c7"/>
+        <Setter Property="Foreground" Value="{StaticResource Foreground_2}"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
     </Style>
@@ -18,7 +18,7 @@
         <Setter Property="Height" Value="30"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="#c4c4c7"/>
+        <Setter Property="Foreground" Value="{StaticResource Foreground_2}"/>
         <Setter Property="Margin" Value="10 0 0 0"/>
         <!--<Setter Property="FontFamily" Value="{StaticResource FontAwesome}"/>-->
         <Setter Property="FontWeight" Value="SemiBold"/>
@@ -36,7 +36,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#444349"/>
+                <Setter Property="Background" Value="{StaticResource Background_5}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -53,14 +53,15 @@
     <!--#region Left side -->
     <!-- Menu button -->
     <Style TargetType="Grid" x:Key="NavGrid">
-        <Setter Property="Background" Value="#4b4f57"/>
+        <Setter Property="Background" Value="{StaticResource Background_2}"/>
     </Style>
+    
     <Style TargetType="Button" x:Key="FuncCallBtn">
         <Setter Property="Width" Value="50"/>
         <Setter Property="Height" Value="50"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="#c4c4c7"/>
+        <Setter Property="Foreground" Value="{StaticResource Foreground_5}"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="Template">
@@ -74,18 +75,18 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#444349"/>
+                <Setter Property="Background" Value="{StaticResource Background_5}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
+    
     <!-- Label -->
     <Style TargetType="Label" x:Key="ListLabel">
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Foreground" Value="#c4c4c7"/>
+        <Setter Property="Foreground" Value="{StaticResource Primary_5}"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="Margin" Value="10 5 0 5"/>
+        <Setter Property="Margin" Value="10 0 10 0"/>
     </Style>
     
     <!-- ListView -->
@@ -97,7 +98,7 @@
     <Style TargetType="ListViewItem" x:Key="SequenceListItem">
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#777e8b"/>
+                <Setter Property="Background" Value="{StaticResource Background_5}"/>
             </Trigger>
         </Style.Triggers>
 
@@ -132,13 +133,39 @@
     <!--#endregion-->
     
     <!--#region Sequence slection -->
+    <Style TargetType="Button" x:Key="SeqSelectActionButton">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource Accent_1}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Opacity" Value="0.25"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style TargetType="StackPanel" x:Key="SequenceSelector">
+        <Setter Property="Margin" Value="15 0 15 0"/>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard Name="SlideInStoryboard">
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="225" Duration="0:0:0.4"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="230" Duration="0:0:0.4"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -150,7 +177,7 @@
                 <Trigger.EnterActions>
                     <BeginStoryboard Name="SlideOutStoryboard">
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Height" From="225" To="0" Duration="0:0:0.4"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Height" From="230" To="0" Duration="0:0:0.4"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -160,33 +187,53 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="ComboBoxItem" x:Key="SequenceSelectorItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border x:Name="brd"
+                            Background="{TemplateBinding Background}">
+                        <Label Content="{Binding Name}"
+                               Margin="5 2"
+                               Foreground="{StaticResource Foreground_2}"                           
+                               FontSize="18"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="brd" Property="Background" Value="{StaticResource Background_5}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>                                    
+                </ControlTemplate>
+            </Setter.Value>           
+        </Setter>        
+    </Style>
     <!--#endregion-->
     
     <!--#region Add Button -->
     <Style TargetType="Button" x:Key="GenericButton">
         <Setter Property="Margin" Value="35 5 35 5"/>
-        <Setter Property="Foreground" Value="#c4c4c7"/>
+        <Setter Property="Foreground" Value="{StaticResource Background_3}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="grid">
                         <Border x:Name="border" 
                                 CornerRadius="8" 
-                                BorderBrush="#c4c4c7" 
+                                BorderBrush="Transparent" 
                                 BorderThickness="2"
-                                Background="Transparent">
+                                Background="{StaticResource Primary_5}">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               TextElement.FontWeight="Bold"/>
                         </Border>
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#36393f"/>
-                        </Trigger>
+                    <ControlTemplate.Triggers>                        
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
-                            <Setter Property="Foreground" Value="#FF33962B"/>
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Primary_4}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Secondary_1}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
@@ -196,5 +243,37 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--#endregion-->
+
+    <Style TargetType="Button" x:Key="CollapsingButton" BasedOn="{StaticResource GenericButton}">
+        <Setter Property="Margin" Value="35 5 35 15"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard Name="SlideInStoryboard">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="60" Duration="0:0:0.4"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <StopStoryboard BeginStoryboardName="SlideInStoryboard"/>
+                </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Trigger.EnterActions>
+                    <BeginStoryboard Name="SlideOutStoryboard">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Height" From="60" To="0" Duration="0:0:0.4"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <StopStoryboard BeginStoryboardName="SlideOutStoryboard"/>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+        
+        <!--#endregion-->
+    
 </ResourceDictionary>

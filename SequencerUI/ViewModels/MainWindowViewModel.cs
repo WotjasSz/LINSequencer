@@ -17,6 +17,7 @@ using System.Windows.Input;
 
 namespace SequencerUI.ViewModels
 {
+    //TODO Add ScrollView style
     public partial class MainWindowViewModel : ObservableObject
     {
         #region Properties
@@ -27,7 +28,10 @@ namespace SequencerUI.ViewModels
         private object _currentView;
 
         [ObservableProperty]
-        private bool _isAddSeqVisible;
+        private bool _isAddSeqPanelEnable;
+        
+        [ObservableProperty]
+        private bool _isPanelButtonEnabled = true;
 
         [ObservableProperty]
         private ObservableCollection<SequenceModel>? _availableSequences;
@@ -64,14 +68,16 @@ namespace SequencerUI.ViewModels
         private void AddSequence()
         {
             ActiveSequences.Add(AvailableSeqSelected);
-            IsAddSeqVisible = !IsAddSeqVisible;
+            IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
+            IsPanelButtonEnabled = !IsAddSeqPanelEnable;
         }
 
         [RelayCommand]
         private void AddNewSequence()
         {
             Debug.WriteLine("Tymczosowo");
-            IsAddSeqVisible = !IsAddSeqVisible;
+            IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
+            IsPanelButtonEnabled = !IsAddSeqPanelEnable;
         }
 
         private bool CanExeuteAddSequence()
@@ -80,9 +86,10 @@ namespace SequencerUI.ViewModels
         }
 
         [RelayCommand]
-        private void ToggleAddSeqVisibility()
+        private void ToggleSeqPanel()
         {
-            IsAddSeqVisible = !IsAddSeqVisible;
+            IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
+            IsPanelButtonEnabled = !IsAddSeqPanelEnable;
         }
 
         #endregion
