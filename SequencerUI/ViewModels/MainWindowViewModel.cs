@@ -43,18 +43,26 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private ObservableCollection<SequenceModel>? _activeSequences;
 
+        [ObservableProperty]
+        private SequenceModel? _currentSequence;
+
         #endregion
 
 
         public MainWindowViewModel()
         {
-            //AddSequenceCommand = new RelayCommand(AddSequence);
-
             LinSequencer.InitializeLinSequencer();
 
             _availableSequences = new ObservableCollection<SequenceModel>(LinSequencer.SequenceList);
             _activeSequences = new ObservableCollection<SequenceModel>();
         }
+
+        #region Property actions
+        partial void OnCurrentSequenceChanged(SequenceModel? value)
+        {
+            CurrentView = new SequenceRun() { DataContext = new SequenceRunViewModel(value) };
+        }
+        #endregion
 
         #region Commands
 
