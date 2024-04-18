@@ -8,7 +8,6 @@
                 <ResourceDictionary Source="./Resources/Themes/DarkModeColors.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/MainWindowStyle.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/ComboBoxCustomStyle.xaml"/>
-                <ResourceDictionary Source="./Resources/Themes/AboutControlStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="FontAwesome">pack://application:,,,/Resources/Fonts/#Font Awesome 6 Free Solid</FontFamily>
         </ResourceDictionary>

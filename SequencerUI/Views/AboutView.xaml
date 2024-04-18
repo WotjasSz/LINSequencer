@@ -7,15 +7,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock Style="{StaticResource FieldLabel}" Text="Program name:"/>
-        <TextBlock Style="{StaticResource FieldValue}" Text="{Binding AboutData.Title}"/>
-        <TextBlock Style="{StaticResource FieldLabel}" Text="Program version:"/>
-        <TextBlock Style="{StaticResource FieldValue}" Text="{Binding AboutData.Version}"/>
-        <TextBlock Style="{StaticResource FieldLabel}" Text="Author:"/>
-        <TextBlock Style="{StaticResource FieldValue}" Text="{Binding AboutData.Author}"/>
-        <TextBlock Style="{StaticResource FieldLabel}" Text="DLL Version:"/>
-        <TextBlock Style="{StaticResource FieldValue}" Text="{Binding AboutData.DllVersion}"/>
-        <TextBlock Style="{StaticResource FieldLabel}" Text="Wrapper version:"/>
-        <TextBlock Style="{StaticResource FieldValue}" Text="{Binding AboutData.WrapperVersion}"/>
+        <Label Style="{StaticResource CommonFieldLabel}" Content="Program name:"/>
+        <TextBlock Style="{StaticResource BiggerFieldValue}" Text="{Binding AboutData.Title}"/>
+        <Label Style="{StaticResource CommonFieldLabel}" Content="Program version:"/>
+        <TextBlock Style="{StaticResource BiggerFieldValue}" Text="{Binding AboutData.Version}"/>
+        <Label Style="{StaticResource CommonFieldLabel}" Content="Author:"/>
+        <TextBlock Style="{StaticResource BiggerFieldValue}" Text="{Binding AboutData.Author}"/>
+        <Label Style="{StaticResource CommonFieldLabel}" Content="DLL Version:"/>
+        <TextBlock Style="{StaticResource BiggerFieldValue}" Text="{Binding AboutData.DllVersion}"/>
+        <Label Style="{StaticResource CommonFieldLabel}" Content="Wrapper version:"/>
+        <TextBlock Style="{StaticResource BiggerFieldValue}" Text="{Binding AboutData.WrapperVersion}"/>
     </StackPanel>
 </UserControl>

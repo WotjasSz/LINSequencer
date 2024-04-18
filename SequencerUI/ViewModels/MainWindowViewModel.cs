@@ -83,7 +83,7 @@ namespace SequencerUI.ViewModels
         [RelayCommand]
         private void AddNewSequence()
         {
-            Debug.WriteLine("Tymczosowo");
+            Debug.WriteLine("Tymczasowo");
             IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
             IsPanelButtonEnabled = !IsAddSeqPanelEnable;
         }
