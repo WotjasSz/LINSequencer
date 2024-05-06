@@ -46,6 +46,9 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private SequenceModel? _currentSequence;
 
+        private SequenceRunView _seqRunVM;
+        private SequenceEditView _sequenceEditVM;
+
         #endregion
 
 
@@ -53,14 +56,22 @@ namespace SequencerUI.ViewModels
         {
             LinSequencer.InitializeLinSequencer();
 
-            _availableSequences = new ObservableCollection<SequenceModel>(LinSequencer.SequenceList);
-            _activeSequences = new ObservableCollection<SequenceModel>();
+            AvailableSequences = new ObservableCollection<SequenceModel>(LinSequencer.SequenceList);
+            ActiveSequences = new ObservableCollection<SequenceModel>();
+
+            _seqRunVM = new SequenceRunView();
+            _sequenceEditVM = new SequenceEditView();
         }
 
         #region Property actions
         partial void OnCurrentSequenceChanged(SequenceModel? value)
         {
-            CurrentView = new SequenceRun() { DataContext = new SequenceRunViewModel(value) };
+            //TODO zmienić to na tworzenie jednego obiektu i update  sequence a nie za każdym razem tworzenie od nowa
+            // Być moze użycie AutoFac??
+            //CurrentView = new SequenceRun() { DataContext = new SequenceRunViewModel(value) };
+            //_seqRunVM.DataContext = new SequenceRunViewModel(value);
+            _sequenceEditVM.DataContext = new SequenceEditViewModel(value);
+            CurrentView = _sequenceEditVM;
         }
         #endregion
 
@@ -69,6 +80,7 @@ namespace SequencerUI.ViewModels
         [RelayCommand]
         private void ShowAboutControl()
         {
+            CurrentSequence = null;
             CurrentView = new AboutView() { DataContext = new AboutViewModel() };
         }
 
@@ -83,7 +95,10 @@ namespace SequencerUI.ViewModels
         [RelayCommand]
         private void AddNewSequence()
         {
-            Debug.WriteLine("Tymczasowo");
+            Debug.WriteLine("Dodawanie nowej sekwencji...");
+            SequenceModel sequenceModel = new SequenceModel();
+            ActiveSequences.Add(sequenceModel);
+            CurrentSequence = sequenceModel;
             IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
             IsPanelButtonEnabled = !IsAddSeqPanelEnable;
         }

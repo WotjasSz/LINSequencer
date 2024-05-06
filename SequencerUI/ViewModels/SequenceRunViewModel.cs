@@ -21,17 +21,21 @@ namespace SequencerUI.ViewModels
 
         [ObservableProperty]
         private DeviceModel _currentDevice;
-
+        
         public SequenceRunViewModel()
         {
-            //TODO Dodać nowy konstruktor bez parametrowy
-            //_sequence = new SequenceModel();
+            Sequence = new SequenceModel();            
         }
 
         public SequenceRunViewModel(SequenceModel sequence)
         {
             Sequence = sequence;
             Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
+        }
+
+        public void UpdateSequence(SequenceModel sequence)
+        {
+            Sequence = sequence;            
         }
     }
 }

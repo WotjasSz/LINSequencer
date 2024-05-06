@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SequencerUI.ViewModels
+namespace SequencerUI.Views
 {
     /// <summary>
-    /// Interaction logic for SequenceRun.xaml
+    /// Interaction logic for SequenceEditView.xaml
     /// </summary>
-    public partial class SequenceRunView : UserControl
+    public partial class SequenceEditView : UserControl
     {
-        public SequenceRunView()
+        public SequenceEditView()
         {
             InitializeComponent();
         }
