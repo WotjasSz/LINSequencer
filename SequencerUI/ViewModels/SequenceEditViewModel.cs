@@ -27,9 +27,13 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private SeqFunction _selectedFunction;
 
+        [ObservableProperty]
+        private ObservableCollection<SequenceStepModel> _stepList;
+
         public SequenceEditViewModel()
         {
             Sequence = new SequenceModel();
+            StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
             FunctionList = new ObservableCollection<SeqFunction>(LinSequencer.FunctionList);
         }
@@ -37,6 +41,7 @@ namespace SequencerUI.ViewModels
         public SequenceEditViewModel(SequenceModel sequence)
         {
             Sequence = sequence;
+            StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
             FunctionList = new ObservableCollection<SeqFunction>(LinSequencer.FunctionList);
         }
@@ -50,7 +55,7 @@ namespace SequencerUI.ViewModels
         [RelayCommand]
         private void AddSequence()
         {
-            Sequence.StepList.Add(new SequenceStepModel(Sequence.StepList.Count, SelectedFunction));
+            StepList.Add(new SequenceStepModel(StepList.Count, SelectedFunction));
         }
     }
 }

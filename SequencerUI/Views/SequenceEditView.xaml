@@ -53,17 +53,22 @@
                 <Label Content="StepList"
                        Style="{StaticResource HeaderLabel}"/>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding Sequence.StepList}"
-                              Style="{StaticResource StepList}"
-                              ItemContainerStyle="{StaticResource StepListItem}"/>
+                    <ListView ItemsSource="{Binding StepList}"
+                              Style="{StaticResource StepList}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:SequenceStepView DataContext="{Binding}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </ScrollViewer>                
             </StackPanel>
             <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <Button Content="Add"
-                            Command="{Binding AddSequenceCommand}"/>
                     <ListView ItemsSource="{Binding FunctionList}"
                               SelectedItem="{Binding SelectedFunction}"/>
+                    <Button Content="Add"
+                            Command="{Binding AddSequenceCommand}"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

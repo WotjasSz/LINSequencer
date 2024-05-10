@@ -67,8 +67,7 @@ namespace SequencerUI.ViewModels
         partial void OnCurrentSequenceChanged(SequenceModel? value)
         {
             //TODO zmienić to na tworzenie jednego obiektu i update  sequence a nie za każdym razem tworzenie od nowa
-            // Być moze użycie AutoFac??
-            //CurrentView = new SequenceRun() { DataContext = new SequenceRunViewModel(value) };
+            // Być moze użycie AutoFac??            
             //_seqRunVM.DataContext = new SequenceRunViewModel(value);
             _sequenceEditVM.DataContext = new SequenceEditViewModel(value);
             CurrentView = _sequenceEditVM;
