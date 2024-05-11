@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using LINSequencerLib.Sequence;
 using SequencerUI.Views;
 using System;
@@ -12,21 +13,5 @@ namespace SequencerUI.ViewModels
 {
     public partial class SequenceStepViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private string _name;
-
-        [ObservableProperty]
-        SequenceStepModel _sequenceStep;
-
-        //public SequenceStepViewModel()
-        //{
-        //    Debug.WriteLine("OK i po inicjalizacji");
-        //    SequenceStep = new SequenceStepModel(0, "");
-        //}
-
-        //public SequenceStepViewModel(SequenceStepModel model)
-        //{
-        //    SequenceStep = model;
-        //}
     }
 }

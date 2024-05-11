@@ -25,7 +25,8 @@ namespace SequencerUI.Views
         public SequenceStepView()
         {
             InitializeComponent();
-            //this.DataContext = new SequenceStepViewModel();
+            //this.DataContext = this;
+            //SequenceStepViewModel seq = new SequenceStepViewModel(this);
         }
     }
 }

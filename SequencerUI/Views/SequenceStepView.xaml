@@ -9,7 +9,8 @@
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
         <StackPanel>
             <Label Content="Name"/>
-            <TextBlock Text="{Binding SequenceStep.Name}" Foreground="White"/>
+            <TextBlock Text="{Binding Name}" Foreground="White"/>
+            <Button Content="Push" Command="{Binding PushCommand}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>
