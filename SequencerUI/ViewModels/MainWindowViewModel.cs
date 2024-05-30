@@ -49,6 +49,8 @@ namespace SequencerUI.ViewModels
         private SequenceRunView _seqRunVM;
         private SequenceEditView _sequenceEditVM;
 
+        private bool _editModeAvailable = true;
+
         #endregion
 
 
@@ -68,9 +70,8 @@ namespace SequencerUI.ViewModels
         {
             //TODO zmienić to na tworzenie jednego obiektu i update  sequence a nie za każdym razem tworzenie od nowa
             // Być moze użycie AutoFac??            
-            //_seqRunVM.DataContext = new SequenceRunViewModel(value);
-            _sequenceEditVM.DataContext = new SequenceEditViewModel(value);
-            CurrentView = _sequenceEditVM;
+            _seqRunVM.DataContext = new SequenceRunViewModel(value);            
+            CurrentView = _seqRunVM;
         }
         #endregion
 
@@ -86,15 +87,26 @@ namespace SequencerUI.ViewModels
         [RelayCommand(CanExecute = nameof(CanExeuteAddSequence))]
         private void AddSequence()
         {
-            ActiveSequences.Add(AvailableSeqSelected);
+            if (AvailableSeqSelected != null)
+            {
+                ActiveSequences.Add(AvailableSeqSelected);
+                AvailableSeqSelected = null;
+            }            
             IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
             IsPanelButtonEnabled = !IsAddSeqPanelEnable;
+        }
+        [RelayCommand]
+        private void AvailableSequenceReload()
+        {
+            AvailableSequences = null;
+            LinSequencer.ReloadAvailableSequences();
+            AvailableSequences = new ObservableCollection<SequenceModel>(LinSequencer.SequenceList);
         }
 
         [RelayCommand]
         private void AddNewSequence()
         {
-            Debug.WriteLine("Dodawanie nowej sekwencji...");
+            //Debug.WriteLine("Dodawanie nowej sekwencji...");
             SequenceModel sequenceModel = new SequenceModel();
             ActiveSequences.Add(sequenceModel);
             CurrentSequence = sequenceModel;
@@ -102,9 +114,27 @@ namespace SequencerUI.ViewModels
             IsPanelButtonEnabled = !IsAddSeqPanelEnable;
         }
 
+        [RelayCommand]
+        private void RemoveSequence(SequenceModel seq)
+        {            
+            ActiveSequences.Remove(seq);
+        }
+
+        [RelayCommand(CanExecute = nameof(CanExecuteEditSequence))]
+        private void EditSequence(SequenceModel seq)
+        {
+            _sequenceEditVM.DataContext = new SequenceEditViewModel(seq);
+            CurrentView = _sequenceEditVM;
+        }
+
         private bool CanExeuteAddSequence()
         {
             return AvailableSeqSelected != null;
+        }
+
+        private bool CanExecuteEditSequence()
+        {
+            return _editModeAvailable;
         }
 
         [RelayCommand]

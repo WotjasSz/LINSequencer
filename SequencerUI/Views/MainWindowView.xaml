@@ -90,9 +90,10 @@
             <!--#region ListView -->
             <ListView Grid.Row="2"
                       Style="{StaticResource ActiveSequenceList}"
-                      SelectedItem="{Binding CurrentSequence}"
                       ItemContainerStyle="{StaticResource SequenceListItem}"
-                      ItemsSource="{Binding ActiveSequences}" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                      SelectedItem="{Binding CurrentSequence}"
+                      ItemsSource="{Binding ActiveSequences}" d:ItemsSource="{d:SampleData ItemCount=5}">
+            </ListView>
             <!--#endregion-->
             
             <!--#region Sequence selection -->
@@ -105,7 +106,8 @@
                     <!-- REFRESH -->
                     <Button Content="&#xf021;" 
                             FontFamily="{StaticResource FontAwesome}"
-                            Style="{StaticResource SeqSelectActionButton}"/>
+                            Style="{StaticResource SeqSelectActionButton}"
+                            Command="{Binding AvailableSequenceReloadCommand}"/>
                     <!-- CANCEL -->
                     <Button Content="&#xf00d;"
                             FontFamily="{StaticResource FontAwesome}"

@@ -55,11 +55,6 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <ListView ItemsSource="{Binding StepList}"
                               Style="{StaticResource StepList}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <local:SequenceStepView DataContext="{Binding}"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
                     </ListView>
                 </ScrollViewer>                
             </StackPanel>
@@ -68,7 +63,7 @@
                     <ListView ItemsSource="{Binding FunctionList}"
                               SelectedItem="{Binding SelectedFunction}"/>
                     <Button Content="Add"
-                            Command="{Binding AddSequenceCommand}"/>
+                            Command="{Binding AddSeqStepCommand}"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

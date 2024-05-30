@@ -25,7 +25,7 @@ namespace SequencerUI.ViewModels
         private ObservableCollection<SeqFunction> _functionList;
 
         [ObservableProperty]
-        private SeqFunction _selectedFunction;
+        private SeqFunction? _selectedFunction;
 
         [ObservableProperty]
         private ObservableCollection<SequenceStepModel> _stepList;
@@ -49,11 +49,13 @@ namespace SequencerUI.ViewModels
         [RelayCommand]
         private void SaveSequence()
         {
+            Sequence.StepList.Clear();
+            Sequence.StepList = StepList.ToList();
             LinSequencer.SaveSequence(Sequence);
         }
 
         [RelayCommand]
-        private void AddSequence()
+        private void AddSeqStep()
         {
             StepList.Add(new SequenceStepModel(StepList.Count, SelectedFunction));
         }
