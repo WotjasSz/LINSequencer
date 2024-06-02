@@ -42,30 +42,42 @@
             <StackPanel>
                 <Label Content="Name" 
                        Style="{StaticResource CommonFieldLabel}"/>
-                <TextBox Text="{Binding Sequence.Name}"/>
+                <TextBox Text="{Binding Sequence.Name, FallbackValue=NameTb}"
+                         Style="{StaticResource ShortFieldText}"/>
                 <Label Content="Description" 
                        Style="{StaticResource CommonFieldLabel}"/>
-                <TextBox Text="{Binding Sequence.Description}"/>
+                <TextBox Text="{Binding Sequence.Description, FallbackValue=DescriptionTb}"
+                         Style="{StaticResource LongFieldText}"/>
                 <Label Content="SDF" 
                        Style="{StaticResource CommonFieldLabel}"/>
                 <ComboBox ItemsSource="{Binding SdfFiles}"
-                          SelectedItem="{Binding Sequence.SdfName}"/>
+                          SelectedItem="{Binding SelectedSdfFile}"
+                          Foreground="{StaticResource Foreground_1}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Name}" 
+                                           FontSize="16" 
+                                           FontWeight="DemiBold" 
+                                           TextAlignment="Center"
+                                           Margin="5 5"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <Label Content="StepList"
                        Style="{StaticResource HeaderLabel}"/>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding StepList}"
-                              Style="{StaticResource StepList}">
-                    </ListView>
-                </ScrollViewer>                
+                <ListView ItemsSource="{Binding StepList}"
+                          Style="{StaticResource StepListEditable}"
+                          ItemContainerStyle="{StaticResource StepListItemEditable}">
+                </ListView>
             </StackPanel>
-            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    <ListView ItemsSource="{Binding FunctionList}"
-                              SelectedItem="{Binding SelectedFunction}"/>
-                    <Button Content="Add"
-                            Command="{Binding AddSeqStepCommand}"/>
-                </StackPanel>
-            </ScrollViewer>
+            <StackPanel Grid.Column="1">
+                <ListView ItemsSource="{Binding FunctionList}"
+                          SelectedItem="{Binding SelectedFunction}"/>
+                <Button Content="Add"
+                        Command="{Binding AddSeqStepCommand}"/>
+            </StackPanel>
         </Grid>
 
     </Grid>

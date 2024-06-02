@@ -22,6 +22,9 @@ namespace SequencerUI.ViewModels
         private ObservableCollection<SdfFileModel> _sdfFiles;
 
         [ObservableProperty]
+        private SdfFileModel? _selectedSdfFile;
+
+        [ObservableProperty]
         private ObservableCollection<SeqFunction> _functionList;
 
         [ObservableProperty]
@@ -51,6 +54,7 @@ namespace SequencerUI.ViewModels
         {
             Sequence.StepList.Clear();
             Sequence.StepList = StepList.ToList();
+            Sequence.SdfName = SelectedSdfFile.Name;
             LinSequencer.SaveSequence(Sequence);
         }
 

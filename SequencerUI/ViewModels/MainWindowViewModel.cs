@@ -29,13 +29,13 @@ namespace SequencerUI.ViewModels
 
         [ObservableProperty]
         private bool _isAddSeqPanelEnable;
-        
+
         [ObservableProperty]
         private bool _isPanelButtonEnabled = true;
 
         [ObservableProperty]
         private ObservableCollection<SequenceModel>? _availableSequences;
-        
+
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(AddSequenceCommand))]
         private SequenceModel? _availableSeqSelected;
@@ -70,7 +70,7 @@ namespace SequencerUI.ViewModels
         {
             //TODO zmienić to na tworzenie jednego obiektu i update  sequence a nie za każdym razem tworzenie od nowa
             // Być moze użycie AutoFac??            
-            _seqRunVM.DataContext = new SequenceRunViewModel(value);            
+            _seqRunVM.DataContext = new SequenceRunViewModel(value);
             CurrentView = _seqRunVM;
         }
         #endregion
@@ -91,7 +91,7 @@ namespace SequencerUI.ViewModels
             {
                 ActiveSequences.Add(AvailableSeqSelected);
                 AvailableSeqSelected = null;
-            }            
+            }
             IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
             IsPanelButtonEnabled = !IsAddSeqPanelEnable;
         }
@@ -110,13 +110,19 @@ namespace SequencerUI.ViewModels
             SequenceModel sequenceModel = new SequenceModel();
             ActiveSequences.Add(sequenceModel);
             CurrentSequence = sequenceModel;
+            _sequenceEditVM.DataContext = new SequenceEditViewModel(sequenceModel);
+            CurrentView = _sequenceEditVM;
             IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
             IsPanelButtonEnabled = !IsAddSeqPanelEnable;
         }
 
         [RelayCommand]
         private void RemoveSequence(SequenceModel seq)
-        {            
+        {
+            if (CurrentSequence == seq)
+            {
+                CurrentView = null;
+            }
             ActiveSequences.Remove(seq);
         }
 

@@ -2,6 +2,74 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- Font Awesome definition -->
     <FontFamily x:Key="FontAwesome">pack://application:,,,/Resources/Fonts/#Font Awesome 6 Free Solid</FontFamily>
+
+    <!--#region Common components -->
+    <!-- Label -->
+    <Style TargetType="Label" x:Key="HeaderLabel">
+        <Setter Property="Foreground" Value="{StaticResource Primary_5}"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontStyle" Value="Italic"/>
+        <Setter Property="Margin" Value="0 10 0 0"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="Label" x:Key="CommonFieldLabel">
+        <Setter Property="Foreground" Value="{StaticResource Accent_1}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="0 5 0 0"/>
+    </Style>
+    <Style TargetType="Label" x:Key="LessImportantFieldLabel">
+        <Setter Property="Foreground" Value="{StaticResource Accent_2}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- TextBlock -->
+    <Style TargetType="TextBlock" x:Key="LessImportantFieldValue">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_5}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="BiggerFieldValue">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Margin" Value="0 0 0 15"/>
+        <Setter Property="Padding" Value="10 0 0 0"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="ShortFieldValue">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Padding" Value="12 0 0 0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="LongTextFieldValue" BasedOn="{StaticResource ShortFieldValue}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <!-- TextBox -->
+    <Style TargetType="TextBox" x:Key="BaseForText">
+
+    </Style>
+    <Style TargetType="TextBox" x:Key="ShortFieldText">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
+        <Setter Property="Background" Value="{StaticResource Background_4}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Padding" Value="5 5"/>
+        <Setter Property="Margin" Value="12 0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Accent_5}"/>
+        <Setter Property="CaretBrush" Value="{StaticResource Accent_1}"/>
+    </Style>
+    <Style TargetType="TextBox" x:Key="LongFieldText" BasedOn="{StaticResource ShortFieldText}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+    <!--#endregion-->
+
     <!--#region Widnow bar-->
     <Style TargetType="Border" x:Key="WidnowBar">
         <Setter Property="Background" Value="{StaticResource Background_1}"/>
@@ -90,7 +158,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="10 0 10 0"/>
     </Style>
-    
+
     <!--#region Sequence slection -->
     <Style TargetType="Button" x:Key="SeqSelectActionButton">
         <Setter Property="Width" Value="20"/>
@@ -240,7 +308,7 @@
         
     <!--#endregion-->
 
-    <!-- ListView -->
+    <!--#region Sequence list -->
     <Style TargetType="ListView" x:Key="ActiveSequenceList">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -304,14 +372,15 @@
         </Style.Triggers>
     </Style>
     <!--#endregion-->
+    <!--#endregion-->
 
-    <!--#region Common components -->
+    <!--#region Step list -->
     <Style TargetType="ListView" x:Key="StepList">
         <Setter Property="Margin" Value="0 10"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>        
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
     </Style>
     <Style TargetType="ListViewItem" x:Key="StepListItem">
         <Style.Triggers>
@@ -323,27 +392,27 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
                     <Border Background="{TemplateBinding Background}"
-                            BorderThickness="3"
-                            BorderBrush="{StaticResource Primary_3}"
-                            CornerRadius="30"
-                            Margin="10 10">
+                        BorderThickness="3"
+                        BorderBrush="{StaticResource Primary_3}"
+                        CornerRadius="30"
+                        Margin="10 10">
                         <StackPanel Orientation="Horizontal"
-                                Margin="5 2">
+                            Margin="5 2">
                             <Label Content="{Binding Id}"
-                               FontSize="30"
-                               Foreground="{StaticResource Accent_1}"
-                               Width="50"
-                               HorizontalContentAlignment="Center"
-                               VerticalContentAlignment="Center"/>
+                           FontSize="30"
+                           Foreground="{StaticResource Accent_1}"
+                           Width="50"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center"/>
                             <StackPanel HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Margin="15 5">
+                                    VerticalAlignment="Center"
+                                    Margin="15 5">
                                 <TextBlock Text="{Binding Name}"
-                                            Foreground="{StaticResource Foreground_2}"
-                                            FontSize="18"/>
+                                        Foreground="{StaticResource Foreground_2}"
+                                        FontSize="18"/>
                                 <TextBlock Text="{Binding Comment}"
-                                           Foreground="{StaticResource Foreground_4}"
-                                           FontSize="14"/>
+                                       Foreground="{StaticResource Foreground_4}"
+                                       FontSize="14"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -351,50 +420,54 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!--#endregion-->
 
-    <Style TargetType="Label" x:Key="HeaderLabel">
-        <Setter Property="Foreground" Value="{StaticResource Primary_5}"/>
-        <Setter Property="FontSize" Value="30"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontStyle" Value="Italic"/>        
-        <Setter Property="Margin" Value="0 10 0 0"/>
+    <!--#region Edit step list -->
+    <Style TargetType="ListView" x:Key="StepListEditable">
+        <Setter Property="Margin" Value="0 10"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
     </Style>
-    <Style TargetType="Label" x:Key="CommonFieldLabel">
-        <Setter Property="Foreground" Value="{StaticResource Accent_1}"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Margin" Value="0 5 0 0"/>
-    </Style>
-    <Style TargetType="TextBlock" x:Key="BiggerFieldValue">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
-        <Setter Property="FontSize" Value="22"/>
-        <Setter Property="Margin" Value="0 0 0 15"/>
-        <Setter Property="Padding" Value="10 0 0 0"/>
-    </Style>
-    
-    <Style TargetType="Label" x:Key="LessImportantFieldLabel">
-        <Setter Property="Foreground" Value="{StaticResource Accent_2}"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-    <Style TargetType="TextBlock" x:Key="LessImportantFieldValue">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_5}"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-    
-    <Style TargetType="TextBlock" x:Key="ShortFieldValue">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Padding" Value="12 0 0 0"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-    <Style TargetType="TextBlock" x:Key="LongTextFieldValue" BasedOn="{StaticResource ShortFieldValue}">
-        <Setter Property="TextWrapping" Value="Wrap"/>
+    <Style TargetType="ListViewItem" x:Key="StepListItemEditable">
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource Primary_3}"/>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderThickness="3"
+                    BorderBrush="{StaticResource Primary_3}"
+                    CornerRadius="30"
+                    Margin="10 10">
+                        <StackPanel Orientation="Horizontal"
+                        Margin="5 2">
+                            <Label Content="{Binding Id}"
+                       FontSize="30"
+                       Foreground="{StaticResource Accent_1}"
+                       Width="50"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"/>
+                            <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="15 5">
+                                <TextBlock Text="{Binding Name}"
+                                    Foreground="{StaticResource Foreground_2}"
+                                    FontSize="18"/>
+                                <TextBlock Text="{Binding Comment}"
+                                   Foreground="{StaticResource Foreground_4}"
+                                   FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <!--#endregion-->
-    
+
 </ResourceDictionary>
