@@ -1,12 +1,16 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Collections;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
+using LINSequencerLib.SequenceStep;
 using LINSequencerLib.SupportingFiles;
+using SequencerUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,26 +23,36 @@ namespace SequencerUI.ViewModels
         private SequenceModel _sequence;
 
         [ObservableProperty]
+        private object _currentStepParamView;
+
+        [ObservableProperty]
         private ObservableCollection<SdfFileModel> _sdfFiles;
 
         [ObservableProperty]
         private SdfFileModel? _selectedSdfFile;
 
         [ObservableProperty]
+        //private ObservableGroupedCollection<string, SeqFunction> _functionList;
         private ObservableCollection<SeqFunction> _functionList;
 
-        [ObservableProperty]
+        [ObservableProperty]        
         private SeqFunction? _selectedFunction;
 
         [ObservableProperty]
         private ObservableCollection<SequenceStepModel> _stepList;
+
+        [ObservableProperty]        
+        private SequenceStepModel? _selectedSeqenceStep;
+
+        private StepParametersView _stepParametersView;
 
         public SequenceEditViewModel()
         {
             Sequence = new SequenceModel();
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
-            FunctionList = new ObservableCollection<SeqFunction>(LinSequencer.FunctionList);
+            _stepParametersView = new StepParametersView();
+            LoadFunctionList();
         }
 
         public SequenceEditViewModel(SequenceModel sequence)
@@ -46,9 +60,19 @@ namespace SequencerUI.ViewModels
             Sequence = sequence;
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
-            FunctionList = new ObservableCollection<SeqFunction>(LinSequencer.FunctionList);
+            _stepParametersView = new StepParametersView();
+            LoadFunctionList();
         }
 
+        #region Property actions
+        partial void OnSelectedSeqenceStepChanged(SequenceStepModel? value)
+        {
+            _stepParametersView.DataContext = value;
+            CurrentStepParamView = _stepParametersView;
+        }
+        #endregion
+
+        #region Commands
         [RelayCommand]
         private void SaveSequence()
         {
@@ -61,7 +85,16 @@ namespace SequencerUI.ViewModels
         [RelayCommand]
         private void AddSeqStep()
         {
-            StepList.Add(new SequenceStepModel(StepList.Count, SelectedFunction));
+            if(SelectedFunction != null)
+            {
+                StepList.Add(new SequenceStepModel(StepList.Count, SelectedFunction));
+            }            
         }
+
+        private void LoadFunctionList()
+        {
+            FunctionList = new ObservableCollection<SeqFunction>(LinSequencer.FunctionList);
+        }
+        #endregion
     }
 }

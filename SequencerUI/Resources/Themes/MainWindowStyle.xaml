@@ -10,7 +10,7 @@
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontStyle" Value="Italic"/>
-        <Setter Property="Margin" Value="0 10 0 0"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
     <Style TargetType="Label" x:Key="CommonFieldLabel">
@@ -427,40 +427,46 @@
         <Setter Property="Margin" Value="0 10"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
     </Style>
     <Style TargetType="ListViewItem" x:Key="StepListItemEditable">
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource Primary_3}"/>
+                <Setter Property="Background" Value="{StaticResource Primary_5}"/>
             </Trigger>
         </Style.Triggers>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
                     <Border Background="{TemplateBinding Background}"
-                    BorderThickness="3"
-                    BorderBrush="{StaticResource Primary_3}"
-                    CornerRadius="30"
-                    Margin="10 10">
+                            BorderThickness="0 1"
+                            BorderBrush="{StaticResource Primary_3}"
+                            CornerRadius="10"
+                            Margin="10 2">
                         <StackPanel Orientation="Horizontal"
-                        Margin="5 2">
+                                    Margin="5 2">
                             <Label Content="{Binding Id}"
-                       FontSize="30"
-                       Foreground="{StaticResource Accent_1}"
-                       Width="50"
-                       HorizontalContentAlignment="Center"
-                       VerticalContentAlignment="Center"/>
+                                   FontSize="30"
+                                   Foreground="{StaticResource Accent_1}"
+                                   Width="50"
+                                   VerticalAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"/>
                             <StackPanel HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="15 5">
+                                        VerticalAlignment="Center"
+                                        Margin="15 5">
                                 <TextBlock Text="{Binding Name}"
-                                    Foreground="{StaticResource Foreground_2}"
-                                    FontSize="18"/>
-                                <TextBlock Text="{Binding Comment}"
-                                   Foreground="{StaticResource Foreground_4}"
-                                   FontSize="14"/>
+                                           Foreground="{StaticResource Foreground_2}"
+                                           FontSize="18"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Comment: "
+                                               Foreground="{StaticResource Foreground_5}"
+                                               FontSize="14"/>
+                                    <TextBlock Text="{Binding Comment}"
+                                             Foreground="{StaticResource Foreground_4}"
+                                             FontSize="14"/>
+                                </StackPanel>                                
                             </StackPanel>
                         </StackPanel>
                     </Border>

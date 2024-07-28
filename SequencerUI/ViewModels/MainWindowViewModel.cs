@@ -48,6 +48,7 @@ namespace SequencerUI.ViewModels
 
         private SequenceRunView _seqRunVM;
         private SequenceEditView _sequenceEditVM;
+        private AboutView _aboutVM;
 
         private bool _editModeAvailable = true;
 
@@ -63,6 +64,10 @@ namespace SequencerUI.ViewModels
 
             _seqRunVM = new SequenceRunView();
             _sequenceEditVM = new SequenceEditView();
+            _aboutVM = new AboutView();
+
+            _aboutVM.DataContext = new AboutViewModel();
+            CurrentView = _aboutVM;
         }
 
         #region Property actions

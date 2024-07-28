@@ -67,7 +67,6 @@
             <ListView ItemsSource="{Binding Sequence.StepList}"
                       Style="{StaticResource StepList}"
                       ItemContainerStyle="{StaticResource StepListItem}">
-                
             </ListView>
         </StackPanel>
         <!--#endregion-->
