@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
 using SequencerUI.Views;
@@ -18,7 +19,7 @@ using System.Windows.Input;
 namespace SequencerUI.ViewModels
 {
     //TODO Add ScrollView style
-    public partial class MainWindowViewModel : ObservableObject
+    public partial class MainWindowViewModel : ObservableRecipient
     {
         #region Properties
         [ObservableProperty]
@@ -67,7 +68,7 @@ namespace SequencerUI.ViewModels
             _aboutVM = new AboutView();
 
             _aboutVM.DataContext = new AboutViewModel();
-            CurrentView = _aboutVM;
+            CurrentView = _aboutVM;   
         }
 
         #region Property actions
@@ -182,7 +183,7 @@ namespace SequencerUI.ViewModels
         private void CloseWidnow()
         {
             Application.Current.Shutdown();
-        }
+        }     
 
         #endregion
 

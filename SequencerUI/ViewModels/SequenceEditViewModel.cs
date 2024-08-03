@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.Collections;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
 using LINSequencerLib.SequenceStep;
 using LINSequencerLib.SupportingFiles;
+using SequencerUI.Helpers;
 using SequencerUI.Views;
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace SequencerUI.ViewModels
 {
-    public partial class SequenceEditViewModel : ObservableObject
+    public partial class SequenceEditViewModel : ObservableRecipient
     {
         [ObservableProperty]
         private SequenceModel _sequence;
@@ -67,8 +69,13 @@ namespace SequencerUI.ViewModels
         #region Property actions
         partial void OnSelectedSeqenceStepChanged(SequenceStepModel? value)
         {
-            _stepParametersView.DataContext = value;
-            CurrentStepParamView = _stepParametersView;
+            if(CurrentStepParamView == null)
+            {
+                _stepParametersView.DataContext = new StepParametersViewModel(value);
+                CurrentStepParamView = _stepParametersView;
+            }
+
+            WeakReferenceMessenger.Default.Send(new StepParameterMessage(value));
         }
         #endregion
 

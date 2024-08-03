@@ -16,6 +16,31 @@
                          Background="{StaticResource Background_3}"
                          TextWrapping="Wrap"/>
             </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Input"
+                           Foreground="{StaticResource Foreground_5}"/>
+                <ItemsControl ItemsSource="{Binding InputParameters}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5"
+                                    BorderBrush="{StaticResource Primary_3}"
+                                    BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource Foreground_5}"/>
+                                    <TextBox Text="{Binding ParamValue}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Output"
+                           Foreground="{StaticResource Foreground_5}"/>
+                <ItemsControl>
+
+                </ItemsControl>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
