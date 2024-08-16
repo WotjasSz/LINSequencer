@@ -8,26 +8,41 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
-            <StackPanel>
+            <StackPanel Margin="5">
                 <TextBlock Text="Comment"
-                           Foreground="{StaticResource Foreground_5}"/>
+                           Foreground="{StaticResource Accent_1}"
+                           FontSize="16"/>
                 <TextBox Text="{Binding Comment}"
-                         Foreground="{StaticResource Foreground_3}"
-                         Background="{StaticResource Background_3}"
-                         TextWrapping="Wrap"/>
-            </StackPanel>
+                         FontSize="16"
+                         Foreground="{StaticResource Foreground_2}"
+                         Background="{StaticResource Background_5}"
+                         TextWrapping="Wrap"
+                         BorderThickness="0"
+                         Padding="3"
+                         Margin="5"/>
+            </StackPanel>            
             <StackPanel>
                 <TextBlock Text="Input"
-                           Foreground="{StaticResource Foreground_5}"/>
+                           Foreground="{StaticResource Accent_1}"
+                           FontSize="16"/>
                 <ItemsControl ItemsSource="{Binding InputParameters}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Padding="5"
-                                    BorderBrush="{StaticResource Primary_3}"
-                                    BorderThickness="1">
+                            <Border Margin="5" 
+                                    Padding="3">
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource Foreground_5}"/>
-                                    <TextBox Text="{Binding ParamValue}"/>
+                                    <TextBlock Text="{Binding Name}" 
+                                               Foreground="{StaticResource Foreground_4}"
+                                               FontSize="14"
+                                               Margin="0 3"/>
+                                    <TextBox Text="{Binding ParamValue}"
+                                             FontSize="16"
+                                             Foreground="{StaticResource Foreground_2}"
+                                             Background="{StaticResource Background_5}"
+                                             TextWrapping="Wrap"
+                                             BorderThickness="0"
+                                             Padding="3"
+                                             Margin="5"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -36,7 +51,8 @@
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Output"
-                           Foreground="{StaticResource Foreground_5}"/>
+                           Foreground="{StaticResource Accent_1}"
+                           FontSize="16"/>
                 <ItemsControl>
 
                 </ItemsControl>

@@ -90,7 +90,10 @@
             <StackPanel Grid.Column="1">              
                 <ListView ItemsSource="{Binding Source={StaticResource ResourceKey=FunctionListSource}}"
                           SelectedItem="{Binding SelectedFunction}"
-                          SelectionMode="Single">
+                          SelectionMode="Single"
+                          Margin="5"
+                          Background="Transparent"
+                          BorderThickness="0">
                     <ListView.GroupStyle>
                         <GroupStyle HidesIfEmpty="True">
                             <GroupStyle.HeaderTemplate>
@@ -98,7 +101,7 @@
                                     <TextBlock 
                                         FontSize="16"
                                         FontWeight="Bold"
-                                        Foreground="Black"
+                                        Foreground="{StaticResource Accent_1}"
                                         Text="{Binding Name, FallbackValue=Group_name}"/>
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
@@ -106,14 +109,19 @@
                     </ListView.GroupStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Name}" />
-                            </StackPanel>
+                            <Border>
+                                <TextBlock Text="{Binding Name}"
+                                           FontSize="14"
+                                           Foreground="{StaticResource Foreground_3}"/>
+                            </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Button Content="Add"
-                        Command="{Binding AddSeqStepCommand}"/>
+                <Button Content="&#x2b;"
+                        FontFamily="{StaticResource FontAwesome}"
+                        FontSize="30"
+                        Command="{Binding AddSeqStepCommand}"                        
+                        Style="{StaticResource GenericButton}"/>
                 <ContentControl x:Name="SelectedStep"
                                 Content="{Binding CurrentStepParamView}"/>
             </StackPanel>            
