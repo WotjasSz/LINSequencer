@@ -31,7 +31,8 @@
                 <ItemsControl ItemsSource="{Binding InputParameters}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="5" 
+                            <local:ParameterView/>
+                            <!--<Border Margin="5" 
                                     Padding="3">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Name}" 
@@ -68,7 +69,7 @@
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
                                 </StackPanel>
-                            </Border>
+                            </Border>-->
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
