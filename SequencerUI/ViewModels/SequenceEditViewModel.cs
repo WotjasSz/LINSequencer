@@ -43,7 +43,8 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private ObservableCollection<SequenceStepModel> _stepList;
 
-        [ObservableProperty]        
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(StepList))]
         private SequenceStepModel? _selectedSeqenceStep;
 
         private StepParametersView _stepParametersView;
@@ -61,7 +62,7 @@ namespace SequencerUI.ViewModels
         {
             Sequence = sequence;
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
-            SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
+            SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);            
             _stepParametersView = new StepParametersView();
             LoadFunctionList();
         }
@@ -69,13 +70,14 @@ namespace SequencerUI.ViewModels
         #region Property actions
         partial void OnSelectedSeqenceStepChanged(SequenceStepModel? value)
         {
-            if(CurrentStepParamView == null)
-            {
-                _stepParametersView.DataContext = new StepParametersViewModel(value);
-                CurrentStepParamView = _stepParametersView;
-            }
-
-            WeakReferenceMessenger.Default.Send(new StepParameterMessage(value));
+            _stepParametersView.DataContext = new StepParametersViewModel(value);
+            CurrentStepParamView = _stepParametersView;
+            //if (CurrentStepParamView == null)
+            //{
+            //    _stepParametersView.DataContext = new StepParametersViewModel(value);
+            //    CurrentStepParamView = _stepParametersView;
+            //}
+            //WeakReferenceMessenger.Default.Send(new StepParameterMessage(value));
         }
         #endregion
 

@@ -47,9 +47,9 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private SequenceModel? _currentSequence;
 
-        private SequenceRunView _seqRunVM;
-        private SequenceEditView _sequenceEditVM;
-        private AboutView _aboutVM;
+        private SequenceRunView _seqRunView;
+        private SequenceEditView _sequenceEditView;
+        private AboutView _aboutView;
 
         private bool _editModeAvailable = true;
 
@@ -63,12 +63,12 @@ namespace SequencerUI.ViewModels
             AvailableSequences = new ObservableCollection<SequenceModel>(LinSequencer.SequenceList);
             ActiveSequences = new ObservableCollection<SequenceModel>();
 
-            _seqRunVM = new SequenceRunView();
-            _sequenceEditVM = new SequenceEditView();
-            _aboutVM = new AboutView();
+            _seqRunView = new SequenceRunView();
+            _sequenceEditView = new SequenceEditView();
+            _aboutView = new AboutView();
 
-            _aboutVM.DataContext = new AboutViewModel();
-            CurrentView = _aboutVM;   
+            _aboutView.DataContext = new AboutViewModel();
+            CurrentView = _aboutView;   
         }
 
         #region Property actions
@@ -76,8 +76,8 @@ namespace SequencerUI.ViewModels
         {
             //TODO zmienić to na tworzenie jednego obiektu i update  sequence a nie za każdym razem tworzenie od nowa
             // Być moze użycie AutoFac??            
-            _seqRunVM.DataContext = new SequenceRunViewModel(value);
-            CurrentView = _seqRunVM;
+            _seqRunView.DataContext = new SequenceRunViewModel(value);
+            CurrentView = _seqRunView;
         }
         #endregion
 
@@ -116,8 +116,8 @@ namespace SequencerUI.ViewModels
             SequenceModel sequenceModel = new SequenceModel();
             ActiveSequences.Add(sequenceModel);
             CurrentSequence = sequenceModel;
-            _sequenceEditVM.DataContext = new SequenceEditViewModel(sequenceModel);
-            CurrentView = _sequenceEditVM;
+            _sequenceEditView.DataContext = new SequenceEditViewModel(sequenceModel);
+            CurrentView = _sequenceEditView;
             IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
             IsPanelButtonEnabled = !IsAddSeqPanelEnable;
         }
@@ -135,8 +135,8 @@ namespace SequencerUI.ViewModels
         [RelayCommand(CanExecute = nameof(CanExecuteEditSequence))]
         private void EditSequence(SequenceModel seq)
         {
-            _sequenceEditVM.DataContext = new SequenceEditViewModel(seq);
-            CurrentView = _sequenceEditVM;
+            _sequenceEditView.DataContext = new SequenceEditViewModel(seq);
+            CurrentView = _sequenceEditView;
         }
 
         private bool CanExeuteAddSequence()

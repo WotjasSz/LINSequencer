@@ -31,11 +31,17 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private ObservableCollection<SequenceStepParamModel>? _outputParameters;
 
+        [ObservableProperty]
+        private bool _isInputParamAvailable;
+
+        [ObservableProperty]
+        private bool _isOutputParamAvailable;
+
         public StepParametersViewModel(SequenceStepModel sequenceStep)
         {
             SequenceStep = sequenceStep;
             UpdateSequenceField();
-            WeakReferenceMessenger.Default.Register<StepParameterMessage>(this);
+            //WeakReferenceMessenger.Default.Register<StepParameterMessage>(this);
         }
 
         public void Receive(StepParameterMessage message)
@@ -49,11 +55,17 @@ namespace SequencerUI.ViewModels
             Comment = SequenceStep.Comment;
             InputParameters = new ObservableCollection<SequenceStepParamModel>(SequenceStep.InputParameterList);
             OutputParameters = new ObservableCollection<SequenceStepParamModel>(SequenceStep.OutputParameterList);
+
+            if (InputParameters.Count > 0) {IsInputParamAvailable = true;}
+            else {IsInputParamAvailable = false;}
+
+            if (OutputParameters.Count > 0) {IsOutputParamAvailable = true;}
+            else{IsOutputParamAvailable = false;}
         }
 
         partial void OnCommentChanged(string? value)
         {
             SequenceStep.Comment = value;
-        }        
+        }
     }
 }
