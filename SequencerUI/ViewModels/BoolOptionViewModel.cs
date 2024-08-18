@@ -9,6 +9,6 @@ namespace SequencerUI.ViewModels
 {
     public partial class BoolOptionViewModel : ObservableObject
     {
-
+        
     }
 }
