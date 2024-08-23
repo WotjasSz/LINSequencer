@@ -9,8 +9,7 @@
     <StackPanel Orientation="Horizontal">
         <TextBlock Text="{Binding Name, FallbackValue=Name}"
                    Foreground="{StaticResource Foreground_4}"
-                   Margin="5 3"
-                   VerticalAlignment="Center"/>
+                   Margin="5 3"/>
         <ItemsControl ItemsSource="{Binding Options}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

@@ -22,7 +22,7 @@ namespace SequencerUI.Views
     {
         public ParameterView()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
     }
 }

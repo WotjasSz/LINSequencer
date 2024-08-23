@@ -11,6 +11,6 @@
                    Foreground="{StaticResource Foreground_4}"
                    Margin="5 3"
                    VerticalAlignment="Center"/>
-        <CheckBox VerticalAlignment="Center"/>
+        <CheckBox IsChecked="{Binding Value}" VerticalAlignment="Center"/>
     </StackPanel>
 </UserControl>

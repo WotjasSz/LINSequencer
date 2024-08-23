@@ -17,13 +17,13 @@ namespace SequencerUI.Helpers
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is ParamOptionBool)
+            if (item is IParamOption)
             {
-                if ((item as ParamOptionBool).Type is EParamOptionType.Bool)
+                if ((item as IParamOption).Type is EParamOptionType.Bool)
                 {
                     return BoolTemplate;
                 }
-                else if ((item as ParamOptionBool).Type is EParamOptionType.BoolSwitch)
+                else if ((item as IParamOption).Type is EParamOptionType.BoolSwitch)
                 {
                     return BoolSwitchTemplate;
                 }

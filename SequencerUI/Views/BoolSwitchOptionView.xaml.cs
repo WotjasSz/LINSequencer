@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LINSequencerLib.Sequence;
+using SequencerUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,19 @@ namespace SequencerUI.Views
         public BoolSwitchOptionView()
         {
             InitializeComponent();
+            this.DataContextChanged += BoolSwitchOptionView_DataContextChanged;
+        }
+
+        private void BoolSwitchOptionView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.DataContext is ParamOptionBoolSwitch)
+            {
+                var vm = new BoolSwitchOptionViewModel((ParamOptionBoolSwitch)this.DataContext);
+
+                this.DataContext = vm;
+            }
+
+            
         }
     }
 }
