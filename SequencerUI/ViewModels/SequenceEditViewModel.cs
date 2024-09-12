@@ -34,7 +34,6 @@ namespace SequencerUI.ViewModels
         private SdfFileModel? _selectedSdfFile;
 
         [ObservableProperty]
-        //private ObservableGroupedCollection<string, SeqFunction> _functionList;
         private ObservableCollection<SeqFunction> _functionList;
 
         [ObservableProperty]        
@@ -55,6 +54,7 @@ namespace SequencerUI.ViewModels
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
             _stepParametersView = new StepParametersView();
+
             LoadFunctionList();
         }
 
@@ -62,7 +62,8 @@ namespace SequencerUI.ViewModels
         {
             Sequence = sequence;
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
-            SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);            
+            SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
+            SelectedSdfFile = SdfFiles.Where(p => p.Name == sequence.SdfName).FirstOrDefault();
             _stepParametersView = new StepParametersView();
             LoadFunctionList();
         }
@@ -70,7 +71,7 @@ namespace SequencerUI.ViewModels
         #region Property actions
         partial void OnSelectedSeqenceStepChanged(SequenceStepModel? value)
         {
-            _stepParametersView.DataContext = new StepParametersViewModel(value);
+            _stepParametersView.DataContext = new StepParametersViewModel(SelectedSeqenceStep);
             CurrentStepParamView = _stepParametersView;
             //if (CurrentStepParamView == null)
             //{

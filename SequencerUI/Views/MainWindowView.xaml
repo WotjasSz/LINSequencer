@@ -9,11 +9,14 @@
         xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
         mc:Ignorable="d"
         Height="800" Width="1200" MinHeight="510" MinWidth="850"
-        Background="#36393f"
+        Background="Transparent"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" CornerRadius="0" GlassFrameThickness="0"/>
+    </WindowChrome.WindowChrome>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>

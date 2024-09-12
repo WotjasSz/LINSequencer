@@ -40,6 +40,7 @@ namespace SequencerUI.ViewModels
         public StepParametersViewModel(SequenceStepModel sequenceStep)
         {
             SequenceStep = sequenceStep;
+            Comment = sequenceStep.Comment;
             UpdateSequenceField();
             //WeakReferenceMessenger.Default.Register<StepParameterMessage>(this);
         }
@@ -52,7 +53,7 @@ namespace SequencerUI.ViewModels
 
         public void UpdateSequenceField()
         {
-            Comment = SequenceStep.Comment;
+            //Comment = SequenceStep.Comment;
             InputParameters = new ObservableCollection<SequenceStepParamModel>(SequenceStep.InputParameterList);
             OutputParameters = new ObservableCollection<SequenceStepParamModel>(SequenceStep.OutputParameterList);
 

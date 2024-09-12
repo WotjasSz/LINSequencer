@@ -15,7 +15,7 @@
                 <TextBlock Text="Comment"
                            Foreground="{StaticResource Accent_1}"
                            FontSize="16"/>
-                <TextBox Text="{Binding Comment}"
+                <TextBox Text="{Binding SequenceStep.Comment}"
                          FontSize="16"
                          Foreground="{StaticResource Foreground_2}"
                          Background="{StaticResource Background_5}"
