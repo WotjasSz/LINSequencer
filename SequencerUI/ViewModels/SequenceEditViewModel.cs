@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using GongSolutions.Wpf.DragDrop;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
 using LINSequencerLib.SequenceStep;
@@ -19,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace SequencerUI.ViewModels
 {
-    public partial class SequenceEditViewModel : ObservableRecipient
+    public partial class SequenceEditViewModel : ObservableRecipient, IDropTarget
     {
         [ObservableProperty]
         private SequenceModel _sequence;
@@ -71,14 +72,11 @@ namespace SequencerUI.ViewModels
         #region Property actions
         partial void OnSelectedSeqenceStepChanged(SequenceStepModel? value)
         {
-            _stepParametersView.DataContext = new StepParametersViewModel(SelectedSeqenceStep);
-            CurrentStepParamView = _stepParametersView;
-            //if (CurrentStepParamView == null)
-            //{
-            //    _stepParametersView.DataContext = new StepParametersViewModel(value);
-            //    CurrentStepParamView = _stepParametersView;
-            //}
-            //WeakReferenceMessenger.Default.Send(new StepParameterMessage(value));
+            if (SelectedSeqenceStep != null)
+            {
+                _stepParametersView.DataContext = new StepParametersViewModel(SelectedSeqenceStep);
+                CurrentStepParamView = _stepParametersView;
+            }
         }
         #endregion
 
@@ -97,13 +95,60 @@ namespace SequencerUI.ViewModels
         {
             if(SelectedFunction != null)
             {
-                StepList.Add(new SequenceStepModel(StepList.Count, SelectedFunction));
+                StepList.Add(new SequenceStepModel(StepList.Count + 1, SelectedFunction));
+                UpdateIndex();
             }            
+        }        
+        #endregion
+
+        #region DragDrop
+        public void DragOver(IDropInfo dropInfo)
+        {
+            dropInfo.Effects = System.Windows.DragDropEffects.Move;            
+            dropInfo.NotHandled = false;
         }
 
+        public void Drop(IDropInfo dropInfo)
+        {
+            if (dropInfo.Data is SequenceStepModel sourceStep && dropInfo.TargetItem is SequenceStepModel targetStep)
+            {                
+                int sourceIndex = StepList.IndexOf(sourceStep);
+                int targetIndex = StepList.IndexOf(targetStep);
+
+                if (sourceIndex != targetIndex)
+                {
+                    StepList.Move(sourceIndex, targetIndex);
+                }
+            }
+            else if(dropInfo.Data is SeqFunction function)
+            {                
+                int targetIndex = dropInfo.InsertIndex;
+
+                if (StepList != null)
+                {
+                    StepList.Insert(targetIndex, new SequenceStepModel(targetIndex + 1, function));                    
+                }
+            }
+
+            UpdateIndex();
+        }
+        #endregion
+
+        #region Functions
         private void LoadFunctionList()
         {
             FunctionList = new ObservableCollection<SeqFunction>(LinSequencer.FunctionList);
+        }
+
+        private void UpdateIndex()
+        {
+            for (int i = 0; i < StepList.Count; i++)
+            {
+                StepList[i].Index = i + 1;
+            }
+            Sequence.StepList = StepList.ToList();
+            StepList.Clear();
+            StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
         }
         #endregion
     }
