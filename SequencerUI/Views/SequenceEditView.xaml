@@ -26,7 +26,7 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <!--#region ActionButtons -->
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal">
@@ -50,7 +50,7 @@
             </StackPanel>
         </Grid>
         <!--#endregion-->
-        
+
         <!--#region Main view-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -58,7 +58,8 @@
                 <ColumnDefinition Width="*" MaxWidth="320"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="18*"/>
             </Grid.RowDefinitions>
             <StackPanel>
                 <Label Content="Name" 
@@ -88,19 +89,22 @@
                 </ComboBox>
                 <Label Content="StepList"
                        Style="{StaticResource HeaderLabel}"/>
+
+            </StackPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="1">
                 <ListView ItemsSource="{Binding StepList, Mode=TwoWay}"
                           Style="{StaticResource StepListEditable}"
                           ItemContainerStyle="{StaticResource StepListItemEditable}"
                           SelectedItem="{Binding SelectedSeqenceStep, Mode=TwoWay}"
                           dd:DragDrop.IsDragSource="True"
                           dd:DragDrop.IsDropTarget="True"
-                          dd:DragDrop.DropHandler="{Binding}">                    
+                          dd:DragDrop.DropHandler="{Binding}">
                 </ListView>
-            </StackPanel>
+            </ScrollViewer>
             <!--#endregion-->
-            
+
             <!--#region Right side-->
-            <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="1" Grid.RowSpan="2">
                 <ListView ItemsSource="{Binding Source={StaticResource ResourceKey=FunctionListSource}}"
                           SelectedItem="{Binding SelectedFunction}"
                           SelectionMode="Single"
@@ -142,6 +146,6 @@
                                 Content="{Binding CurrentStepParamView}"/>
             </StackPanel>
             <!--#endregion-->
-        </Grid>    
+        </Grid>
     </Grid>
 </UserControl>
