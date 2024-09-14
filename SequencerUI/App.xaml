@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="./Resources/Themes/DarkModeColors.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/MainWindowStyle.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/ComboBoxCustomStyle.xaml"/>
+                <ResourceDictionary Source="./Resources/Themes/ScrollCustomStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>            
         </ResourceDictionary>
     </Application.Resources>

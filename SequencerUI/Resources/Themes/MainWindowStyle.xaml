@@ -398,7 +398,7 @@
                         Margin="10 10">
                         <StackPanel Orientation="Horizontal"
                             Margin="5 2">
-                            <Label Content="{Binding Id}"
+                            <Label Content="{Binding Index}"
                            FontSize="30"
                            Foreground="{StaticResource Accent_1}"
                            Width="50"

@@ -11,7 +11,11 @@
             <ColumnDefinition Width="3*" MinWidth="500"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <!--#region Content side-->        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--#region Content side-->
         <StackPanel Grid.Column="0">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Creation date:"
@@ -40,8 +44,8 @@
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <ComboBox ItemsSource="{Binding Devices}"
-                              SelectedItem="{Binding CurrentDevice}">                        
-                        <ComboBox.ItemTemplate>                            
+                              SelectedItem="{Binding CurrentDevice}">
+                        <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="DemiBold" TextAlignment="Center"/>
@@ -64,11 +68,16 @@
             </Grid>
             <Label Content="StepList"
                    Style="{StaticResource HeaderLabel}"/>
+
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" 
+                      HorizontalScrollBarVisibility="Auto" 
+                      VerticalScrollBarVisibility="Auto">
             <ListView ItemsSource="{Binding Sequence.StepList}"
                       Style="{StaticResource StepList}"
                       ItemContainerStyle="{StaticResource StepListItem}">
             </ListView>
-        </StackPanel>
+        </ScrollViewer>
         <!--#endregion-->
         <GridSplitter HorizontalAlignment="Right" Width="2"/>
         <!--#region Log area -->
