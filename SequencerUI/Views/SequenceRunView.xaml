@@ -70,14 +70,11 @@
                    Style="{StaticResource HeaderLabel}"/>
 
         </StackPanel>
-        <ScrollViewer Grid.Row="1" 
-                      HorizontalScrollBarVisibility="Auto" 
-                      VerticalScrollBarVisibility="Auto">
-            <ListView ItemsSource="{Binding Sequence.StepList}"
-                      Style="{StaticResource StepList}"
-                      ItemContainerStyle="{StaticResource StepListItem}">
-            </ListView>
-        </ScrollViewer>
+        <ListView Grid.Row="1"
+                  ItemsSource="{Binding Sequence.StepList}"
+                  Style="{StaticResource StepList}"
+                  ItemContainerStyle="{StaticResource StepListItem}">
+        </ListView>
         <!--#endregion-->
         <GridSplitter HorizontalAlignment="Right" Width="2"/>
         <!--#region Log area -->

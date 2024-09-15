@@ -91,18 +91,15 @@
                        Style="{StaticResource HeaderLabel}"/>
 
             </StackPanel>
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="1">
-                <ListView ItemsSource="{Binding StepList, Mode=TwoWay}"
-                          Style="{StaticResource StepListEditable}"
-                          ItemContainerStyle="{StaticResource StepListItemEditable}"
-                          SelectedItem="{Binding SelectedSeqenceStep, Mode=TwoWay}"
-                          dd:DragDrop.IsDragSource="True"
-                          dd:DragDrop.IsDropTarget="True"
-                          dd:DragDrop.DropHandler="{Binding}">
-                </ListView>
-            </ScrollViewer>
-            <!--#endregion-->
-
+            <ListView Grid.Row="1"
+                      ItemsSource="{Binding StepList, Mode=TwoWay}"
+                      Style="{StaticResource StepListEditable}"
+                      ItemContainerStyle="{StaticResource StepListItemEditable}"
+                      SelectedItem="{Binding SelectedSeqenceStep, Mode=TwoWay}"
+                      dd:DragDrop.IsDragSource="True"
+                      dd:DragDrop.IsDropTarget="True"
+                      dd:DragDrop.DropHandler="{Binding}">
+            </ListView>
             <!--#region Right side-->
             <StackPanel Grid.Column="1" Grid.RowSpan="2">
                 <ListView ItemsSource="{Binding Source={StaticResource ResourceKey=FunctionListSource}}"
