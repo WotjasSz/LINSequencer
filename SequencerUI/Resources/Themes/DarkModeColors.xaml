@@ -64,5 +64,4 @@
     <SolidColorBrush x:Key="Accent_4" Color="{StaticResource Accent_4_Color}"/>
     <SolidColorBrush x:Key="Accent_5" Color="{StaticResource Accent_5_Color}"/>
     <!--#endregion-->
-
 </ResourceDictionary>

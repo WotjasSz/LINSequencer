@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SequencerUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,10 @@ namespace SequencerUI.Views
     /// </summary>
     public partial class MainWindowView : Window
     {
-        public MainWindowView()
+        public MainWindowView(MainWindowViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
 
         //TODO Przenieść kod do view model.

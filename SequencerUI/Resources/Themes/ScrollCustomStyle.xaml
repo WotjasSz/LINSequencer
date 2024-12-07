@@ -84,7 +84,7 @@
                 <Track.Thumb>
                     <Thumb x:Name="ScrlThumb" 
                            Style="{StaticResource ScrollBarThumb}" 
-                           Margin="6,0,0,0"
+                           Margin="6,0,1,0"
                            Background="{StaticResource Background_5}"
                            BorderBrush="Transparent"/>
                 </Track.Thumb>
@@ -104,7 +104,7 @@
             <Trigger SourceName="ScrlThumb" Property="IsMouseOver" Value="True">
                 <Setter TargetName="BtnUp" Property="Height" Value="10"/>
                 <Setter TargetName="BtnDown" Property="Height" Value="10"/>
-                <Setter TargetName="ScrlThumb" Property="Margin" Value="0"/>                
+                <Setter TargetName="ScrlThumb" Property="Margin" Value="1 0 1 0"/>                
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -135,7 +135,7 @@
                 </Track.DecreaseRepeatButton>
                 <Track.Thumb>
                     <Thumb Style="{StaticResource ScrollBarThumb}"
-                           Margin="0,6,0,0"
+                           Margin="0,6,0,1"
                            Background="{StaticResource Background_5}"
                            BorderBrush="Transparent"/>
                 </Track.Thumb>
@@ -155,7 +155,7 @@
             <Trigger SourceName="ScrlThumb" Property="IsMouseOver" Value="True">
                 <Setter TargetName="BtnUp" Property="Width" Value="10"/>
                 <Setter TargetName="BtnDown" Property="Width" Value="10"/>
-                <Setter TargetName="ScrlThumb" Property="Margin" Value="0"/>
+                <Setter TargetName="ScrlThumb" Property="Margin" Value="0 1 0 1"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

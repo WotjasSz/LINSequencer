@@ -151,7 +151,7 @@
     </Style>
     
     <!-- Label -->
-    <Style TargetType="Label" x:Key="ListLabel">
+    <Style TargetType="Label" x:Key="ListLabel">        
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Foreground" Value="{StaticResource Primary_5}"/>
         <Setter Property="FontWeight" Value="Medium"/>

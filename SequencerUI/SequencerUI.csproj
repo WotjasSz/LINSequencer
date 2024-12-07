@@ -13,6 +13,7 @@
     <None Remove="Resources\Fonts\Awesome_6_Brand_Regular.otf" />
     <None Remove="Resources\Fonts\Awesome_6_Free_Regular.otf" />
     <None Remove="Resources\Fonts\Awesome_6_Free_Solid.otf" />
+    <None Remove="Resources\Fonts\Poppins-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,8 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0-preview3" />
     <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +40,7 @@
     <Resource Include="Resources\Fonts\Awesome_6_Free_Solid.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Fonts\Poppins-Regular.ttf" />
     <Resource Include="Resources\Themes\DarkModeColors.xaml" />
   </ItemGroup>
 

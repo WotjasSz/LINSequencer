@@ -13,7 +13,8 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
-        ResizeMode="CanResizeWithGrip">
+        ResizeMode="CanResizeWithGrip"
+        FontFamily="/Resources/Fonts/#Poppins">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" CornerRadius="0" GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
@@ -23,7 +24,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
