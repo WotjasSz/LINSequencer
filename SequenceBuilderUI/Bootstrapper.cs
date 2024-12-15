@@ -3,8 +3,6 @@ using SequenceBuilderUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SequenceBuilderUI
@@ -32,7 +30,7 @@ namespace SequenceBuilderUI
                 .Where(type => type.Name.EndsWith("ViewModel"))
                 .ToList()
                 .ForEach(viewModelType => _container.RegisterPerRequest(
-                    viewModelType, viewModelType.ToString(), viewModelType));            
+                    viewModelType, viewModelType.ToString(), viewModelType));
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)

@@ -1,13 +1,8 @@
 ﻿using Caliburn.Micro;
 using LINSequencerLib.Sequence;
 using SequenceBuilderUI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace SequenceBuilderUI.ViewModels
 {
@@ -79,7 +74,7 @@ namespace SequenceBuilderUI.ViewModels
                 {
                     ActivatedSequences.Add(message.Sequence);
                     //SelectedSequence = message.Sequence;
-                    
+
                 }
             }
             );

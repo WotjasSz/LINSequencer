@@ -1,10 +1,7 @@
 ﻿using Caliburn.Micro;
 using LINSequencerLib.Sequence;
 using SequenceBuilderUI.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,8 +27,8 @@ namespace SequenceBuilderUI.ViewModels
         public string Name
         {
             get { return _name; }
-            private set 
-            { 
+            private set
+            {
                 Set(ref _name, value);
             }
         }
@@ -39,7 +36,7 @@ namespace SequenceBuilderUI.ViewModels
         public string Comment
         {
             get { return _comment; }
-            set 
+            set
             {
                 Set(ref _comment, value);
                 SeqStep.Comment = value;
@@ -58,8 +55,8 @@ namespace SequenceBuilderUI.ViewModels
         public BindableCollection<ParameterModel> InputParameters
         {
             get { return _inputParameters; }
-            set 
-            { 
+            set
+            {
                 Set(ref _inputParameters, value);
             }
         }
@@ -71,12 +68,12 @@ namespace SequenceBuilderUI.ViewModels
             {
                 Set(ref _outputParameters, value);
             }
-        }        
+        }
 
         public ParameterModel SelectedInputParameter
         {
             get { return _selectedInputParameter; }
-            set 
+            set
             {
                 Set(ref _selectedInputParameter, value);
             }
@@ -85,9 +82,9 @@ namespace SequenceBuilderUI.ViewModels
         public ParameterModel SelectedOutputParameter
         {
             get { return _selectedOutputParameter; }
-            set 
-            { 
-                Set(ref _selectedOutputParameter, value);                
+            set
+            {
+                Set(ref _selectedOutputParameter, value);
             }
         }
 

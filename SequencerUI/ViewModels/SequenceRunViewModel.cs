@@ -14,7 +14,7 @@ namespace SequencerUI.ViewModels
     public partial class SequenceRunViewModel : ObservableObject
     {
         [ObservableProperty]
-        private SequenceModel _sequence;
+        private ISequenceModel _sequence;
 
         [ObservableProperty]
         private ObservableCollection<DeviceModel> _devices;
@@ -27,13 +27,13 @@ namespace SequencerUI.ViewModels
             Sequence = new SequenceModel();            
         }
 
-        public SequenceRunViewModel(SequenceModel sequence)
+        public SequenceRunViewModel(ISequenceModel sequence)
         {
             Sequence = sequence;
             Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
         }
 
-        public void UpdateSequence(SequenceModel sequence)
+        public void UpdateSequence(ISequenceModel sequence)
         {
             Sequence = sequence;            
         }

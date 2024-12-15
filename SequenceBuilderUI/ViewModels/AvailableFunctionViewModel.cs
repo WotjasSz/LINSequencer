@@ -2,9 +2,6 @@
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,16 +22,16 @@ namespace SequenceBuilderUI.ViewModels
         public BindableCollection<SeqFunction> SequenceFunction
         {
             get { return _sequenceFunction; }
-            set 
-            { 
-                Set(ref _sequenceFunction, value); 
+            set
+            {
+                Set(ref _sequenceFunction, value);
             }
-        }       
+        }
 
         public SeqFunction SelectedFunction
         {
             get { return _selectedFunction; }
-            set 
+            set
             {
                 Set(ref _selectedFunction, value);
             }
@@ -44,7 +41,7 @@ namespace SequenceBuilderUI.ViewModels
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
-        }        
+        }
 
         public void AddSequenceStep()
         {
@@ -81,7 +78,7 @@ namespace SequenceBuilderUI.ViewModels
                     Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
                 {
                     //Console.WriteLine(e.OriginalSource.GetType());
-                    
+
                     if (e.OriginalSource is TextBlock)
                     {
                         Console.WriteLine((e.OriginalSource as TextBlock).DataContext.GetType());

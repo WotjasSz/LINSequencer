@@ -1,9 +1,4 @@
 ﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SequenceBuilderUI.ViewModels
 {
@@ -15,18 +10,18 @@ namespace SequenceBuilderUI.ViewModels
         public PropertiesViewModel PropertiesVm
         {
             get { return _propertiesVm; }
-            set 
-            { 
-                Set(ref _propertiesVm, value); 
+            set
+            {
+                Set(ref _propertiesVm, value);
             }
         }
 
         public AvailableFunctionViewModel FunctionVm
         {
             get { return _functionVM; }
-            set 
+            set
             {
-                Set(ref _functionVM, value); 
+                Set(ref _functionVM, value);
             }
         }
 

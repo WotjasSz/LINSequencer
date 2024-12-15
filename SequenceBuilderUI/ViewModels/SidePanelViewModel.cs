@@ -2,17 +2,14 @@
 using LINSequencerLib;
 using LINSequencerLib.BabyLinWrapper;
 using LINSequencerLib.Sequence;
-using SequenceBuilderUI.Helpers;
 using SequenceBuilderUI.Models;
 using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace SequenceBuilderUI.ViewModels
 {
-    public  class SidePanelViewModel : Screen
+    public class SidePanelViewModel : Screen
     {
         #region Fields
         private readonly IEventAggregator _eventAggregator;
@@ -28,33 +25,33 @@ namespace SequenceBuilderUI.ViewModels
         public BindableCollection<SequenceModel> Sequences
         {
             get { return _sequences; }
-            set 
-            { 
-                Set(ref _sequences, value); 
+            set
+            {
+                Set(ref _sequences, value);
             }
-        }     
+        }
         public BindableCollection<DeviceModel> Devices
         {
             get { return _devices; }
-            set 
-            { 
-                Set(ref _devices, value); 
+            set
+            {
+                Set(ref _devices, value);
             }
         }
         public SequenceModel SelectedSequence
         {
             get { return _selectedSequence; }
-            set 
-            { 
-                Set(ref _selectedSequence,value);
+            set
+            {
+                Set(ref _selectedSequence, value);
                 NotifyOfPropertyChange(() => CanLoadSequence);
             }
         }
         public DeviceModel SelectedDevice
         {
             get { return _selectedDevice; }
-            set 
-            { 
+            set
+            {
                 Set(ref _selectedDevice, value);
                 NotifyOfPropertyChange(() => CanLoadSequence);
             }
@@ -73,7 +70,7 @@ namespace SequenceBuilderUI.ViewModels
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
-        } 
+        }
 
         public void AddSequence()
         {
@@ -83,7 +80,7 @@ namespace SequenceBuilderUI.ViewModels
         }
 
         public void LoadSequence(string sequence)
-        {    
+        {
             _eventAggregator.PublishOnUIThreadAsync(new SequenceMessage(this, SelectedSequence));
         }
 

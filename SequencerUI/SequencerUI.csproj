@@ -7,6 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>8.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>Resources\Icon\sequence.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +15,7 @@
     <None Remove="Resources\Fonts\Awesome_6_Free_Regular.otf" />
     <None Remove="Resources\Fonts\Awesome_6_Free_Solid.otf" />
     <None Remove="Resources\Fonts\Poppins-Regular.ttf" />
+    <None Remove="Resources\Icon\sequence.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0-preview3" />
-    <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
+    <PackageReference Include="gong-wpf-dragdrop" Version="4.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
   </ItemGroup>
 
@@ -41,6 +43,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Fonts\Poppins-Regular.ttf" />
+    <Resource Include="Resources\Icon\sequence.ico" />
     <Resource Include="Resources\Themes\DarkModeColors.xaml" />
   </ItemGroup>
 

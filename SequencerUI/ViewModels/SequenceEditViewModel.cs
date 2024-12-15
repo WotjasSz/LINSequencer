@@ -8,6 +8,7 @@ using LINSequencerLib.Sequence;
 using LINSequencerLib.SequenceStep;
 using LINSequencerLib.SupportingFiles;
 using SequencerUI.Helpers;
+using SequencerUI.Services;
 using SequencerUI.Views;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,7 @@ namespace SequencerUI.ViewModels
             Sequence = new SequenceModel();
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
+
             _stepParametersView = new StepParametersView();
 
             LoadFunctionList();
@@ -65,7 +67,9 @@ namespace SequencerUI.ViewModels
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
             SelectedSdfFile = SdfFiles.Where(p => p.Name == sequence.SdfName).FirstOrDefault();
+
             _stepParametersView = new StepParametersView();
+
             LoadFunctionList();
         }
 

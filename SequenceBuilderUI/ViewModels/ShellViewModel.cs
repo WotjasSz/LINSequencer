@@ -1,12 +1,5 @@
 ﻿using Caliburn.Micro;
 using LINSequencerLib;
-using LINSequencerLib.Sequence;
-using SequenceBuilderUI.Helpers;
-using SequenceBuilderUI.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,13 +17,13 @@ namespace SequenceBuilderUI.ViewModels
         #region Properties
         public SidePanelViewModel SidePanel
         {
-            get {  return _sidePanel; }
+            get { return _sidePanel; }
         }
 
         public MainPanelViewModel MainPanel
         {
             get { return _mainPanel; }
-        }        
+        }
 
         #endregion
         public ShellViewModel(IWindowManager windowManager, IEventAggregator eventAggregator, SidePanelViewModel seqNaviVM, MainPanelViewModel mainPanel)
@@ -38,7 +31,7 @@ namespace SequenceBuilderUI.ViewModels
             LinSequencer.InitializeLinSequencer();
             _windowManager = windowManager;
             _eventAggregator = eventAggregator;
-            _sidePanel = seqNaviVM;            
+            _sidePanel = seqNaviVM;
             _mainPanel = mainPanel;
 
             SidePanel.ConductWith(this);
@@ -51,7 +44,7 @@ namespace SequenceBuilderUI.ViewModels
         }
 
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
-        {            
+        {
             return base.OnActivateAsync(cancellationToken);
         }
 

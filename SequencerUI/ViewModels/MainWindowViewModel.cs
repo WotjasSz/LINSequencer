@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
+using SequencerUI.Services;
 using SequencerUI.Views;
 using System;
 using System.Collections.Generic;
@@ -35,17 +36,17 @@ namespace SequencerUI.ViewModels
         private bool _isPanelButtonEnabled = true;
 
         [ObservableProperty]
-        private ObservableCollection<SequenceModel>? _availableSequences;
+        private ObservableCollection<ISequenceModel>? _availableSequences;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(AddSequenceCommand))]
         private SequenceModel? _availableSeqSelected;
 
         [ObservableProperty]
-        private ObservableCollection<SequenceModel>? _activeSequences;
+        private ObservableCollection<ISequenceModel>? _activeSequences;
 
         [ObservableProperty]
-        private SequenceModel? _currentSequence;
+        private ISequenceModel? _currentSequence;
 
         private SequenceRunView _seqRunView;
         private SequenceEditView _sequenceEditView;
@@ -60,8 +61,8 @@ namespace SequencerUI.ViewModels
         {
             LinSequencer.InitializeLinSequencer();
 
-            AvailableSequences = new ObservableCollection<SequenceModel>(LinSequencer.SequenceList);
-            ActiveSequences = new ObservableCollection<SequenceModel>();
+            AvailableSequences = new ObservableCollection<ISequenceModel>(LinSequencer.SequenceList);
+            ActiveSequences = new ObservableCollection<ISequenceModel>();
 
             _seqRunView = new SequenceRunView();
             _sequenceEditView = new SequenceEditView();
@@ -72,12 +73,21 @@ namespace SequencerUI.ViewModels
         }
 
         #region Property actions
-        partial void OnCurrentSequenceChanged(SequenceModel? value)
+        partial void OnCurrentSequenceChanged(ISequenceModel? value)
         {
-            //TODO zmienić to na tworzenie jednego obiektu i update  sequence a nie za każdym razem tworzenie od nowa
+            //TODO zmienić to na tworzenie jednego obiektu i update sequence a nie za każdym razem tworzenie od nowa
             // Być moze użycie AutoFac??            
-            _seqRunView.DataContext = new SequenceRunViewModel(value);
-            CurrentView = _seqRunView;
+            if(value != null)
+            {
+                _seqRunView.DataContext = new SequenceRunViewModel(value);
+                //ServiceLocator.Current.GetInstance<SequenceRunView>().
+                CurrentView = _seqRunView;
+                //var vmFactory = ServiceLocator.GetService<SequenceRunViewModel>();
+                //var vm = (SequenceRunViewModel)vmFactory(new object[] { value });
+                //var sequenceRunView = ServiceLocator.GetService<SequenceRunView>();
+                //sequenceRunView.DataContext = vm;
+                //CurrentView = sequenceRunView;
+            }            
         }
         #endregion
 
@@ -87,7 +97,7 @@ namespace SequencerUI.ViewModels
         private void ShowAboutControl()
         {
             CurrentSequence = null;
-            CurrentView = new AboutView() { DataContext = new AboutViewModel() };
+            CurrentView = _aboutView;            
         }
 
         [RelayCommand(CanExecute = nameof(CanExeuteAddSequence))]
@@ -106,7 +116,7 @@ namespace SequencerUI.ViewModels
         {
             AvailableSequences = null;
             LinSequencer.ReloadAvailableSequences();
-            AvailableSequences = new ObservableCollection<SequenceModel>(LinSequencer.SequenceList);
+            AvailableSequences = new ObservableCollection<ISequenceModel>(LinSequencer.SequenceList);
         }
 
         [RelayCommand]

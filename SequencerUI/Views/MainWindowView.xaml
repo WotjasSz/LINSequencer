@@ -33,8 +33,11 @@
                 Style="{StaticResource WidnowBar}"
                 MouseDown="Border_MouseDown">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Label Content="{Binding Title}"
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource AppIcon}" Width="24" Height="24" Margin="1"/>
+                    <Label Content="{Binding Title}"
                        Style="{StaticResource TitleLabel}"/>
+                </StackPanel>
                 <StackPanel HorizontalAlignment="Right"
                             Orientation="Horizontal">
                     <Button Style="{StaticResource WindowStateBtn}" 
