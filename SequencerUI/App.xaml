@@ -5,12 +5,14 @@
     <Application.Resources>
         <ResourceDictionary>
             <BitmapImage x:Key="AppIcon" UriSource="pack://application:,,,/Resources/Icon/sequence.ico" />
-            <!--<FontFamily x:Key="FontAwesome">pack://application:,,,/Resources/Fonts/#Font Awesome 6 Free Solid</FontFamily>-->
+            <BitmapImage x:Key="AppIconBW" UriSource="pack://application:,,,/Resources/Icon/sequence_bw.ico" />
+            <BitmapImage x:Key="AppIconLogo" UriSource="pack://application:,,,/Resources/Icon/sequence_b.png" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./Resources/Themes/DarkModeColors.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/MainWindowStyle.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/MainWindowTitleBarStyle.xaml"/>
-                <ResourceDictionary Source="./Resources/Themes/AppNavigationStyle.xaml"/>
+                <ResourceDictionary Source="./Resources/Themes/MenuStyle.xaml"/>
+                <ResourceDictionary Source="./Resources/Themes/LeftContentStyle.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/SequenceSelectionStyle.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/ComboBoxCustomStyle.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/ScrollCustomStyle.xaml"/>

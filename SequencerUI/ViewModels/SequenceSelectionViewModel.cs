@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
 using System;
@@ -11,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace SequencerUI.ViewModels
 {
-    public partial class SequenceSelectionViewModel : ObservableObject
+    public partial class SequenceSelectionViewModel : ObservableRecipient
     {
+        #region Fields
         [ObservableProperty]
         private bool _isAddSeqPanelEnable;
 
@@ -34,8 +36,13 @@ namespace SequencerUI.ViewModels
 
         private bool _editModeAvailable = true;
 
-        public SequenceSelectionViewModel()
+        private readonly IMessenger _messenger;
+
+        #endregion
+
+        public SequenceSelectionViewModel(IMessenger messenger)
         {
+            _messenger = messenger;
             AvailableSequences = new ObservableCollection<ISequenceModel>(LinSequencer.SequenceList);
             ActiveSequences = new ObservableCollection<ISequenceModel>();
         }
@@ -96,11 +103,11 @@ namespace SequencerUI.ViewModels
         [RelayCommand]
         private void RemoveSequence(SequenceModel seq)
         {
-            //if (CurrentSequence == seq)
-            //{
-            //    CurrentView = null;
-            //}
-            //ActiveSequences.Remove(seq);
+            if (CurrentSequence == seq)
+            {
+                //CurrentView = null;
+            }
+            ActiveSequences.Remove(seq);
         }
 
         [RelayCommand(CanExecute = nameof(CanExecuteEditSequence))]

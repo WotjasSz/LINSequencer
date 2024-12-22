@@ -32,16 +32,26 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private object _navigationContentView;
 
+        [ObservableProperty]
+        private bool _isMenuVisible = false;
+
+        [ObservableProperty]
+        private bool _isLeftContentVisible = true;
+
         private SequenceRunView _seqRunView;
         private SequenceEditView _sequenceEditView;
         private AboutView _aboutView;
         private SequenceSelectionView _sequenceSelectionView;
 
+        private readonly IMessenger _messenger;
+
         #endregion
 
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IMessenger messenger)
         {
+            _messenger = messenger;
+
             LinSequencer.InitializeLinSequencer();           
 
             _seqRunView = new SequenceRunView();
@@ -50,13 +60,20 @@ namespace SequencerUI.ViewModels
             _sequenceSelectionView = new SequenceSelectionView();
 
             _aboutView.DataContext = new AboutViewModel();
-            _sequenceSelectionView.DataContext = new SequenceSelectionViewModel();
+            _sequenceSelectionView.DataContext = ServiceLocator.GetService<SequenceSelectionViewModel>();
 
             NavigationContentView = _sequenceSelectionView;
             CurrentView = _aboutView;           
         }
 
         #region Commands 
+        [RelayCommand]
+        private void MenuToggle()
+        {
+            IsMenuVisible = !IsMenuVisible;
+            IsLeftContentVisible = !IsLeftContentVisible;
+        }
+
         [RelayCommand]
         private void ShowAboutControl()
         {            

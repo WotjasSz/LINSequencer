@@ -3,17 +3,32 @@
     <!-- Font Awesome definition -->
     <FontFamily x:Key="FontAwesome">pack://application:,,,/Resources/Fonts/#Font Awesome 6 Free Solid</FontFamily>
 
+    <!--#region MainWindow-->
     <Style TargetType="Window" x:Key="MainWindowStyle">
         <Setter Property="WindowStyle" Value="None"/>
-        <Setter Property="Height" Value="850"/>
-        <Setter Property="MinHeight" Value="510"/>
-        <Setter Property="Width" Value="1200"/>
+        <Setter Property="Height" Value="900"/>
+        <Setter Property="MinHeight" Value="650"/>
+        <Setter Property="Width" Value="1300"/>
         <Setter Property="MinWidth" Value="850"/>
         <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="FontFamily" Value="/Resources/Fonts/#Poppins"/>
+        <Setter Property="Background" Value="Transparent"/>
     </Style>
 
+    <Style TargetType="Border" x:Key="MainWindowBorder">
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource Background_2_Color}" Offset="0"/>
+                    <GradientStop Color="{StaticResource Background_3_Color}" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+    
     <!--#region Common components -->
     <!-- Label -->
     <Style TargetType="Label" x:Key="HeaderLabel">

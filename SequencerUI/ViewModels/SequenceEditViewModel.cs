@@ -27,7 +27,7 @@ namespace SequencerUI.ViewModels
         private SequenceModel _sequence;
 
         [ObservableProperty]
-        private object _currentStepParamView;
+        private object? _currentStepParamView;
 
         [ObservableProperty]
         private ObservableCollection<SdfFileModel> _sdfFiles;
@@ -36,7 +36,7 @@ namespace SequencerUI.ViewModels
         private SdfFileModel? _selectedSdfFile;
 
         [ObservableProperty]
-        private ObservableCollection<SeqFunction> _functionList;
+        private ObservableCollection<SeqFunction>? _functionList;
 
         [ObservableProperty]        
         private SeqFunction? _selectedFunction;
@@ -50,8 +50,11 @@ namespace SequencerUI.ViewModels
 
         private StepParametersView _stepParametersView;
 
-        public SequenceEditViewModel()
+        private readonly IMessenger _messenger;
+
+        public SequenceEditViewModel(IMessenger messenger)
         {
+            _messenger = messenger;
             Sequence = new SequenceModel();
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
@@ -61,8 +64,9 @@ namespace SequencerUI.ViewModels
             LoadFunctionList();
         }
 
-        public SequenceEditViewModel(SequenceModel sequence)
+        public SequenceEditViewModel(IMessenger messenger, SequenceModel sequence)
         {
+            _messenger = messenger;
             Sequence = sequence;
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);

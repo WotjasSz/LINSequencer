@@ -1,4 +1,5 @@
-﻿using LINSequencerLib.Sequence;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using LINSequencerLib.Sequence;
 using Microsoft.Extensions.DependencyInjection;
 using SequencerUI.ViewModels;
 using SequencerUI.Views;
@@ -19,16 +20,17 @@ namespace SequencerUI.Services
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddTransient<MainWindowView>();
-            serviceCollection.AddTransient<MainWindowViewModel>();
+            serviceCollection.AddSingleton<IMessenger, WeakReferenceMessenger>();
+
+            serviceCollection.AddTransient<MainWindowView>();            
 
             // Registering All Views and ViewModels
-            //var assembly = Assembly.GetExecutingAssembly();
+            var assembly = Assembly.GetExecutingAssembly();
             //var externalAssembly = Assembly.Load("LINSequencerLib");
 
             //RegisterExternalTypes(serviceCollection, externalAssembly, "LINSequencerLib.Sequence");
             //RegisterViews(serviceCollection, assembly);
-            //RegisterViewModels(serviceCollection, assembly);
+            RegisterViewModels(serviceCollection, assembly);
 
             // Registartation of the Services
             _serviceProvider = serviceCollection.BuildServiceProvider();
@@ -77,7 +79,8 @@ namespace SequencerUI.Services
                 .ToList(); 
             foreach (var viewModelType in viewModelTypes) 
             {
-                RegisterViewModelWithFactory(services, viewModelType);
+                services.AddTransient(viewModelType);
+                //RegisterViewModelWithFactory(services, viewModelType);
             }
         }
 

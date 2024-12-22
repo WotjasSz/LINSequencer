@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib;
 using LINSequencerLib.BabyLinWrapper;
 using LINSequencerLib.Sequence;
@@ -17,18 +18,24 @@ namespace SequencerUI.ViewModels
         private ISequenceModel _sequence;
 
         [ObservableProperty]
-        private ObservableCollection<DeviceModel> _devices;
+        private ObservableCollection<DeviceModel>? _devices;
 
         [ObservableProperty]
-        private DeviceModel _currentDevice;
-        
-        public SequenceRunViewModel()
+        private DeviceModel? _currentDevice;
+
+        private readonly IMessenger _messenger;
+
+        public SequenceRunViewModel(IMessenger messenger)
         {
+            _messenger = messenger;
+
             Sequence = new SequenceModel();            
         }
 
-        public SequenceRunViewModel(ISequenceModel sequence)
+        public SequenceRunViewModel(IMessenger messenger, ISequenceModel sequence)
         {
+            _messenger = messenger;
+
             Sequence = sequence;
             Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
         }

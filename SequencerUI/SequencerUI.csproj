@@ -16,6 +16,8 @@
     <None Remove="Resources\Fonts\Awesome_6_Free_Solid.otf" />
     <None Remove="Resources\Fonts\Poppins-Regular.ttf" />
     <None Remove="Resources\Icon\sequence.ico" />
+    <None Remove="Resources\Icon\sequence_b.png" />
+    <None Remove="Resources\Icon\sequence_bw.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +46,8 @@
     </Resource>
     <Resource Include="Resources\Fonts\Poppins-Regular.ttf" />
     <Resource Include="Resources\Icon\sequence.ico" />
+    <Resource Include="Resources\Icon\sequence_b.png" />
+    <Resource Include="Resources\Icon\sequence_bw.ico" />
     <Resource Include="Resources\Themes\DarkModeColors.xaml" />
   </ItemGroup>
 
