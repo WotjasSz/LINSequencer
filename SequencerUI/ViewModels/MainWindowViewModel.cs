@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
+using SequencerUI.Helpers;
 using SequencerUI.Services;
 using SequencerUI.Views;
 using System;
@@ -27,7 +28,7 @@ namespace SequencerUI.ViewModels
         private string? _title = "Sequencer";
 
         [ObservableProperty]
-        private object _currentView;
+        private object? _currentView;
 
         [ObservableProperty]
         private object _navigationContentView;
@@ -50,7 +51,12 @@ namespace SequencerUI.ViewModels
 
         public MainWindowViewModel(IMessenger messenger)
         {
+            //Register message and handlers
             _messenger = messenger;
+            _messenger.Register<GenericMessage<ISequenceModel>>(this, (r, m) =>
+            {
+                HandleReceiveMessage(m.Content);
+            });
 
             LinSequencer.InitializeLinSequencer();           
 
@@ -59,12 +65,11 @@ namespace SequencerUI.ViewModels
             _aboutView = new AboutView();
             _sequenceSelectionView = new SequenceSelectionView();
 
-            _aboutView.DataContext = new AboutViewModel();
+            _aboutView.DataContext = ServiceLocator.GetService<AboutViewModel>();
             _sequenceSelectionView.DataContext = ServiceLocator.GetService<SequenceSelectionViewModel>();
 
-            NavigationContentView = _sequenceSelectionView;
-            CurrentView = _aboutView;           
-        }
+            NavigationContentView = _sequenceSelectionView;           
+        }        
 
         #region Commands 
         [RelayCommand]
@@ -77,9 +82,17 @@ namespace SequencerUI.ViewModels
         [RelayCommand]
         private void ShowAboutControl()
         {            
-            CurrentView = _aboutView;
+            CurrentView = _aboutView;            
         }
 
+        #endregion
+
+        #region Message handlers
+        private void HandleReceiveMessage(ISequenceModel content)
+        {
+            _sequenceEditView.DataContext = ServiceLocator.GetService<SequenceEditViewModel>(content);
+            CurrentView = _sequenceEditView;
+        }
         #endregion
 
         #region Window actions

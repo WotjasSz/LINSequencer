@@ -20,9 +20,11 @@ namespace SequencerUI.Services
         {
             var serviceCollection = new ServiceCollection();
 
+            //Services registration
             serviceCollection.AddSingleton<IMessenger, WeakReferenceMessenger>();
 
-            serviceCollection.AddTransient<MainWindowView>();            
+            //Main View registration 
+            serviceCollection.AddTransient<MainWindowView>();
 
             // Registering All Views and ViewModels
             var assembly = Assembly.GetExecutingAssembly();
@@ -42,11 +44,11 @@ namespace SequencerUI.Services
                 .Where(t => t.IsClass && t.Namespace != null && t.Namespace == nsPrefix)
                 .ToList();
             foreach (var type in types)
-            { 
-                foreach (var iface in type.GetInterfaces()) 
+            {
+                foreach (var iface in type.GetInterfaces())
                 {
-                    serviceCollection.AddTransient(iface, type); 
-                } 
+                    serviceCollection.AddTransient(iface, type);
+                }
             }
         }
 
@@ -76,8 +78,8 @@ namespace SequencerUI.Services
         {
             var viewModelTypes = assembly.GetTypes()
                 .Where(t => t.IsClass && t.Namespace == "SequencerUI.ViewModels")
-                .ToList(); 
-            foreach (var viewModelType in viewModelTypes) 
+                .ToList();
+            foreach (var viewModelType in viewModelTypes)
             {
                 services.AddTransient(viewModelType);
                 //RegisterViewModelWithFactory(services, viewModelType);
@@ -92,7 +94,7 @@ namespace SequencerUI.Services
         private static void RegisterViewModelWithFactory(IServiceCollection services, Type viewModelType)
         {
             var constructors = viewModelType.GetConstructors();
-            
+
             foreach (var constructor in constructors)
             {
                 var parameters = constructor.GetParameters();
@@ -126,6 +128,64 @@ namespace SequencerUI.Services
             }
         }
 
+        /// <summary>
+        /// Methods return an instance of the requested type. Use only if type have constructor without parameters or parameters are registerd in DI
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T GetService<T>() => _serviceProvider.GetRequiredService<T>();
+
+        /// <summary>
+        /// Methods return an instance of the requested type with parameters. Method check given parameter list with all type's contructors and select proper one.
+        /// If constructor has parameter which are registered in the DI, automatically add it to the constructor.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parameters">Paramaters which aren't registered in the DI container</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static T GetService<T>(params object[] parameters)
+        {
+            var type = typeof(T);
+            var constructors = type.GetConstructors();
+
+            foreach (var constructor in constructors.OrderByDescending(c => c.GetParameters().Length))
+            {
+                var paramInfos = constructor.GetParameters();
+                var paramInstances = new List<object>();
+                bool canConstruct = true;
+
+                foreach (var paramInfo in paramInfos)
+                {
+                    // Sprawdzenie, czy parametr jest już zarejestrowany w DI
+                    var service = _serviceProvider.GetService(paramInfo.ParameterType);
+                    if (service != null)
+                    {
+                        paramInstances.Add(service);
+                    }
+                    else
+                    {
+                        // Sprawdzenie, czy parametr jest na liście przekazanych parametrów
+                        var parameter = parameters.FirstOrDefault(p => p.GetType() == paramInfo.ParameterType);
+                        if (parameter != null)
+                        {
+                            paramInstances.Add(parameter);
+                        }
+                        else
+                        {
+                            canConstruct = false;
+                            break;
+                        }
+                    }
+                }
+
+                // Utworzenie instancji z wszystkimi parametrami
+                if (canConstruct)
+                {
+                    return (T)constructor.Invoke(paramInstances.ToArray());
+                }
+            }
+
+            throw new ArgumentException($"No matching constructor found for type {type}");
+        }
     }
 }

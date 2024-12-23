@@ -65,7 +65,7 @@
     
     <!-- Combobox -->
     <Style TargetType="{x:Type ComboBox}">
-        <Setter Property="Margin" Value="5 5 10 5"/>
+        <Setter Property="Margin" Value="5 0 5 0"/>
         <Setter Property="UIElement.SnapsToDevicePixels" Value="True"/>
         <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>

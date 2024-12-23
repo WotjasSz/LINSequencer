@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
+using SequencerUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -54,6 +55,7 @@ namespace SequencerUI.ViewModels
             // Być moze użycie AutoFac??            
             if (value != null)
             {
+                _messenger.Send(new GenericMessage<ISequenceModel>(value));
                 //_seqRunView.DataContext = new SequenceRunViewModel(value);
                 //ServiceLocator.Current.GetInstance<SequenceRunView>().
                 //CurrentView = _seqRunView;

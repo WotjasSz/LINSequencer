@@ -13,9 +13,10 @@
                 <ResourceDictionary Source="./Resources/Themes/MainWindowTitleBarStyle.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/MenuStyle.xaml"/>
                 <ResourceDictionary Source="./Resources/Themes/LeftContentStyle.xaml"/>
-                <ResourceDictionary Source="./Resources/Themes/SequenceSelectionStyle.xaml"/>
+                <ResourceDictionary Source="./Resources/Themes/SequenceSelectionStyle.xaml"/>                
                 <ResourceDictionary Source="./Resources/Themes/ComboBoxCustomStyle.xaml"/>
-                <ResourceDictionary Source="./Resources/Themes/ScrollCustomStyle.xaml"/>
+                <ResourceDictionary Source="./Resources/Themes/ScrollCustomStyle.xaml"/>                
+                <ResourceDictionary Source="./Resources/Themes/SequenceEditViewStyle.xaml"/>                
             </ResourceDictionary.MergedDictionaries>            
         </ResourceDictionary>
     </Application.Resources>

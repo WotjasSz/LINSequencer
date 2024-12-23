@@ -30,7 +30,23 @@
     <!--#endregion-->
     
     <!--#region Common components -->
-    <!-- Label -->
+    
+    <!--#region ViewBorder -->
+    <Style TargetType="Border" x:Key="ViewBorder">
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource Background_5_Color}" Offset="0"/>
+                    <GradientStop Color="{StaticResource Background_4_Color}" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+    
+    <!--#region Labels -->
     <Style TargetType="Label" x:Key="HeaderLabel">
         <Setter Property="Foreground" Value="{StaticResource Primary_5}"/>
         <Setter Property="FontSize" Value="30"/>
@@ -51,8 +67,9 @@
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
+    <!--#endregion-->
 
-    <!-- TextBlock -->
+    <!--#region TextBlocks -->
     <Style TargetType="TextBlock" x:Key="LessImportantFieldValue">
         <Setter Property="Foreground" Value="{StaticResource Foreground_5}"/>
         <Setter Property="FontSize" Value="14"/>
@@ -74,26 +91,100 @@
     <Style TargetType="TextBlock" x:Key="LongTextFieldValue" BasedOn="{StaticResource ShortFieldValue}">
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
+    <!--#endregion-->
 
-    <!-- TextBox -->
-    <Style TargetType="TextBox" x:Key="BaseForText">
+    <!--#region TextBox-->
+    <Style TargetType="{x:Type TextBox}" x:Key="InputTextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border CornerRadius="5"
+                            Background="{StaticResource Background_4}">
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                     Text="{TemplateBinding Text}"
+                                     CaretBrush="{StaticResource Foreground_1}"
+                                     BorderThickness="0"
+                                     VerticalContentAlignment="Center"
+                                     Padding="5"
+                                     Background="Transparent"
+                                     Foreground="{StaticResource Foreground_1}"
+                                     x:Name="InputBox"/>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="{Binding RelativeSource={RelativeSource AncestorType=TextBox}, Path=Tag}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10 0 0 0"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       Foreground="{StaticResource Foreground_5}"
+                                       Grid.Column="0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=InputBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>                                        
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
+    <Style TargetType="{x:Type TextBox}" x:Key="InputMultilineTextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border CornerRadius="5"
+                        Background="{StaticResource Background_4}">
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1" 
+                                     Text="{TemplateBinding Text}"
+                                     CaretBrush="{StaticResource Foreground_1}"
+                                     BorderThickness="0"
+                                     VerticalContentAlignment="Top"
+                                     Padding="5"
+                                     Background="Transparent"
+                                     Foreground="{StaticResource Foreground_1}"
+                                     x:Name="InputBox"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"
+                                     VerticalScrollBarVisibility="Auto"
+                                     HorizontalScrollBarVisibility="Auto"/>
+                            <TextBlock IsHitTestVisible="False"
+                                   Text="{Binding RelativeSource={RelativeSource AncestorType=TextBox}, Path=Tag}"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="10 5 0 0"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   Foreground="{StaticResource Foreground_5}"
+                                   Grid.Column="0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=InputBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-    <Style TargetType="TextBox" x:Key="ShortFieldText">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
-        <Setter Property="Background" Value="{StaticResource Background_4}"/>
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Padding" Value="5 5"/>
-        <Setter Property="Margin" Value="12 0"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="BorderBrush" Value="{StaticResource Accent_5}"/>
-        <Setter Property="CaretBrush" Value="{StaticResource Accent_1}"/>
-    </Style>
-    <Style TargetType="TextBox" x:Key="LongFieldText" BasedOn="{StaticResource ShortFieldText}">
-        <Setter Property="TextWrapping" Value="Wrap"/>
-    </Style>
+    <!--#endregion-->
+    
     <!--#endregion-->
 
     <!--#region Step list -->
@@ -143,60 +234,4 @@
         </Setter>
     </Style>
     <!--#endregion-->
-
-    <!--#region Edit step list -->
-    <Style TargetType="ListView" x:Key="StepListEditable">
-        <Setter Property="Margin" Value="0 10"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
-    </Style>
-    <Style TargetType="ListViewItem" x:Key="StepListItemEditable">
-        <Style.Triggers>
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource Primary_5}"/>
-            </Trigger>
-        </Style.Triggers>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ListViewItem">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderThickness="0 1"
-                            BorderBrush="{StaticResource Primary_3}"
-                            CornerRadius="10"
-                            Margin="10 2">
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="5 2">
-                            <Label Content="{Binding Index}"
-                                   FontSize="30"
-                                   Foreground="{StaticResource Accent_1}"
-                                   Width="50"
-                                   VerticalAlignment="Center"
-                                   HorizontalContentAlignment="Center"
-                                   VerticalContentAlignment="Center"/>
-                            <StackPanel HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Margin="15 5">
-                                <TextBlock Text="{Binding Name}"
-                                           Foreground="{StaticResource Foreground_2}"
-                                           FontSize="18"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Comment: "
-                                               Foreground="{StaticResource Foreground_5}"
-                                               FontSize="14"/>
-                                    <TextBlock Text="{Binding Comment}"
-                                             Foreground="{StaticResource Foreground_4}"
-                                             FontSize="14"/>
-                                </StackPanel>                                
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <!--#endregion-->
-
 </ResourceDictionary>
