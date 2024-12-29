@@ -34,6 +34,25 @@
     <!--#region ViewBorder -->
     <Style TargetType="Border" x:Key="ViewBorder">
         <Setter Property="Margin" Value="10"/>
+        <Setter Property="CornerRadius" Value="10"/>        
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource Background_5_Color}" Offset="0"/>
+                    <GradientStop Color="{StaticResource Background_4_Color}" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Border" x:Key="ViewWithGroupBorder">
+        <Setter Property="Margin" Value="10 10 0 0"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="GroupViewBorder">
+        <Setter Property="Margin" Value="0 0 10 10"/>
         <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="Background">
             <Setter.Value>
@@ -48,12 +67,10 @@
     
     <!--#region Labels -->
     <Style TargetType="Label" x:Key="HeaderLabel">
-        <Setter Property="Foreground" Value="{StaticResource Primary_5}"/>
-        <Setter Property="FontSize" Value="30"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontStyle" Value="Italic"/>
+        <Setter Property="Foreground" Value="{StaticResource Foreground_4}"/>
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="Margin" Value="0 0 0 0"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>          
     </Style>
     <Style TargetType="Label" x:Key="CommonFieldLabel">
         <Setter Property="Foreground" Value="{StaticResource Accent_1}"/>
@@ -70,10 +87,17 @@
     <!--#endregion-->
 
     <!--#region TextBlocks -->
+    <Style TargetType="TextBlock" x:Key="H1TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_4}"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="TextDecorations" Value="Underline"/>
+    </Style>
     <Style TargetType="TextBlock" x:Key="LessImportantFieldValue">
         <Setter Property="Foreground" Value="{StaticResource Foreground_5}"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>        
     </Style>
     <Style TargetType="TextBlock" x:Key="BiggerFieldValue">
         <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>

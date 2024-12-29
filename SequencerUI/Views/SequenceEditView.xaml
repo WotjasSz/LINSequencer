@@ -13,6 +13,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisCoverter"/>
         <CollectionViewSource x:Key="FunctionListSource"
                               Source="{Binding FunctionList, Mode=OneWay}"
                               IsLiveGroupingRequested="True">
@@ -21,159 +22,232 @@
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
-    <Border Style="{StaticResource ViewBorder}">
+    <Border Style="{StaticResource ViewWithGroupBorder}">
+        <!--#region Main view-->
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
-            <!--#region ActionButtons -->
             <Grid Grid.Row="0">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Creation date:"
-                       Style="{StaticResource LessImportantFieldLabel}"/>
-                    <TextBlock Text="{Binding Sequence.CreationDate, FallbackValue=CreationDateField}"
-                           Style="{StaticResource LessImportantFieldValue}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-                    <Button Style="{StaticResource GenericButtonNarrow}"
-                    FontSize="10"
-                    Content="Save"
-                    Command="{Binding SaveSequenceCommand}"/>
-                    <Button Style="{StaticResource GenericButtonNarrow}"
-                    FontSize="10"
-                    Content="Cancel"/>
-                    <Button Style="{StaticResource GenericButtonNarrow}"
-                    FontSize="10"
-                    Content="Save&amp;Test"/>
-                </StackPanel>
-            </Grid>
-            <!--#endregion-->
-
-            <!--#region Main view-->
-            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="2*"/>                    
+                    <ColumnDefinition Width="*"/>                    
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                
                 <!--#region  Header-->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0">
-                        <StackPanel Style="{StaticResource InputFieldStackPanel}">
-                            <Label Content="Name" 
-                               Target="{Binding ElementName=txtNameInput}"
-                               Style="{StaticResource CommonFieldLabel}"/>
-                            <TextBox Text="{Binding Sequence.Name, FallbackValue=NameTb}"
-                                     x:Name="txtNameInput"
-                                     Style="{StaticResource InputField}"
-                                     Tag="Type name"/>
+                <Border Grid.Column="0"
+                        Style="{StaticResource GroupViewBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!--#region Info field -->
+                        <StackPanel Grid.Column="0" Grid.Row="0"
+                                    Orientation="Horizontal">
+                            <Label Content="Creation date:"
+                                   Style="{StaticResource LessImportantFieldLabel}"/>
+                            <TextBlock Text="{Binding Sequence.CreationDate, FallbackValue=CreationDateField}"
+                                       Style="{StaticResource LessImportantFieldValue}"/>
                         </StackPanel>
-                        <StackPanel Style="{StaticResource InputFieldStackPanel}">
-                            <Label Content="SDF" 
-                               Target="{Binding ElementName=cbxSdfSelection}"
-                               Style="{StaticResource CommonFieldLabel}"/>
-                            <ComboBox ItemsSource="{Binding SdfFiles}"
-                                  SelectedItem="{Binding SelectedSdfFile}"
-                                  x:Name="cbxSdfSelection"
-                                  Foreground="{StaticResource Foreground_1}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Vertical">
-                                            <TextBlock Text="{Binding Name}" 
+                        <!--#endregion-->
+
+                        <!--#region Single line fields -->
+                        <StackPanel Grid.Column="0" Grid.Row="1">
+                            <StackPanel Style="{StaticResource InputFieldStackPanel}">
+                                <Label Content="Name" 
+                                       Target="{Binding ElementName=txtNameInput}"
+                                       Style="{StaticResource CommonFieldLabel}"/>
+                                <TextBox Text="{Binding Sequence.Name, FallbackValue=NameTb}"
+                                         x:Name="txtNameInput"
+                                         Style="{StaticResource InputField}"
+                                         Tag="Type name"/>
+                            </StackPanel>
+                            <StackPanel Style="{StaticResource InputFieldStackPanel}">
+                                <Label Content="SDF" 
+                                       Target="{Binding ElementName=cbxSdfSelection}"
+                                       Style="{StaticResource CommonFieldLabel}"/>
+                                <ComboBox ItemsSource="{Binding SdfFiles}"
+                                          SelectedItem="{Binding SelectedSdfFile}"
+                                          x:Name="cbxSdfSelection"
+                                          Foreground="{StaticResource Foreground_1}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="{Binding Name}" 
                                                        FontSize="16" 
                                                        FontWeight="DemiBold" 
                                                        TextAlignment="Center"
                                                        Margin="5 5"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                    <StackPanel Grid.Column="1"
-                                Style="{StaticResource InputFieldStackPanel}">
-                        <Label Content="Description" 
+                        <!--#endregion-->
+
+                        <!--#region Description field -->
+                        <StackPanel Grid.Column="1" Grid.Row="1"
+                                Style="{StaticResource DescriptionFieldStackPanel}">
+                            <Label Content="Description" 
                                Target="{Binding ElementName=txtDescriptionInput}"
                                Style="{StaticResource CommonFieldLabel}"/>
-                        <TextBox Text="{Binding Sequence.Description, FallbackValue=DescriptionTb}"
+                            <TextBox Text="{Binding Sequence.Description, FallbackValue=DescriptionTb}"
                                  x:Name="txtDescriptionInput"
                                  Height="115"
                                  Style="{StaticResource InputMultilineField}"
                                  Tag="Sequence desciption"/>
-                    </StackPanel>                    
-                </Grid>
+                        </StackPanel>
+                        <!--#endregion-->
+                        
+                    </Grid>
+                </Border>
                 <!--#endregion-->
-                <!--#region Step list-->
-                <StackPanel Grid.Row="1"
-                            Style="{StaticResource InputFieldStackPanel}">
-                    <Label Content="StepList"
-                           Style="{StaticResource HeaderLabel}"/>
-                    <ListView ItemsSource="{Binding StepList, Mode=TwoWay}"
-                              Style="{StaticResource StepListEditable}"
-                              ItemContainerStyle="{StaticResource StepListItemEditable}"
-                              SelectedItem="{Binding SelectedSeqenceStep, Mode=TwoWay}"
-                              dd:DragDrop.IsDragSource="True"
-                              dd:DragDrop.IsDropTarget="True"                      
-                              dd:DragDrop.DropHandler="{Binding}">
-                    </ListView>
-                </StackPanel>
+
+                <!--#region ActionButtons -->
+                <Border Grid.Column="1"
+                        Style="{StaticResource GroupViewBorder}">
+                    <Grid>                        
+                        <StackPanel Orientation="Vertical"
+                                HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center">
+                            <Button Style="{StaticResource GenericButtonNarrow}"
+                                FontSize="10"
+                                Content="Save"
+                                Command="{Binding SaveSequenceCommand}"/>
+                            <Button Style="{StaticResource GenericButtonNarrow}"
+                                FontSize="10"
+                                Content="Cancel"/>
+                            <Button Style="{StaticResource GenericButtonNarrow}"
+                                FontSize="10"
+                                Content="Save&amp;Test"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
                 <!--#endregion-->
                 
-                <!--#region Right side-->
-                <StackPanel Grid.Column="1" Grid.RowSpan="2">
-                    <ListView ItemsSource="{Binding Source={StaticResource ResourceKey=FunctionListSource}}"
-                          SelectedItem="{Binding SelectedFunction}"
-                          SelectionMode="Single"
-                          Margin="5"
-                          Background="Transparent"
-                          BorderThickness="0"
-                          dd:DragDrop.IsDragSource="True"
-                          dd:DragDrop.IsDropTarget="False"
-                          dd:DragDrop.DropHandler="{Binding}">
-                        <ListView.GroupStyle>
-                            <GroupStyle HidesIfEmpty="True">
-                                <GroupStyle.HeaderTemplate>
-                                    <DataTemplate DataType="{x:Type collections:IReadOnlyObservableGroup}">
-                                        <TextBlock 
-                                        FontSize="16"
-                                        FontWeight="Bold"
-                                        Foreground="{StaticResource Accent_1}"
-                                        Text="{Binding Name, FallbackValue=Group_name}"/>
-                                    </DataTemplate>
-                                </GroupStyle.HeaderTemplate>
-                            </GroupStyle>
-                        </ListView.GroupStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Border>
-                                    <TextBlock Text="{Binding Name}"
-                                           FontSize="14"
-                                           Foreground="{StaticResource Foreground_3}"/>
-                                </Border>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    <Button Content="&#x2b;"
-                        FontFamily="{StaticResource FontAwesome}"
-                        FontSize="30"
-                        Command="{Binding AddSeqStepCommand}"                        
-                        Style="{StaticResource GenericButton}"/>
-                    <ContentControl x:Name="SelectedStep"
-                                Content="{Binding CurrentStepParamView}"/>
-                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>                    
+                    <ColumnDefinition Width="*"/>                    
+                    <ColumnDefinition Width="auto"/>                    
+                </Grid.ColumnDefinitions>
+                <!--#region Step list-->
+                <Border Grid.Row="1"
+                        Style="{StaticResource GroupViewBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" 
+                               Text="StepList"
+                               Style="{StaticResource H1TextBlock}"/>
+                        <ScrollViewer Grid.Row="1">
+                            <StackPanel Style="{StaticResource InputFieldStackPanel}">
+                                <ListView ItemsSource="{Binding StepList, Mode=TwoWay}"
+                                          Style="{StaticResource StepListEditable}"
+                                          ItemContainerStyle="{StaticResource StepListItemEditable}"
+                                          SelectedItem="{Binding SelectedSeqenceStep, Mode=TwoWay}"
+                                          dd:DragDrop.IsDragSource="True"
+                                          dd:DragDrop.IsDropTarget="True"                      
+                                          dd:DragDrop.DropHandler="{Binding}">
+                                </ListView>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>                    
+                </Border>
+                <!--#endregion-->
+
+                <!--#region Step properties -->
+                <Border Grid.Column="1" 
+                        Style="{StaticResource GroupViewBorder}">
+                    <StackPanel Style="{StaticResource InputFieldStackPanel}">
+                        <TextBlock Text="Step properties"
+                                   Style="{StaticResource H1TextBlock}"/>
+                        <ContentControl x:Name="SelectedStep"
+                                        Content="{Binding CurrentStepParamView}"/>
+                    </StackPanel>
+                </Border>
+                <!--#endregion-->
+
+                <!--#region Function list-->
+                <Border Grid.Column="2"
+                        Style="{StaticResource GroupViewBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--#region Label and acion buttons -->
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Right">
+                            <Button Content="&#xf105;"
+                                    FontFamily="{StaticResource FontAwesome}"
+                                    Style="{StaticResource SeqSelectActionButton}"
+                                    Command="{Binding ToggleFunctionListVisibilityCommand}"
+                                    Visibility="{Binding IsFunctionListVisible, Converter={StaticResource BoolToVisCoverter}}"/>
+                            <Button Content="&#xf104;"
+                                    FontFamily="{StaticResource FontAwesome}"
+                                    Style="{StaticResource SeqSelectActionButton}"
+                                    Command="{Binding ToggleFunctionListVisibilityCommand}"
+                                    Visibility="{Binding IsExpandButtonVisible, Converter={StaticResource BoolToVisCoverter}}"/>
+                        </StackPanel>
+                        <TextBlock Grid.Row="0"
+                               Text="Add function"
+                               Style="{StaticResource H1TextBlock}"
+                               Visibility="{Binding IsFunctionListVisible, Converter={StaticResource BoolToVisCoverter}}"/>
+                        <!--#endregion-->
+
+                        <!--#region Function list view -->
+                        <StackPanel Grid.Row="1"
+                                    Visibility="{Binding IsFunctionListVisible, Converter={StaticResource BoolToVisCoverter}}">
+                            <ListView ItemsSource="{Binding Source={StaticResource ResourceKey=FunctionListSource}}"
+                                      SelectedItem="{Binding SelectedFunction}"
+                                      Style="{StaticResource FunctionListStyle}"
+                                      ItemContainerStyle="{StaticResource FunctionListItemStyle}"
+                                      dd:DragDrop.IsDragSource="True"
+                                      dd:DragDrop.IsDropTarget="False"
+                                      dd:DragDrop.DropHandler="{Binding}">
+                                <ListView.GroupStyle>
+                                    <GroupStyle HidesIfEmpty="True">
+                                        <GroupStyle.HeaderTemplate>
+                                            <DataTemplate DataType="{x:Type collections:IReadOnlyObservableGroup}">
+                                                <!--<Expander Header="{Binding Name, FallbackValue=Group_name}" IsExpanded="True">
+                                                    <ItemsPresenter/>
+                                                </Expander>-->
+                                                <TextBlock FontSize="16"
+                                                           FontWeight="Bold"
+                                                           Foreground="{StaticResource Accent_1}"
+                                                           Text="{Binding Name, FallbackValue=Group_name}"/>
+                                            </DataTemplate>
+                                        </GroupStyle.HeaderTemplate>
+                                    </GroupStyle>
+                                </ListView.GroupStyle>
+                            </ListView>
+                            <Button Content="&#x2b;"
+                                FontFamily="{StaticResource FontAwesome}"
+                                FontSize="30"
+                                Command="{Binding AddSeqStepCommand}"                        
+                                Style="{StaticResource GenericButton}"/>
+                        </StackPanel>
+                        <!--#endregion-->
+                    </Grid>
+                </Border>
                 <!--#endregion-->
             </Grid>
-            <!--#endregion-->
         </Grid>
+        <!--#endregion-->
     </Border>
 </UserControl>

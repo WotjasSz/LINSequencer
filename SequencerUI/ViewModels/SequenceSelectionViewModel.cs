@@ -56,14 +56,6 @@ namespace SequencerUI.ViewModels
             if (value != null)
             {
                 _messenger.Send(new GenericMessage<ISequenceModel>(value));
-                //_seqRunView.DataContext = new SequenceRunViewModel(value);
-                //ServiceLocator.Current.GetInstance<SequenceRunView>().
-                //CurrentView = _seqRunView;
-                //var vmFactory = ServiceLocator.GetService<SequenceRunViewModel>();
-                //var vm = (SequenceRunViewModel)vmFactory(new object[] { value });
-                //var sequenceRunView = ServiceLocator.GetService<SequenceRunView>();
-                //sequenceRunView.DataContext = vm;
-                //CurrentView = sequenceRunView;
             }
         }
         #endregion

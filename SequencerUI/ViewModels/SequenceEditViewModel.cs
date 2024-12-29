@@ -24,6 +24,12 @@ namespace SequencerUI.ViewModels
     public partial class SequenceEditViewModel : ObservableRecipient, IDropTarget
     {
         [ObservableProperty]
+        private bool _isFunctionListVisible;
+
+        [ObservableProperty]
+        private bool _isExpandButtonVisible = true;
+
+        [ObservableProperty]
         private SequenceModel _sequence;
 
         [ObservableProperty]
@@ -107,6 +113,13 @@ namespace SequencerUI.ViewModels
                 UpdateIndex();
             }            
         }        
+
+        [RelayCommand]
+        private void ToggleFunctionListVisibility()
+        {
+            IsExpandButtonVisible = !IsExpandButtonVisible;
+            IsFunctionListVisible = !IsFunctionListVisible;
+        }
         #endregion
 
         #region DragDrop
