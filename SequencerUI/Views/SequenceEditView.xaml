@@ -118,16 +118,19 @@
                         <StackPanel Orientation="Vertical"
                                 HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center">
-                            <Button Style="{StaticResource GenericButtonNarrow}"
-                                FontSize="10"
-                                Content="Save"
-                                Command="{Binding SaveSequenceCommand}"/>
-                            <Button Style="{StaticResource GenericButtonNarrow}"
-                                FontSize="10"
-                                Content="Cancel"/>
-                            <Button Style="{StaticResource GenericButtonNarrow}"
-                                FontSize="10"
-                                Content="Save&amp;Test"/>
+                            <Button Style="{StaticResource GenericButton}"
+                                    FontSize="16"
+                                    Content="Save"
+                                    Command="{Binding SaveSequenceCommand}"/>
+                            <Button Style="{StaticResource GenericButton}"
+                                    FontSize="16"
+                                    Content="Save as new"/>
+                            <Button Style="{StaticResource GenericButton}"
+                                    FontSize="16"
+                                    Content="Cancel"/>
+                            <Button Style="{StaticResource GenericButton}"
+                                    FontSize="16"
+                                    Content="Save&amp;Test"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -153,18 +156,16 @@
                                Text="StepList"
                                Style="{StaticResource H1TextBlock}"/>
                         <ScrollViewer Grid.Row="1">
-                            <StackPanel Style="{StaticResource InputFieldStackPanel}">
-                                <ListView ItemsSource="{Binding StepList, Mode=TwoWay}"
-                                          Style="{StaticResource StepListEditable}"
-                                          ItemContainerStyle="{StaticResource StepListItemEditable}"
-                                          SelectedItem="{Binding SelectedSeqenceStep, Mode=TwoWay}"
-                                          dd:DragDrop.IsDragSource="True"
-                                          dd:DragDrop.IsDropTarget="True"                      
-                                          dd:DragDrop.DropHandler="{Binding}">
-                                </ListView>
-                            </StackPanel>
+                            <ListView ItemsSource="{Binding StepList, Mode=TwoWay}"
+                                      Style="{StaticResource StepListEditable}"
+                                      ItemContainerStyle="{StaticResource StepListItemEditable}"
+                                      SelectedItem="{Binding SelectedSeqenceStep, Mode=TwoWay}"                                      
+                                      dd:DragDrop.IsDragSource="True"
+                                      dd:DragDrop.IsDropTarget="True"                      
+                                      dd:DragDrop.DropHandler="{Binding}">
+                            </ListView>
                         </ScrollViewer>
-                    </Grid>                    
+                    </Grid>
                 </Border>
                 <!--#endregion-->
 

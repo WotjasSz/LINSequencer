@@ -12,23 +12,20 @@
     <Grid>
         <StackPanel>
             <StackPanel Margin="5">
-                <TextBlock Text="Comment"
-                           Foreground="{StaticResource Accent_1}"
-                           FontSize="16"/>
+                <Label Content="Comment"
+                       Target="{Binding ElementName=txtStepCommentField}"
+                       Style="{StaticResource CommonFieldLabel}"/>
                 <TextBox Text="{Binding SequenceStep.Comment}"
-                         FontSize="16"
-                         Foreground="{StaticResource Foreground_2}"
-                         Background="{StaticResource Background_5}"
-                         TextWrapping="Wrap"
-                         BorderThickness="0"
-                         Padding="3"
-                         Margin="5"/>
+                         x:Name="txtStepCommentField"
+                         Style="{StaticResource InputField}"/>
             </StackPanel>
-            <StackPanel Visibility="{Binding IsInputParamAvailable, Converter={StaticResource BoolToVis}}">
-                <TextBlock Text="Input"
-                           Foreground="{StaticResource Accent_1}"
-                           FontSize="16"/>
-                <ItemsControl ItemsSource="{Binding InputParameters}">
+            <StackPanel Margin="5"
+                        Visibility="{Binding IsInputParamAvailable, Converter={StaticResource BoolToVis}}">
+                <Label Content="Input"
+                       Target="{Binding ElementName=icInputParameterList}"
+                       Style="{StaticResource CommonFieldLabel}"/>
+                <ItemsControl x:Name="icInputParameterList"
+                              ItemsSource="{Binding InputParameters}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <local:ParameterView/>
@@ -36,12 +33,12 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-            <StackPanel Visibility="{Binding IsOutputParamAvailable, Converter={StaticResource BoolToVis}}">
-                <TextBlock Text="Output"
-                           Foreground="{StaticResource Accent_1}"
-                           FontSize="16"
-                           />
-                <ItemsControl>
+            <StackPanel Margin="5"
+                        Visibility="{Binding IsOutputParamAvailable, Converter={StaticResource BoolToVis}}">
+                <Label Content="Output"
+                       Target="{Binding ElementName=icOutputParamterList}"
+                       Style="{StaticResource CommonFieldLabel}"/>
+                <ItemsControl x:Name="icOutputParamterList">
 
                 </ItemsControl>
             </StackPanel>

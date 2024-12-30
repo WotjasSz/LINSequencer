@@ -1,6 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:collections="clr-namespace:CommunityToolkit.Mvvm.Collections;assembly=CommunityToolkit.Mvvm">
+                    xmlns:collections="clr-namespace:CommunityToolkit.Mvvm.Collections;assembly=CommunityToolkit.Mvvm"
+                    xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+                    xmlns:hlp="clr-namespace:SequencerUI.Helpers">
+
+    <hlp:ZeroCountToVisibilityConverter x:Key="ZeroCountToVisibilityConverter"/>
+
     <!--#region StackPanels -->
     <Style TargetType="StackPanel" x:Key="InputFieldStackPanel">
         <Setter Property="MinWidth" Value="250"/>
@@ -25,15 +30,38 @@
     <!--#endregion-->
 
     <!--#region Edit step list -->
+    <!--ListView-->
     <Style TargetType="ListView" x:Key="StepListEditable">
         <Setter Property="Margin" Value="0 10"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListView">
+                    <Border Background="Transparent" 
+                            dd:DragDrop.IsDropTarget="True" 
+                            dd:DragDrop.DropHandler="{Binding}">                        
+                        <Grid>
+                            <ItemsPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            <TextBlock Text="Drop here"                                        
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       Foreground="{StaticResource Foreground_5}"
+                                       Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Items.Count, Converter={StaticResource ZeroCountToVisibilityConverter}}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
+
+    <!--ListViewItem-->
     <Style TargetType="ListViewItem" x:Key="StepListItemEditable">
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
@@ -72,12 +100,70 @@
                                                FontSize="14"/>
                                 </StackPanel>
                             </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Right">
+                                <Button Content="&#xf044;" 
+                                        FontFamily="{StaticResource FontAwesome}"
+                                        Style="{StaticResource SeqSelectActionButton}"
+                                        Command="{Binding DataContext.EditSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
+                                    <Button.ToolTip>
+                                        <StackPanel>
+                                            <TextBlock>Edit</TextBlock>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button Content="&#xf00d;" 
+                                        FontFamily="{StaticResource FontAwesome}"
+                                        Style="{StaticResource SeqSelectActionButton}"
+                                        Command="{Binding DataContext.RemoveSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
+                                    <Button.ToolTip>
+                                        <StackPanel>
+                                            <TextBlock>Close</TextBlock>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
+                            </StackPanel>
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+    <!--#endregion-->
+    
+    <!--#region Parameters view-->
+    <Style TargetType="Border" x:Key="SingleParameterArea">
+        <Setter Property="Background" Value="{StaticResource GroupContentBackgroundGradient}"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="SingleOptionBorder">
+        <!--<Setter Property="BorderBrush" Value="{StaticResource ListItemSeparatorGradient}"/>
+        <Setter Property="BorderThickness" Value="0 0 0 1"/>-->
+        <Setter Property="Margin" Value="20 0"/>
+    </Style>
+    
+    <Style TargetType="Label" x:Key="ParameterNameLabel">
+        <Setter Property="Foreground" Value="{StaticResource Accent_2}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="OptionNameLabel">
+        <Setter Property="Foreground" Value="{StaticResource Accent_3}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="RadioButton" x:Key="OptionSelectionRadioButon">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_4}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="10 5 0 0"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>    
     <!--#endregion-->
     
     <!--#region Function list -->

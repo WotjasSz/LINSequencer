@@ -18,7 +18,7 @@
                               VerticalAlignment="Center"
                               Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" >
                             <Path.Fill>
-                                <SolidColorBrush Color="{StaticResource Background_5_Color}"/>
+                                <SolidColorBrush Color="{StaticResource Scroll_1_Color}"/>
                             </Path.Fill>
                         </Path>
                     </Border>
@@ -85,7 +85,7 @@
                     <Thumb x:Name="ScrlThumb" 
                            Style="{StaticResource ScrollBarThumb}" 
                            Margin="6,0,1,0"
-                           Background="{StaticResource Background_5}"
+                           Background="{StaticResource Scroll_1}"
                            BorderBrush="Transparent"/>
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
@@ -136,7 +136,7 @@
                 <Track.Thumb>
                     <Thumb Style="{StaticResource ScrollBarThumb}"
                            Margin="0,6,0,1"
-                           Background="{StaticResource Background_5}"
+                           Background="{StaticResource Scroll_1}"
                            BorderBrush="Transparent"/>
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>

@@ -31,6 +31,14 @@
     <Color x:Key="Accent_4_Color">#E9F2CE</Color>
     <Color x:Key="Accent_5_Color">#F1F6DF</Color>
 
+    <Color x:Key="Scroll_1_Color">#B8B8B8</Color>
+
+    <Color x:Key="GroupContentBackground_1_Color">#0FF5F5F5</Color>
+    <Color x:Key="GroupContentBackground_2_Color">#0FEBEBEB</Color>
+
+    <Color x:Key="ListItemSeparator_1_Color">#50F5F5F5</Color>
+    <Color x:Key="ListItemSeparator_2_Color">#965A5E5A</Color>
+
     <!--#endregion-->
     
     <!--#region SolidBrushColors -->
@@ -63,5 +71,67 @@
     <SolidColorBrush x:Key="Accent_3" Color="{StaticResource Accent_3_Color}"/>
     <SolidColorBrush x:Key="Accent_4" Color="{StaticResource Accent_4_Color}"/>
     <SolidColorBrush x:Key="Accent_5" Color="{StaticResource Accent_5_Color}"/>
+
+    <SolidColorBrush x:Key="Scroll_1" Color="{StaticResource Scroll_1_Color}"/>
+
+    <SolidColorBrush x:Key="GroupContentBackground_1" Color="{StaticResource GroupContentBackground_1_Color}"/>
+    <SolidColorBrush x:Key="GroupContentBackground_2" Color="{StaticResource GroupContentBackground_2_Color}"/>
+
+    <SolidColorBrush x:Key="ListItemSeparator_1" Color="{StaticResource ListItemSeparator_1_Color}"/>
+    <SolidColorBrush x:Key="ListItemSeparator_2" Color="{StaticResource ListItemSeparator_2_Color}"/>
     <!--#endregion-->
+
+    <LinearGradientBrush x:Key="GroupContentBackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource GroupContentBackground_1_Color}" Offset="0"/>
+        <GradientStop Color="{StaticResource GroupContentBackground_2_Color}" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ListItemSeparatorGradient" StartPoint="0,0.5" EndPoint="1,0.5">
+        <GradientStop Color="{StaticResource ListItemSeparator_2_Color}" Offset="0"/>
+        <GradientStop Color="{StaticResource ListItemSeparator_1_Color}" Offset="0.25"/>
+        <GradientStop Color="{StaticResource ListItemSeparator_1_Color}" Offset="0.75"/>
+        <GradientStop Color="{StaticResource ListItemSeparator_2_Color}" Offset="1"/>
+    </LinearGradientBrush>
+
+
+    <!--Background Colors-->
+    <Color x:Key="primaryBackColor1">#0A003A</Color>
+    <Color x:Key="primaryBackColor2">#1C0E49</Color>
+    <Color x:Key="secondaryBackColor1">#24105F</Color>
+    <Color x:Key="secondaryBackColor2">#210F55</Color>
+
+    <!--Window Border Colors-->
+    <Color x:Key="winBorderColor1">#6D2FFF</Color>
+    <Color x:Key="winBorderColor2">#FB539B</Color>
+    <Color x:Key="winBorderColor3">#836EFB</Color>
+
+    <!--Color Palette-->
+    <SolidColorBrush x:Key="color1" Color="#E285DE"/>
+    <SolidColorBrush x:Key="color2" Color="#784DFD"/>
+    <SolidColorBrush x:Key="color3" Color="#4ADAEC"/>
+    <SolidColorBrush x:Key="color4" Color="#FB539B"/>
+    <SolidColorBrush x:Key="color5" Color="#7E82FC"/>
+    <SolidColorBrush x:Key="color6" Color="#FFC047"/>
+    <SolidColorBrush x:Key="color7" Color="#EF6C96"/>
+    <SolidColorBrush x:Key="color8" Color="#78A3FC"/>
+    <SolidColorBrush x:Key="color9" Color="#07F3C0"/>
+    <SolidColorBrush x:Key="color10" Color="#FBA1AA"/>
+
+    <!--Font Colors-->
+    <SolidColorBrush x:Key="titleColor1" Color="#E0E1F1"/>
+    <SolidColorBrush x:Key="titleColor2" Color="#D5CFF5"/>
+    <SolidColorBrush x:Key="titleColor3" Color="#BCBEE0"/>
+    <SolidColorBrush x:Key="plainTextColor1" Color="#9497CD"/>
+    <SolidColorBrush x:Key="plainTextColor2" Color="#7C80C2"/>
+    <SolidColorBrush x:Key="plainTextColor3" Color="#7376BD"/>
+
+    <!--Panel Colors-->
+    <SolidColorBrush x:Key="panelColor" Color="#200F53"/>
+    <SolidColorBrush x:Key="panelOverColor" Color="#281269"/>
+    <SolidColorBrush x:Key="panelActiveColor" Color="#2B1372"/>
+
+    <!--Button Colors-->
+    <!--TextBox Colors-->
+    <!--Etc-->
+
 </ResourceDictionary>
