@@ -53,7 +53,7 @@ namespace SequencerUI.ViewModels
         {
             //Register message and handlers
             _messenger = messenger;
-            _messenger.Register<GenericMessage<ISequenceModel>>(this, (r, m) =>
+            _messenger.Register<GenericMessage<ViewMessage>>(this, (r, m) =>
             {
                 HandleReceiveMessage(m.Content);
             });
@@ -88,10 +88,30 @@ namespace SequencerUI.ViewModels
         #endregion
 
         #region Message handlers
-        private void HandleReceiveMessage(ISequenceModel content)
+        private void HandleReceiveMessage(ViewMessage content)
         {
-            _sequenceEditView.DataContext = ServiceLocator.GetService<SequenceEditViewModel>(content);
-            CurrentView = _sequenceEditView;
+            switch (content.Mode)
+            {
+                case EViewMode.None:
+                    CurrentView = null;
+                    break;
+                case EViewMode.NormalMode:
+                    _seqRunView.DataContext = ServiceLocator.GetService<SequenceRunViewModel>(content.View);
+                    CurrentView = _seqRunView;
+                    break;
+                case EViewMode.EditMode:
+                    _sequenceEditView.DataContext = ServiceLocator.GetService<SequenceEditViewModel>(content.View);
+                    CurrentView = _sequenceEditView;
+                    break;
+                case EViewMode.DeleteMode:
+                    CurrentView = null;
+                    break;
+                default:
+                    CurrentView = null;
+                    break;
+            }
+
+            
         }
         #endregion
 

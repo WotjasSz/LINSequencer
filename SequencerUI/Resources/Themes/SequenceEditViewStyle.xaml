@@ -109,7 +109,7 @@
                                 <Button Content="&#xf24d;" 
                                         FontFamily="{StaticResource FontAwesome}"
                                         Style="{StaticResource SeqSelectActionButton}"
-                                        Command="{Binding DataContext.RemoveSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
+                                        Command="{Binding DataContext.DuplicateStepCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
                                     <Button.ToolTip>
                                         <StackPanel>
                                             <TextBlock>Duplicate</TextBlock>
@@ -119,7 +119,7 @@
                                 <Button Content="&#xf1f8;" 
                                         FontFamily="{StaticResource FontAwesome}"
                                         Style="{StaticResource SeqSelectActionButton}"
-                                        Command="{Binding DataContext.RemoveSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
+                                        Command="{Binding DataContext.RemoveStepCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
                                     <Button.ToolTip>
                                         <StackPanel>
                                             <TextBlock>Delete</TextBlock>

@@ -55,7 +55,8 @@ namespace SequencerUI.ViewModels
             // Być moze użycie AutoFac??            
             if (value != null)
             {
-                _messenger.Send(new GenericMessage<ISequenceModel>(value));
+                ViewMessage message = new ViewMessage(EViewMode.NormalMode, value);
+                _messenger.Send(new GenericMessage<ViewMessage>(message));
             }
         }
         #endregion
@@ -83,13 +84,16 @@ namespace SequencerUI.ViewModels
 
         [RelayCommand]
         private void AddNewSequence()
-        {
-            //Debug.WriteLine("Dodawanie nowej sekwencji...");
+        {            
             SequenceModel sequenceModel = new SequenceModel();
             ActiveSequences.Add(sequenceModel);
             CurrentSequence = sequenceModel;
-            //_sequenceEditView.DataContext = new SequenceEditViewModel(sequenceModel);
-            //CurrentView = _sequenceEditView;
+            
+            //Send message to MainView
+            ViewMessage message = new ViewMessage(EViewMode.EditMode, sequenceModel);
+            _messenger.Send(new GenericMessage<ViewMessage>(message));
+            
+            //Hide Add panel
             IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
             IsPanelButtonEnabled = !IsAddSeqPanelEnable;
         }
@@ -99,7 +103,8 @@ namespace SequencerUI.ViewModels
         {
             if (CurrentSequence == seq)
             {
-                //CurrentView = null;
+                ViewMessage message = new ViewMessage(EViewMode.DeleteMode, seq);
+                _messenger.Send(new GenericMessage<ViewMessage>(message));
             }
             ActiveSequences.Remove(seq);
         }
@@ -107,8 +112,8 @@ namespace SequencerUI.ViewModels
         [RelayCommand(CanExecute = nameof(CanExecuteEditSequence))]
         private void EditSequence(SequenceModel seq)
         {
-            //_sequenceEditView.DataContext = new SequenceEditViewModel(seq);
-            //CurrentView = _sequenceEditView;
+            ViewMessage message = new ViewMessage(EViewMode.EditMode, seq);
+            _messenger.Send(new GenericMessage<ViewMessage>(message));
         }
 
         private bool CanExeuteAddSequence()

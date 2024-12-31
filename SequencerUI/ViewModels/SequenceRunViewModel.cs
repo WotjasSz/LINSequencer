@@ -32,7 +32,7 @@ namespace SequencerUI.ViewModels
             Sequence = new SequenceModel();            
         }
 
-        public SequenceRunViewModel(IMessenger messenger, ISequenceModel sequence)
+        public SequenceRunViewModel(IMessenger messenger, SequenceModel sequence)
         {
             _messenger = messenger;
 

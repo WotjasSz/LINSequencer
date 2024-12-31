@@ -17,6 +17,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace SequencerUI.ViewModels
@@ -112,7 +113,26 @@ namespace SequencerUI.ViewModels
                 StepList.Add(new SequenceStepModel(StepList.Count + 1, SelectedFunction));
                 UpdateIndex();
             }            
-        }        
+        }
+
+        [RelayCommand]
+        private void DuplicateStep(SequenceStepModel step)
+        {
+            var newStep = step.DeepCloneJson();
+            newStep.Index = StepList.Count + 1;
+            StepList.Add(newStep);
+        }
+
+        [RelayCommand]
+        private void RemoveStep(SequenceStepModel step)
+        {            
+            if (StepList.Contains(step))
+            {
+                StepList.Remove(step);
+                SelectedSeqenceStep = null;
+                CurrentStepParamView = null;
+            }
+        }
 
         [RelayCommand]
         private void ToggleFunctionListVisibility()
