@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
+using LINSequencerLib.SupportingFiles;
 using SequencerUI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ namespace SequencerUI.ViewModels
         {
             if (AvailableSeqSelected != null)
             {
-                ActiveSequences.Add(AvailableSeqSelected);
+                ActiveSequences.Add(AvailableSeqSelected.DeepCloneJson());
                 AvailableSeqSelected = null;
             }
             IsAddSeqPanelEnable = !IsAddSeqPanelEnable;
