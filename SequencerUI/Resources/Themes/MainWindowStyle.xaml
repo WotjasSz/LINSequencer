@@ -90,10 +90,26 @@
     <Style TargetType="TextBlock" x:Key="H1TextBlock">
         <Setter Property="Foreground" Value="{StaticResource Foreground_4}"/>
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Margin" Value="0 0 0 0"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="TextDecorations" Value="Underline"/>
     </Style>
+
+    <Style TargetType="TextBlock" x:Key="H1HeaderCenter" BasedOn="{StaticResource H1TextBlock}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <!--<Setter Property="TextDecorations" Value="Underline"/>-->
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="SingleLineTextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="MultilineTextBlock" BasedOn="{StaticResource SingleLineTextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+    
+    
+    
     <Style TargetType="TextBlock" x:Key="LessImportantFieldValue">
         <Setter Property="Foreground" Value="{StaticResource Foreground_5}"/>
         <Setter Property="FontSize" Value="14"/>
@@ -118,6 +134,11 @@
     <!--#endregion-->
 
     <!--#region TextBox-->
+    <Style TargetType="TextBox" x:Key="DefaultTextBox">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+    
     <Style TargetType="{x:Type TextBox}" x:Key="InputTextBox">
         <Setter Property="Template">
             <Setter.Value>
@@ -209,53 +230,32 @@
     </Style>
     <!--#endregion-->
     
-    <!--#endregion-->
-
-    <!--#region Step list -->
-    <Style TargetType="ListView" x:Key="StepList">
-        <Setter Property="Margin" Value="0 10"/>
+    <!--#region Buttons-->
+    <Style TargetType="Button" x:Key="SmallActionButton">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-    </Style>
-    <Style TargetType="ListViewItem" x:Key="StepListItem">
-        <Style.Triggers>
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource Primary_3}"/>
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="Foreground" Value="{StaticResource Accent_1}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Opacity" Value="0.25"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="ListViewItem">
-                    <Border Background="{TemplateBinding Background}"
-                        BorderThickness="3"
-                        BorderBrush="{StaticResource Primary_3}"
-                        CornerRadius="30"
-                        Margin="10 10">
-                        <StackPanel Orientation="Horizontal"
-                            Margin="5 2">
-                            <Label Content="{Binding Index}"
-                           FontSize="30"
-                           Foreground="{StaticResource Accent_1}"
-                           Width="50"
-                           HorizontalContentAlignment="Center"
-                           VerticalContentAlignment="Center"/>
-                            <StackPanel HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Margin="15 5">
-                                <TextBlock Text="{Binding Name}"
-                                        Foreground="{StaticResource Foreground_2}"
-                                        FontSize="18"/>
-                                <TextBlock Text="{Binding Comment}"
-                                       Foreground="{StaticResource Foreground_4}"
-                                       FontSize="14"/>
-                            </StackPanel>
-                        </StackPanel>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
+    <!--#endregion-->
+    
     <!--#endregion-->
 </ResourceDictionary>

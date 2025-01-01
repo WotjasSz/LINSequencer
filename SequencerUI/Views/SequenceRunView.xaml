@@ -6,86 +6,168 @@
              xmlns:local="clr-namespace:SequencerUI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" MinWidth="500"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <!--#region Content side-->
-        <StackPanel Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Creation date:"
-                        Style="{StaticResource LessImportantFieldLabel}"/>
-                <TextBlock Text="{Binding Sequence.CreationDate, FallbackValue=CreationDateField}"
-                           Style="{StaticResource LessImportantFieldValue}"/>
-            </StackPanel>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="260"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <Label Content="Name" 
-                           Style="{StaticResource CommonFieldLabel}"/>
-                    <TextBlock Text="{Binding Sequence.Name, FallbackValue=NameField}"
-                               Style="{StaticResource ShortFieldValue}"/>
-                    <Label Content="Description" 
-                           Style="{StaticResource CommonFieldLabel}"/>
-                    <TextBlock Text="{Binding Sequence.Description, FallbackValue=DescriptionField}"
-                               Style="{StaticResource LongTextFieldValue}"/>
-                    <Label Content="SDF" 
-                           Style="{StaticResource CommonFieldLabel}"/>
-                    <TextBlock Text="{Binding Sequence.SdfName, FallbackValue=SDFField}"
-                               Style="{StaticResource ShortFieldValue}"/>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
-                    <ComboBox ItemsSource="{Binding Devices}"
-                              SelectedItem="{Binding CurrentDevice}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="DemiBold" TextAlignment="Center"/>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <TextBlock Text="SN:" FontSize="14" FontWeight="DemiBold" TextAlignment="Center" Margin="5 0"/>
-                                        <TextBlock Text="{Binding SerialNumber}" FontSize="14" FontWeight="Light" TextAlignment="Center"/>
-                                        <TextBlock Text=" " FontSize="14" FontWeight="Light" TextAlignment="Center"/>
-                                        <TextBlock Text="Usage:" FontSize="14" FontWeight="DemiBold" TextAlignment="Center" Margin="5 0"/>
-                                        <TextBlock Text="{Binding Usage}" FontSize="14" FontWeight="Light" TextAlignment="Center"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <Button Command="{Binding RunSequenceCommand}"
-                            Content="Run"
-                            FontSize="25"
-                            Style="{StaticResource GenericButton}"/>
-                </StackPanel>
-            </Grid>
-            <Label Content="StepList"
-                   Style="{StaticResource HeaderLabel}"/>
-
-        </StackPanel>
-        <ListView Grid.Row="1"
-                  ItemsSource="{Binding Sequence.StepList}"
-                  Style="{StaticResource StepList}"
-                  ItemContainerStyle="{StaticResource StepListItem}">
-        </ListView>
-        <!--#endregion-->
-        <GridSplitter HorizontalAlignment="Right" Width="2"/>
-        <!--#region Log area -->
-        <Grid Grid.Column="1">
+    <Border Style="{StaticResource ViewWithGroupBorder}">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="{Binding Log}" Grid.Row="1" Grid.RowSpan="2"/>
+            <!--#region Header-->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--#region Basic information -->
+                <Border Grid.Column="0" Style="{StaticResource GroupViewBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>                        
+
+                        <!--#region Info field-->
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal">
+                            <Label Content="Creation date:"
+                                   Style="{StaticResource LessImportantFieldLabel}"/>
+                            <TextBlock Text="{Binding Sequence.CreationDate, FallbackValue=CreationDateField}"
+                                       Style="{StaticResource LessImportantFieldValue}"/>
+                        </StackPanel>
+                        <!--#endregion-->
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <!--#region Single line fields-->
+                            <StackPanel Grid.Column="0">
+                                <StackPanel Style="{StaticResource SingleLineFieldsRunViewStackPanel}">
+                                    <Label Content="Name" 
+                                       Target="{Binding ElementName=txtNameField}"
+                                       Style="{StaticResource CommonFieldLabel}"/>
+                                    <TextBlock Text="{Binding Sequence.Name, FallbackValue=NameTb}"
+                                         x:Name="txtNameField"
+                                         Style="{StaticResource SingleLineField}"/>
+                                </StackPanel>
+                                <StackPanel Style="{StaticResource SingleLineFieldsRunViewStackPanel}">
+                                    <Label Content="SDF" 
+                                       Target="{Binding ElementName=txtSdfField}"
+                                       Style="{StaticResource CommonFieldLabel}"/>
+                                    <TextBlock Text="{Binding Sequence.SdfName, FallbackValue=SDFName}"
+                                           x:Name="txtSdfField"
+                                           Style="{StaticResource SingleLineField}"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <!--#endregion-->
+
+                            <!--#region Description field-->
+                            <StackPanel Grid.Column="1"
+                                    Style="{StaticResource MultilineFieldsRunViewStackPanel}">
+                                <Label Content="Description"
+                                   Target="{Binding ElementName=txbDescriptionField}"
+                                   Style="{StaticResource CommonFieldLabel}"/>
+                                <TextBox Text="{Binding Sequence.Description, FallbackValue=Description}"
+                                       x:Name="txbDescriptionField"
+                                       Style="{StaticResource MultilineReadField}"/>
+                            </StackPanel>
+                            <!--#endregion-->
+                        </Grid>
+                    </Grid>
+                </Border>
+                <!--#endregion-->
+
+                <!--#region Action border -->
+                <Border Grid.Column="1" Style="{StaticResource GroupViewBorder}">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Stretch">
+                            <Grid>
+                                <Label Content="Select device" 
+                               Target="{Binding ElementName=cbxDeviceSelection}"
+                               Style="{StaticResource CommonFieldLabel}"/>
+                                <Button Content="&#xf021;" 
+                                    FontFamily="{StaticResource FontAwesome}"
+                                    Style="{StaticResource SmallActionButton}"
+                                    HorizontalAlignment="Right"
+                                    Margin="0 0 10 0"
+                                    Command="{Binding ReloadDeviceListCommand}">
+                                    <Button.ToolTip>
+                                        <StackPanel>
+                                            <TextBlock>Refresh</TextBlock>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
+                            </Grid>
+                            <ComboBox ItemsSource="{Binding Devices}"
+                                  SelectedItem="{Binding CurrentDevice}"
+                                  x:Name="cbxDeviceSelection"
+                                  Foreground="{StaticResource Foreground_1}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                            <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="DemiBold" TextAlignment="Center"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock Text="SN:" FontSize="14" FontWeight="DemiBold" TextAlignment="Center" Margin="5 0"/>
+                                                <TextBlock Text="{Binding SerialNumber}" FontSize="14" FontWeight="Light" TextAlignment="Center"/>
+                                                <TextBlock Text=" " FontSize="14" FontWeight="Light" TextAlignment="Center"/>
+                                                <TextBlock Text="Usage:" FontSize="14" FontWeight="DemiBold" TextAlignment="Center" Margin="5 0"/>
+                                                <TextBlock Text="{Binding Usage}" FontSize="14" FontWeight="Light" TextAlignment="Center"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Command="{Binding RunSequenceCommand}"
+                                Content="Run"
+                                FontSize="25"
+                                Style="{StaticResource GenericButton}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <!--#endregion-->
+            </Grid>            
+            <!--#endregion-->
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <!--#region Step list -->
+                <Border Grid.Column="0" Style="{StaticResource GroupViewBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="StepList"
+                               Style="{StaticResource H1HeaderCenter}"/>
+                        <ListView Grid.Row="1"
+                                  ItemsSource="{Binding Sequence.StepList}"
+                                  Style="{StaticResource StepListRunView}"
+                                  ItemContainerStyle="{StaticResource StepListItemRunView}">
+                        </ListView>
+                    </Grid>
+                </Border>
+                <!--#endregion-->
+
+                <!--#region Log area -->
+                <Border Grid.Column="1"
+                        Style="{StaticResource GroupViewBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Log"
+                                   Style="{StaticResource H1HeaderCenter}"/>
+                    </Grid>
+                </Border>
+                <!--#endregion-->
+            </Grid>
         </Grid>
-        <!--#endregion-->
-    </Grid>
+    </Border>
 </UserControl>

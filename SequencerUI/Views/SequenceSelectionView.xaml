@@ -48,12 +48,12 @@
                     <!-- REFRESH -->
                     <Button Content="&#xf021;" 
                             FontFamily="{StaticResource FontAwesome}"
-                            Style="{StaticResource SeqSelectActionButton}"
+                            Style="{StaticResource SmallActionButton}"
                             Command="{Binding AvailableSequenceReloadCommand}"/>
                     <!-- CANCEL -->
                     <Button Content="&#xf00d;"
                             FontFamily="{StaticResource FontAwesome}"
-                            Style="{StaticResource SeqSelectActionButton}"
+                            Style="{StaticResource SmallActionButton}"
                             Command="{Binding ToggleSeqPanelCommand}"/>
                 </StackPanel>
                 <Label Content="Select sequence"

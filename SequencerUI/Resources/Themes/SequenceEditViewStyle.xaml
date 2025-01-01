@@ -7,11 +7,11 @@
     <hlp:ZeroCountToVisibilityConverter x:Key="ZeroCountToVisibilityConverter"/>
 
     <!--#region StackPanels -->
-    <Style TargetType="StackPanel" x:Key="InputFieldStackPanel">
+    <Style TargetType="StackPanel" x:Key="InputFieldEditViewStackPanel">
         <Setter Property="MinWidth" Value="250"/>
     </Style>
 
-    <Style TargetType="StackPanel" x:Key="DescriptionFieldStackPanel" BasedOn="{StaticResource InputFieldStackPanel}">
+    <Style TargetType="StackPanel" x:Key="MultilineEditViewFieldsStackPanel" BasedOn="{StaticResource InputFieldEditViewStackPanel}">
         <Setter Property="Margin" Value="0 0 0 5"/>
     </Style>
     <!--#endregion-->
@@ -27,9 +27,10 @@
         <Setter Property="Margin" Value="5 0"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
-    <!--#endregion-->
+    <!--#endregion-->     
 
     <!--#region Edit step list -->
+    
     <!--ListView-->
     <Style TargetType="ListView" x:Key="StepListEditable">
         <Setter Property="Margin" Value="0 10"/>
@@ -39,17 +40,14 @@
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListView">
-                    <Border Background="Transparent" 
-                            dd:DragDrop.IsDropTarget="True" 
-                            dd:DragDrop.DropHandler="{Binding}">                        
+                    <Border Background="Transparent">
                         <Grid>
                             <ItemsPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                            <TextBlock Text="Drop here"                                        
+                            <TextBlock Text="Drop here"
+                                       FontSize="20"
                                        HorizontalAlignment="Center" 
                                        VerticalAlignment="Center" 
                                        Foreground="{StaticResource Foreground_5}"
@@ -108,7 +106,7 @@
                                         Margin="0 5 0 0">                                
                                 <Button Content="&#xf24d;" 
                                         FontFamily="{StaticResource FontAwesome}"
-                                        Style="{StaticResource SeqSelectActionButton}"
+                                        Style="{StaticResource SmallActionButton}"
                                         Command="{Binding DataContext.DuplicateStepCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
                                     <Button.ToolTip>
                                         <StackPanel>
@@ -118,7 +116,7 @@
                                 </Button>
                                 <Button Content="&#xf1f8;" 
                                         FontFamily="{StaticResource FontAwesome}"
-                                        Style="{StaticResource SeqSelectActionButton}"
+                                        Style="{StaticResource SmallActionButton}"
                                         Command="{Binding DataContext.RemoveStepCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
                                     <Button.ToolTip>
                                         <StackPanel>

@@ -106,6 +106,22 @@ namespace SequencerUI.ViewModels
         }
 
         [RelayCommand]
+        private void SaveSequenceAs()
+        {            
+            Sequence.StepList.Clear();
+            Sequence.StepList = StepList.ToList();
+            Sequence.UpdateFileName();
+            Sequence.SdfName = SelectedSdfFile.Name;
+            LinSequencer.SaveSequence(Sequence);
+        }
+
+        [RelayCommand]
+        private void SaveSequenceAndTest()
+        {
+            
+        }
+
+        [RelayCommand]
         private void AddSeqStep()
         {
             if(SelectedFunction != null)
@@ -131,6 +147,7 @@ namespace SequencerUI.ViewModels
                 StepList.Remove(step);
                 SelectedSeqenceStep = null;
                 CurrentStepParamView = null;
+                UpdateIndex();
             }
         }
 

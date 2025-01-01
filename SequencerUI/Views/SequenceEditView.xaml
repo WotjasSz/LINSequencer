@@ -60,7 +60,7 @@
 
                         <!--#region Single line fields -->
                         <StackPanel Grid.Column="0" Grid.Row="1">
-                            <StackPanel Style="{StaticResource InputFieldStackPanel}">
+                            <StackPanel Style="{StaticResource InputFieldEditViewStackPanel}">
                                 <Label Content="Name" 
                                        Target="{Binding ElementName=txtNameInput}"
                                        Style="{StaticResource CommonFieldLabel}"/>
@@ -69,7 +69,7 @@
                                          Style="{StaticResource InputField}"
                                          Tag="Type name"/>
                             </StackPanel>
-                            <StackPanel Style="{StaticResource InputFieldStackPanel}">
+                            <StackPanel Style="{StaticResource InputFieldEditViewStackPanel}">
                                 <Label Content="SDF" 
                                        Target="{Binding ElementName=cbxSdfSelection}"
                                        Style="{StaticResource CommonFieldLabel}"/>
@@ -95,7 +95,7 @@
 
                         <!--#region Description field -->
                         <StackPanel Grid.Column="1" Grid.Row="1"
-                                Style="{StaticResource DescriptionFieldStackPanel}">
+                                Style="{StaticResource MultilineEditViewFieldsStackPanel}">
                             <Label Content="Description" 
                                Target="{Binding ElementName=txtDescriptionInput}"
                                Style="{StaticResource CommonFieldLabel}"/>
@@ -116,7 +116,7 @@
                         Style="{StaticResource GroupViewBorder}">
                     <Grid>                        
                         <StackPanel Orientation="Vertical"
-                                HorizontalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center">
                             <Button Style="{StaticResource GenericButton}"
                                     FontSize="16"
@@ -124,13 +124,15 @@
                                     Command="{Binding SaveSequenceCommand}"/>
                             <Button Style="{StaticResource GenericButton}"
                                     FontSize="16"
-                                    Content="Save as new"/>
+                                    Content="Save as new"
+                                    Command="{Binding SaveSequenceAsCommand}"/>
                             <Button Style="{StaticResource GenericButton}"
                                     FontSize="16"
                                     Content="Cancel"/>
                             <Button Style="{StaticResource GenericButton}"
                                     FontSize="16"
-                                    Content="Save&amp;Test"/>
+                                    Content="Save&amp;Test"
+                                    Command="{Binding SaveSequenceAndTestCommand}"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -154,7 +156,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" 
                                Text="StepList"
-                               Style="{StaticResource H1TextBlock}"/>
+                               Style="{StaticResource H1HeaderCenter}"/>
                         <ScrollViewer Grid.Row="1">
                             <ListView ItemsSource="{Binding StepList, Mode=TwoWay}"
                                       Style="{StaticResource StepListEditable}"
@@ -172,9 +174,9 @@
                 <!--#region Step properties -->
                 <Border Grid.Column="1" 
                         Style="{StaticResource GroupViewBorder}">
-                    <StackPanel Style="{StaticResource InputFieldStackPanel}">
+                    <StackPanel Style="{StaticResource InputFieldEditViewStackPanel}">
                         <TextBlock Text="Step properties"
-                                   Style="{StaticResource H1TextBlock}"/>
+                                   Style="{StaticResource H1HeaderCenter}"/>
                         <ContentControl x:Name="SelectedStep"
                                         Content="{Binding CurrentStepParamView}"/>
                     </StackPanel>
@@ -196,18 +198,18 @@
                                     HorizontalAlignment="Right">
                             <Button Content="&#xf105;"
                                     FontFamily="{StaticResource FontAwesome}"
-                                    Style="{StaticResource SeqSelectActionButton}"
+                                    Style="{StaticResource SmallActionButton}"
                                     Command="{Binding ToggleFunctionListVisibilityCommand}"
                                     Visibility="{Binding IsFunctionListVisible, Converter={StaticResource BoolToVisCoverter}}"/>
                             <Button Content="&#xf104;"
                                     FontFamily="{StaticResource FontAwesome}"
-                                    Style="{StaticResource SeqSelectActionButton}"
+                                    Style="{StaticResource SmallActionButton}"
                                     Command="{Binding ToggleFunctionListVisibilityCommand}"
                                     Visibility="{Binding IsExpandButtonVisible, Converter={StaticResource BoolToVisCoverter}}"/>
                         </StackPanel>
                         <TextBlock Grid.Row="0"
                                Text="Add function"
-                               Style="{StaticResource H1TextBlock}"
+                               Style="{StaticResource H1HeaderCenter}"
                                Visibility="{Binding IsFunctionListVisible, Converter={StaticResource BoolToVisCoverter}}"/>
                         <!--#endregion-->
 

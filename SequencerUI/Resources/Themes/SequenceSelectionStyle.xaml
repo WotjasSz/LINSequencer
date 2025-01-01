@@ -10,31 +10,6 @@
     </Style>
 
     <!--#region Sequence slection -->
-    <Style TargetType="Button" x:Key="SeqSelectActionButton">
-        <Setter Property="Width" Value="20"/>
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="{StaticResource Accent_1}"/>
-        <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="FontSize" Value="15"/>
-        <Setter Property="Opacity" Value="0.25"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Opacity" Value="1"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <Style TargetType="StackPanel" x:Key="SequenceSelector">
         <Setter Property="Margin" Value="15 0 15 0"/>
         <Style.Triggers>
@@ -188,7 +163,7 @@
                                     HorizontalAlignment="Right">
                                 <Button Content="&#xf044;" 
                                     FontFamily="{StaticResource FontAwesome}"
-                                    Style="{StaticResource SeqSelectActionButton}"
+                                    Style="{StaticResource SmallActionButton}"
                                     Command="{Binding DataContext.EditSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
                                     <Button.ToolTip>
                                         <StackPanel>
@@ -198,7 +173,7 @@
                                 </Button>
                                 <Button Content="&#xf00d;" 
                                     FontFamily="{StaticResource FontAwesome}"
-                                    Style="{StaticResource SeqSelectActionButton}"
+                                    Style="{StaticResource SmallActionButton}"
                                     Command="{Binding DataContext.RemoveSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
                                     <Button.ToolTip>
                                         <StackPanel>
