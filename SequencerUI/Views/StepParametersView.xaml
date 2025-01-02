@@ -12,6 +12,14 @@
     <Grid>
         <StackPanel>
             <StackPanel Margin="5">
+                <Label Content="UserName"
+                       Target="{Binding ElementName=txtStepUserNameField}"
+                       Style="{StaticResource CommonFieldLabel}"/>
+                <TextBox Text="{Binding SequenceStep.UserName}"
+                         x:Name="txtStepUserNameField"
+                         Style="{StaticResource InputField}"/>
+            </StackPanel>
+            <StackPanel Margin="5">
                 <Label Content="Comment"
                        Target="{Binding ElementName=txtStepCommentField}"
                        Style="{StaticResource CommonFieldLabel}"/>

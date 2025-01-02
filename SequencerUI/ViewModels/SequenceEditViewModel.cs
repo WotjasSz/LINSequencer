@@ -31,7 +31,16 @@ namespace SequencerUI.ViewModels
         private bool _isExpandButtonVisible = true;
 
         [ObservableProperty]
+        private DateTime _creationDate;
+
+        [ObservableProperty]
+        private string _fileName;
+
+        [ObservableProperty]
         private SequenceModel _sequence;
+
+        [ObservableProperty]
+        private SequenceModel _sequenceCopy;
 
         [ObservableProperty]
         private object? _currentStepParamView;
@@ -66,6 +75,9 @@ namespace SequencerUI.ViewModels
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
 
+            CreationDate = Sequence.CreationDate;
+            FileName = Sequence.FileName;
+
             _stepParametersView = new StepParametersView();
 
             LoadFunctionList();
@@ -75,14 +87,25 @@ namespace SequencerUI.ViewModels
         {
             _messenger = messenger;
             Sequence = sequence;
+            SequenceCopy = sequence.DeepCloneJson(); //Needed for cancelation
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
             SdfFiles = new ObservableCollection<SdfFileModel>(LinSequencer.SdfList);
             SelectedSdfFile = SdfFiles.Where(p => p.Name == sequence.SdfName).FirstOrDefault();
+
+            CreationDate = Sequence.CreationDate;
+            FileName = Sequence.FileName;
 
             _stepParametersView = new StepParametersView();
 
             LoadFunctionList();
         }
+
+        //TODO dodać kopię sekwencji podczas edytowania aby po naciśnięciu cancel można było wrócić do wartości oryginalnych
+        //TODO dodać możliwość porównywania obiektu oryginalnego ze zmodyfikowanym w celu np. wyświetleniu monitu o potrzebie zapisania, itp
+        //Do tego celu najlepiej nadpisać metody GetHashCode oraz Equal wykorzystując bibliotekę Equatable
+
+        //TODO zmodyfikować widok listy kroków tak aby wyświetlał nazwę nadaną przez użytkownika a nazwa funkcji była z małych liter
+        //Trzeba do tego zmodyfikować metode SequenceStepModel.
 
         #region Property actions
         partial void OnSelectedSeqenceStepChanged(SequenceStepModel? value)
@@ -112,13 +135,31 @@ namespace SequencerUI.ViewModels
             Sequence.StepList = StepList.ToList();
             Sequence.UpdateFileName();
             Sequence.SdfName = SelectedSdfFile.Name;
+
+            CreationDate = Sequence.CreationDate;
+            FileName = Sequence.FileName;
+
             LinSequencer.SaveSequence(Sequence);
+        }
+
+        [RelayCommand]
+        private void CancelEdition()
+        {
+            //TODO Zmienić sposób kopiowania tak aby nadpisać dane dla kokretnej referencji a nie zmienić referencję.
+            //TODO Dodać metodę w klasie SequenceModel do nadpisywania wartości.
+            //Sequence = SequenceCopy.DeepCloneJson();
         }
 
         [RelayCommand]
         private void SaveSequenceAndTest()
         {
-            
+            Sequence.StepList.Clear();
+            Sequence.StepList = StepList.ToList();
+            Sequence.SdfName = SelectedSdfFile.Name;
+            LinSequencer.SaveSequence(Sequence);
+
+            ViewMessage message = new ViewMessage(EViewMode.NormalMode, Sequence);
+            _messenger.Send(new GenericMessage<ViewMessage>(message));
         }
 
         [RelayCommand]

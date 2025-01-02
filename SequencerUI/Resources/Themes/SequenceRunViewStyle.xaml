@@ -70,14 +70,14 @@
                                 <StackPanel HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Margin="15 5">
-                                    <TextBlock Text="{Binding Name}"
+                                    <TextBlock Text="{Binding UserName}"
                                            Foreground="{StaticResource Foreground_2}"
                                            FontSize="18"/>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Comment: "
+                                        <TextBlock Text="Function: "
                                                Foreground="{StaticResource Foreground_5}"
                                                FontSize="14"/>
-                                        <TextBlock Text="{Binding Comment}"
+                                        <TextBlock Text="{Binding Name}"
                                                Foreground="{StaticResource Foreground_4}"
                                                FontSize="14"/>
                                     </StackPanel>

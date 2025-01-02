@@ -28,13 +28,24 @@
                         </Grid.RowDefinitions>                        
 
                         <!--#region Info field-->
-                        <StackPanel Grid.Row="0"
-                                    Orientation="Horizontal">
-                            <Label Content="Creation date:"
-                                   Style="{StaticResource LessImportantFieldLabel}"/>
-                            <TextBlock Text="{Binding Sequence.CreationDate, FallbackValue=CreationDateField}"
-                                       Style="{StaticResource LessImportantFieldValue}"/>
-                        </StackPanel>
+                        <Grid Grid.Row="0"
+                              HorizontalAlignment="Stretch">
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10 0">
+                                <Label Content="Creation date:"
+                                       Style="{StaticResource LessImportantFieldLabel}"/>
+                                <TextBlock Text="{Binding Sequence.CreationDate, FallbackValue=CreationDateField}"
+                                           Style="{StaticResource LessImportantFieldValue}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        Margin="10 0">
+                                <Label Content="File name:"
+                                       Style="{StaticResource LessImportantFieldLabel}"/>
+                                <TextBlock Text="{Binding Sequence.FileName, FallbackValue=FileName}"
+                                           Style="{StaticResource LessImportantFieldValue}"/>
+                            </StackPanel>
+                        </Grid>
                         <!--#endregion-->
 
                         <Grid Grid.Row="1">

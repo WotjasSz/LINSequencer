@@ -49,13 +49,24 @@
                         </Grid.ColumnDefinitions>
                         
                         <!--#region Info field -->
-                        <StackPanel Grid.Column="0" Grid.Row="0"
-                                    Orientation="Horizontal">
-                            <Label Content="Creation date:"
-                                   Style="{StaticResource LessImportantFieldLabel}"/>
-                            <TextBlock Text="{Binding Sequence.CreationDate, FallbackValue=CreationDateField}"
-                                       Style="{StaticResource LessImportantFieldValue}"/>
-                        </StackPanel>
+                        <Grid Grid.ColumnSpan="2" Grid.Row="0"
+                              HorizontalAlignment="Stretch">
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10 0">
+                                <Label Content="Creation date:"
+                                       Style="{StaticResource LessImportantFieldLabel}"/>
+                                <TextBlock Text="{Binding CreationDate, FallbackValue=CreationDateField}"
+                                           Style="{StaticResource LessImportantFieldValue}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        Margin="10 0">
+                                <Label Content="File name:"
+                                       Style="{StaticResource LessImportantFieldLabel}"/>
+                                <TextBlock Text="{Binding FileName, FallbackValue=FileName}"
+                                           Style="{StaticResource LessImportantFieldValue}"/>
+                            </StackPanel>
+                        </Grid>
                         <!--#endregion-->
 
                         <!--#region Single line fields -->
@@ -128,7 +139,8 @@
                                     Command="{Binding SaveSequenceAsCommand}"/>
                             <Button Style="{StaticResource GenericButton}"
                                     FontSize="16"
-                                    Content="Cancel"/>
+                                    Content="Cancel"
+                                    Command="{Binding CancelEditionCommand}"/>
                             <Button Style="{StaticResource GenericButton}"
                                     FontSize="16"
                                     Content="Save&amp;Test"
