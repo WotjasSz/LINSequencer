@@ -148,6 +148,9 @@ namespace SequencerUI.ViewModels
             //TODO Zmienić sposób kopiowania tak aby nadpisać dane dla kokretnej referencji a nie zmienić referencję.
             //TODO Dodać metodę w klasie SequenceModel do nadpisywania wartości.
             //Sequence = SequenceCopy.DeepCloneJson();
+
+            ViewMessage message = new ViewMessage(EViewMode.RunMode, Sequence);
+            _messenger.Send(new GenericMessage<ViewMessage>(message));
         }
 
         [RelayCommand]
@@ -158,7 +161,7 @@ namespace SequencerUI.ViewModels
             Sequence.SdfName = SelectedSdfFile.Name;
             LinSequencer.SaveSequence(Sequence);
 
-            ViewMessage message = new ViewMessage(EViewMode.NormalMode, Sequence);
+            ViewMessage message = new ViewMessage(EViewMode.RunMode, Sequence);
             _messenger.Send(new GenericMessage<ViewMessage>(message));
         }
 

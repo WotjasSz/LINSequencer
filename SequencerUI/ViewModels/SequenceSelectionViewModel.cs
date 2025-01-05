@@ -56,7 +56,7 @@ namespace SequencerUI.ViewModels
             // Być moze użycie AutoFac??            
             if (value != null)
             {
-                ViewMessage message = new ViewMessage(EViewMode.NormalMode, value);
+                ViewMessage message = new ViewMessage(EViewMode.RunMode, value);
                 _messenger.Send(new GenericMessage<ViewMessage>(message));
             }
         }
@@ -115,6 +115,12 @@ namespace SequencerUI.ViewModels
         {
             ViewMessage message = new ViewMessage(EViewMode.EditMode, seq);
             _messenger.Send(new GenericMessage<ViewMessage>(message));
+        }
+
+        [RelayCommand]
+        private void DuplicateSequence(SequenceModel seq)
+        {
+            ActiveSequences.Add(seq.DeepCloneJson());
         }
 
         private bool CanExeuteAddSequence()

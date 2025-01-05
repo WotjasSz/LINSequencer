@@ -9,7 +9,7 @@ namespace SequencerUI.Helpers
     public enum EViewMode
     {
         None,
-        NormalMode,
+        RunMode,
         EditMode,
         DeleteMode
     }

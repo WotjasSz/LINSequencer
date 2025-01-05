@@ -161,10 +161,22 @@
                             <StackPanel Orientation="Horizontal"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Right">
+                                <Button Content="&#xf24d;" 
+                                        FontFamily="{StaticResource FontAwesome}"
+                                        Style="{StaticResource SmallActionButton}"
+                                        Command="{Binding DataContext.DuplicateSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                        CommandParameter="{Binding}">
+                                    <Button.ToolTip>
+                                        <StackPanel>
+                                            <TextBlock>Duplicate</TextBlock>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
                                 <Button Content="&#xf044;" 
-                                    FontFamily="{StaticResource FontAwesome}"
-                                    Style="{StaticResource SmallActionButton}"
-                                    Command="{Binding DataContext.EditSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
+                                        FontFamily="{StaticResource FontAwesome}"
+                                        Style="{StaticResource SmallActionButton}"
+                                        Command="{Binding DataContext.EditSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                        CommandParameter="{Binding}">
                                     <Button.ToolTip>
                                         <StackPanel>
                                             <TextBlock>Edit</TextBlock>
@@ -172,9 +184,10 @@
                                     </Button.ToolTip>
                                 </Button>
                                 <Button Content="&#xf00d;" 
-                                    FontFamily="{StaticResource FontAwesome}"
-                                    Style="{StaticResource SmallActionButton}"
-                                    Command="{Binding DataContext.RemoveSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}">
+                                        FontFamily="{StaticResource FontAwesome}"
+                                        Style="{StaticResource SmallActionButton}"
+                                        Command="{Binding DataContext.RemoveSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                        CommandParameter="{Binding}">
                                     <Button.ToolTip>
                                         <StackPanel>
                                             <TextBlock>Close</TextBlock>

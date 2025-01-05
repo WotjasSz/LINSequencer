@@ -60,7 +60,7 @@ namespace SequencerUI.ViewModels
         [RelayCommand]
         private void RunSequence()
         {
-
+            Sequence.RunAsync(CurrentDevice, LinSequencer.FunctionList);
         }
         #endregion
     }

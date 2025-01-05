@@ -20,7 +20,6 @@ using System.Windows.Input;
 
 namespace SequencerUI.ViewModels
 {
-    //TODO Add ScrollView style
     public partial class MainWindowViewModel : ObservableRecipient
     {
         #region Properties
@@ -95,7 +94,7 @@ namespace SequencerUI.ViewModels
                 case EViewMode.None:
                     CurrentView = null;
                     break;
-                case EViewMode.NormalMode:
+                case EViewMode.RunMode:
                     _seqRunView.DataContext = ServiceLocator.GetService<SequenceRunViewModel>(content.View);
                     CurrentView = _seqRunView;
                     break;
