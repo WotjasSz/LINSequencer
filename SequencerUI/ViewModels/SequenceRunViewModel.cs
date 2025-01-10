@@ -54,7 +54,7 @@ namespace SequencerUI.ViewModels
             LinSequencer.CheckAvailableDevice();
             CurrentDevice = null;
             Devices.Clear();
-            Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
+            Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);            
         }
 
         [RelayCommand]

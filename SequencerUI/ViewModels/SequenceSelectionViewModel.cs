@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib;
 using LINSequencerLib.Sequence;
+using LINSequencerLib.Settings;
 using LINSequencerLib.SupportingFiles;
 using SequencerUI.Helpers;
 using System;
@@ -36,7 +37,7 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private ISequenceModel? _currentSequence;
 
-        private bool _editModeAvailable = true;
+        private bool _editModeAvailable = AppConfig.AdminMode;
 
         private readonly IMessenger _messenger;
 
@@ -83,7 +84,7 @@ namespace SequencerUI.ViewModels
             AvailableSequences = new ObservableCollection<ISequenceModel>(LinSequencer.SequenceList);
         }
 
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanExecuteAddNewSequence))]
         private void AddNewSequence()
         {            
             SequenceModel sequenceModel = new SequenceModel();
@@ -129,6 +130,11 @@ namespace SequencerUI.ViewModels
         }
 
         private bool CanExecuteEditSequence()
+        {
+            return _editModeAvailable;
+        }
+
+        private bool CanExecuteAddNewSequence()
         {
             return _editModeAvailable;
         }

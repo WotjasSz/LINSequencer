@@ -80,8 +80,8 @@ namespace SequencerUI.ViewModels
 
         [RelayCommand]
         private void ShowAboutControl()
-        {            
-            CurrentView = _aboutView;            
+        {
+            CurrentView = _aboutView;           
         }
 
         #endregion
