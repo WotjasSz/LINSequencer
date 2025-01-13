@@ -170,7 +170,7 @@ namespace SequencerUI.ViewModels
         {
             if(SelectedFunction != null)
             {
-                StepList.Add(new SequenceStepModel(StepList.Count + 1, SelectedFunction));
+                StepList.Add(new SequenceStepModel(StepList.Count, SelectedFunction));
                 UpdateIndex();
             }            
         }
@@ -246,7 +246,7 @@ namespace SequencerUI.ViewModels
         {
             for (int i = 0; i < StepList.Count; i++)
             {
-                StepList[i].Index = i + 1;
+                StepList[i].Index = i;
             }
             Sequence.StepList = StepList.ToList();
             StepList.Clear();
