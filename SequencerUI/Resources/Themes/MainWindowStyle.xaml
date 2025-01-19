@@ -200,7 +200,7 @@
                                      Background="Transparent"
                                      Foreground="{StaticResource Foreground_1}"
                                      x:Name="InputBox"
-                                     AcceptsReturn="True"
+                                     AcceptsReturn="False"
                                      TextWrapping="Wrap"
                                      VerticalScrollBarVisibility="Auto"
                                      HorizontalScrollBarVisibility="Auto"/>

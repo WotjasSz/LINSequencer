@@ -10,15 +10,7 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
     <Grid>
-        <StackPanel>
-            <StackPanel Margin="5">
-                <Label Content="UserName"
-                       Target="{Binding ElementName=txtStepUserNameField}"
-                       Style="{StaticResource CommonFieldLabel}"/>
-                <TextBox Text="{Binding SequenceStep.UserName}"
-                         x:Name="txtStepUserNameField"
-                         Style="{StaticResource InputField}"/>
-            </StackPanel>
+        <StackPanel>            
             <StackPanel Margin="5">
                 <Label Content="Comment"
                        Target="{Binding ElementName=txtStepCommentField}"
@@ -28,12 +20,18 @@
                          Style="{StaticResource InputField}"/>
             </StackPanel>
             <StackPanel Margin="5"
-                        Visibility="{Binding IsInputParamAvailable, Converter={StaticResource BoolToVis}}">
+                        Visibility="{Binding IsInputParamAvailable, Converter={StaticResource BoolToVis}}"
+                        HorizontalAlignment="Stretch">
                 <Label Content="Input"
                        Target="{Binding ElementName=icInputParameterList}"
                        Style="{StaticResource CommonFieldLabel}"/>
                 <ItemsControl x:Name="icInputParameterList"
                               ItemsSource="{Binding InputParameters}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="1"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <local:ParameterView/>

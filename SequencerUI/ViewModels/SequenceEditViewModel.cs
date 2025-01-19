@@ -69,7 +69,7 @@ namespace SequencerUI.ViewModels
         private readonly IMessenger _messenger;
 
         public SequenceEditViewModel(IMessenger messenger)
-        {
+        {            
             _messenger = messenger;
             Sequence = new SequenceModel();
             StepList = new ObservableCollection<SequenceStepModel>(Sequence.StepList);
@@ -170,7 +170,7 @@ namespace SequencerUI.ViewModels
         {
             if(SelectedFunction != null)
             {
-                StepList.Add(new SequenceStepModel(StepList.Count, SelectedFunction));
+                StepList.Add(new SequenceStepModel(StepList.Count, StepList.ToList(), SelectedFunction));
                 UpdateIndex();
             }            
         }
@@ -228,7 +228,7 @@ namespace SequencerUI.ViewModels
 
                 if (StepList != null)
                 {
-                    StepList.Insert(targetIndex, new SequenceStepModel(targetIndex + 1, function));                    
+                    StepList.Insert(targetIndex, new SequenceStepModel(targetIndex + 1, StepList.ToList(), function));                    
                 }
             }
 

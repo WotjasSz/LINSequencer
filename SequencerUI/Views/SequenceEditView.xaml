@@ -10,10 +10,11 @@
              xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
              xmlns:models="clr-namespace:LINSequencerLib.Sequence;assembly=LINSequencerLib"
              xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+             xmlns:hlp="clr-namespace:SequencerUI.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisCoverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisCoverter"/>        
         <CollectionViewSource x:Key="FunctionListSource"
                               Source="{Binding FunctionList, Mode=OneWay}"
                               IsLiveGroupingRequested="True">

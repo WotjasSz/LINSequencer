@@ -5,7 +5,8 @@
                     xmlns:hlp="clr-namespace:SequencerUI.Helpers">
 
     <hlp:ZeroCountToVisibilityConverter x:Key="ZeroCountToVisibilityConverter"/>
-
+    <hlp:StepParameterConverter x:Key="ParameterConverter"/>
+    
     <!--#region StackPanels -->
     <Style TargetType="StackPanel" x:Key="InputFieldEditViewStackPanel">
         <Setter Property="MinWidth" Value="250"/>
@@ -27,10 +28,10 @@
         <Setter Property="Margin" Value="5 0"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
-    <!--#endregion-->     
+    <!--#endregion-->
 
     <!--#region Edit step list -->
-    
+
     <!--ListView-->
     <Style TargetType="ListView" x:Key="StepListEditable">
         <Setter Property="Margin" Value="0 10"/>
@@ -87,7 +88,7 @@
                                 <StackPanel HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Margin="15 5">
-                                    <TextBlock Text="{Binding UserName}"
+                                    <TextBlock Text="{Binding Path=InputParameterList, Converter={StaticResource ParameterConverter}, ConverterParameter='StepName'}"
                                            Foreground="{StaticResource Foreground_2}"
                                            FontSize="18"/>
                                     <StackPanel Orientation="Horizontal">
@@ -98,12 +99,12 @@
                                                Foreground="{StaticResource Foreground_4}"
                                                FontSize="14"/>
                                     </StackPanel>
-                                </StackPanel>                                
+                                </StackPanel>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
-                                        Margin="0 5 0 0">                                
+                                        Margin="0 5 0 0">
                                 <Button Content="&#xf24d;" 
                                         FontFamily="{StaticResource FontAwesome}"
                                         Style="{StaticResource SmallActionButton}"
@@ -132,7 +133,7 @@
         </Setter>
     </Style>
     <!--#endregion-->
-    
+
     <!--#region Parameters view-->
     <Style TargetType="Border" x:Key="SingleParameterArea">
         <Setter Property="Background" Value="{StaticResource GroupContentBackgroundGradient}"/>
@@ -145,7 +146,7 @@
         <Setter Property="BorderThickness" Value="0 0 0 1"/>-->
         <Setter Property="Margin" Value="20 0"/>
     </Style>
-    
+
     <Style TargetType="Label" x:Key="ParameterNameLabel">
         <Setter Property="Foreground" Value="{StaticResource Accent_2}"/>
         <Setter Property="FontSize" Value="16"/>
@@ -164,9 +165,9 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="10 5 0 0"/>
         <Setter Property="FontSize" Value="14"/>
-    </Style>    
+    </Style>
     <!--#endregion-->
-    
+
     <!--#region Function list -->
     <Style TargetType="ListView" x:Key="FunctionListStyle">
         <Setter Property="Margin" Value="5"/>
@@ -226,5 +227,5 @@
         </Setter>
     </Style>
     <!--#endregion-->
-    
+
 </ResourceDictionary>

@@ -164,7 +164,7 @@
                     </Grid>
                 </Border>
                 <!--#endregion-->
-
+                <GridSplitter Grid.Column="0" ResizeDirection="Columns" Width="3" Background="Transparent"/>
                 <!--#region Log area -->
                 <Border Grid.Column="1"
                         Style="{StaticResource GroupViewBorder}">
@@ -175,6 +175,10 @@
                         </Grid.RowDefinitions>
                         <TextBlock Text="Log"
                                    Style="{StaticResource H1HeaderCenter}"/>
+                        <ListView Grid.Row="1" 
+                                  ItemsSource="{Binding Messages}"
+                                  Style="{StaticResource LogListView}"
+                                  ItemContainerStyle="{StaticResource LogListItemView}"/>
                     </Grid>
                 </Border>
                 <!--#endregion-->

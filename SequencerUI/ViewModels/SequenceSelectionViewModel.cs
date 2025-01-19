@@ -47,7 +47,7 @@ namespace SequencerUI.ViewModels
         {
             _messenger = messenger;
             AvailableSequences = new ObservableCollection<ISequenceModel>(LinSequencer.SequenceList);
-            ActiveSequences = new ObservableCollection<ISequenceModel>();
+            ActiveSequences = new ObservableCollection<ISequenceModel>(LinSequencer.ActiveSequenceList);
         }
 
         #region Property actions
