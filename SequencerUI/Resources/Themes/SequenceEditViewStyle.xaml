@@ -23,6 +23,13 @@
         <Setter Property="Margin" Value="5 0"/>
     </Style>
 
+    <Style TargetType="TextBox" x:Key="NumberInputField" BasedOn="{StaticResource InputTextBox}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Margin" Value="5 0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
     <Style TargetType="TextBox" x:Key="InputMultilineField" BasedOn="{StaticResource InputMultilineTextBox}">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Margin" Value="5 0"/>

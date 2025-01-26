@@ -153,6 +153,9 @@
                                      CaretBrush="{StaticResource Foreground_1}"
                                      BorderThickness="0"
                                      VerticalContentAlignment="Center"
+                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                     MinWidth="{TemplateBinding MinWidth}"
                                      Padding="5"
                                      Background="Transparent"
                                      Foreground="{StaticResource Foreground_1}"
@@ -258,5 +261,91 @@
     </Style>
     <!--#endregion-->
     
+    <!--#region  CheckBox-->
+    <Style TargetType="CheckBox" x:Key="ToggleSwitchStyle">
+        <!-- Override the default template for CheckBox -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <!-- The main container consists of two columns: for the switch and the text label. -->
+                    <Grid>
+                        <!-- Defining two columns -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- Border around the switch -->
+                        <Border x:Name="SwitchBorder" Grid.Column="0" 
+                                Width="44" Height="24" 
+                                BorderBrush="Transparent" 
+                                BorderThickness="1" 
+                                CornerRadius="12" 
+                                Background="{StaticResource Background_3}">
+                            <!-- The rectangle that acts as the switch itself -->
+                            <Rectangle x:Name="Switch" 
+                                       Width="20" Height="20" 
+                                       Fill="{StaticResource Background_5}" 
+                                       Stroke="{StaticResource Background_5}" 
+                                       StrokeThickness="0" 
+                                       RadiusX="10" RadiusY="10" 
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Left"
+                                       Margin="1">
+                                <!-- Transform is used to animate the movement of the switch. -->
+                                <Rectangle.RenderTransform>
+                                    <TranslateTransform x:Name="SwitchTranslateTransform"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Border>
+                        <!-- A text label indicating the current state of the switch. -->
+                        <TextBlock Grid.Column="1" x:Name="StateLabel" 
+                                   Text="Off" 
+                                   VerticalAlignment="Center" 
+                                   Margin="5,0,0,0"/>
+                        <!-- State groups that define animations for the different states of a CheckBox -->
+                        <VisualStateManager.VisualStateGroups>
+                            <!-- State group for on and off states -->
+                            <VisualStateGroup x:Name="CheckStates">
+                                <!-- Animations for the enabled state -->
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <!-- Moves the switch to the right -->
+                                        <DoubleAnimation Storyboard.TargetName="SwitchTranslateTransform" Storyboard.TargetProperty="X" To="20" Duration="0:0:0.2"/>
+                                        <!-- Changes the text to "Enabled" -->
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLabel" Storyboard.TargetProperty="Text">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="On"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <!-- Changes the switch color to SkyBlue -->
+                                        <ColorAnimation Storyboard.TargetName="Switch" Storyboard.TargetProperty="Fill.Color" To="{StaticResource Accent_2_Color}" Duration="0:0:0.2"/>
+                                        <!-- Changes the toggle border color to SkyBlue -->
+                                        <ColorAnimation Storyboard.TargetName="Switch" Storyboard.TargetProperty="Stroke.Color" To="{StaticResource Accent_2_Color}" Duration="0:0:0.2"/>
+                                        <!-- Changes the border color to SkyBlue -->
+                                        <ColorAnimation Storyboard.TargetName="SwitchBorder" Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource Accent_2_Color}" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <!-- Animations for off state -->
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <!-- Returns the switch back to the left -->
+                                        <DoubleAnimation Storyboard.TargetName="SwitchTranslateTransform" Storyboard.TargetProperty="X" To="0" Duration="0:0:0.2"/>
+                                        <!-- Changes the text to "Disabled" -->
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLabel" Storyboard.TargetProperty="Text">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Off"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <!-- Resets the switch color to DarkGray -->
+                                        <ColorAnimation Storyboard.TargetName="Switch" Storyboard.TargetProperty="Fill.Color" To="{StaticResource Background_5_Color}" Duration="0:0:0.2"/>
+                                        <!-- Resets the border color of the toggle to its initial value. -->
+                                        <ColorAnimation Storyboard.TargetName="Switch" Storyboard.TargetProperty="Stroke.Color" To="{StaticResource Background_5_Color}" Duration="0:0:0.2"/>
+                                        <!-- Resets the border color to its initial value.-->
+                                        <ColorAnimation Storyboard.TargetName="SwitchBorder" Storyboard.TargetProperty="BorderBrush.Color" To="Transparent" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <!--#endregion-->
 </ResourceDictionary>

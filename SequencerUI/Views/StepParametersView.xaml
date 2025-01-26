@@ -4,10 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SequencerUI.Views"
+             xmlns:models="clr-namespace:LINSequencerLib.Sequence;assembly=LINSequencerLib"
+             xmlns:hlp="clr-namespace:SequencerUI.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <DataTemplate x:Key="BoolTemplate">
+            <local:BoolParameterView/>
+        </DataTemplate>
+        <DataTemplate x:Key="StringTemplate">
+            <local:StringParameterView/>
+        </DataTemplate>
+        <DataTemplate x:Key="IntTemplate">
+            <local:IntParameterView/>
+        </DataTemplate>
+        <hlp:StepParameterDataTemplateSelector x:Key="TemplateSelector"
+                                               BoolTemplate="{StaticResource BoolTemplate}"  
+                                               StringTemplate="{StaticResource StringTemplate}"
+                                               IntTemplate="{StaticResource IntTemplate}"/>
     </UserControl.Resources>
     <Grid>
         <StackPanel>            
@@ -26,17 +41,13 @@
                        Target="{Binding ElementName=icInputParameterList}"
                        Style="{StaticResource CommonFieldLabel}"/>
                 <ItemsControl x:Name="icInputParameterList"
-                              ItemsSource="{Binding InputParameters}">
+                              ItemsSource="{Binding InputParametersVm}"
+                              ItemTemplateSelector="{StaticResource TemplateSelector}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="1"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <local:ParameterView/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
             <StackPanel Margin="5"

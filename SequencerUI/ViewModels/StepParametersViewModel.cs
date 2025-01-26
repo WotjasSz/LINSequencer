@@ -32,6 +32,9 @@ namespace SequencerUI.ViewModels
         private ObservableCollection<SequenceStepParamModel>? _outputParameters;
 
         [ObservableProperty]
+        private ObservableCollection<object>? _inputParametersVm;
+
+        [ObservableProperty]
         private bool _isInputParamAvailable;
 
         [ObservableProperty]
@@ -41,6 +44,7 @@ namespace SequencerUI.ViewModels
         {
             SequenceStep = sequenceStep;
             Comment = sequenceStep.Comment;
+            InputParametersVm = new ObservableCollection<object>();
             UpdateSequenceField();
             //WeakReferenceMessenger.Default.Register<StepParameterMessage>(this);
         }
@@ -56,6 +60,23 @@ namespace SequencerUI.ViewModels
             //Comment = SequenceStep.Comment;
             InputParameters = new ObservableCollection<SequenceStepParamModel>(SequenceStep.InputParameterList);
             OutputParameters = new ObservableCollection<SequenceStepParamModel>(SequenceStep.OutputParameterList);
+
+            foreach (var parameter in InputParameters)
+            {
+                if (parameter.ParamType.Equals("System.Boolean"))
+                {
+                    InputParametersVm.Add(new BoolParameterViewModel(parameter));
+                }
+                if (parameter.ParamType.Equals("System.String"))
+                {
+                    InputParametersVm.Add(new StringParameterViewModel(parameter));
+                }
+                if (parameter.ParamType.Equals("System.Int32"))
+                {
+                    InputParametersVm.Add(new IntParameterViewModel(parameter));
+                }
+            }
+
 
             if (InputParameters.Count > 0) {IsInputParamAvailable = true;}
             else {IsInputParamAvailable = false;}

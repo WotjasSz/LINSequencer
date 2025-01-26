@@ -52,4 +52,13 @@
     <Resource Include="Resources\Themes\DarkModeColors.xaml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\BoolParameterView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\IntParameterView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

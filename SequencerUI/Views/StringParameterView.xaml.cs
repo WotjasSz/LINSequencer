@@ -1,4 +1,5 @@
-﻿using SequencerUI.ViewModels;
+﻿using LINSequencerLib.Sequence;
+using SequencerUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,9 @@ namespace SequencerUI.Views
     /// <summary>
     /// Interaction logic for ParameterView.xaml
     /// </summary>
-    public partial class ParameterView : UserControl
+    public partial class StringParameterView : UserControl
     {
-        public ParameterView()
+        public StringParameterView()
         {
             InitializeComponent();
         }

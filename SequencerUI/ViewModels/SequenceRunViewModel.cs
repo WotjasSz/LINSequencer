@@ -8,10 +8,12 @@ using LINSequencerLib.Sequence;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 
 namespace SequencerUI.ViewModels
 {
@@ -42,7 +44,9 @@ namespace SequencerUI.ViewModels
             Messages = new ObservableCollection<LogMessage>();            
             _logger = Sequence.Logger;
             _logger.SequenceLog += OnLogGenerated;
-        }
+
+            Messages.CollectionChanged += Messages_CollectionChanged;
+        }       
 
         public SequenceRunViewModel(IMessenger messenger, SequenceModel sequence)
         {
@@ -87,6 +91,31 @@ namespace SequencerUI.ViewModels
                         Messages.Add(msg);
                     }); 
             }
+        }
+
+        //TODO Sprawdzić i rozwinąć przewijanie listy do ostatniego elementu
+        private void Messages_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                var lastItem = Messages.LastOrDefault();
+                if (lastItem != null)
+                {
+                    ScrollToLastItem(lastItem);
+                }
+            }
+        }
+
+        private void ScrollToLastItem(LogMessage lastItem)
+        {
+            ScrollToItem?.Invoke(this, new ScrollEventArgs { Item = lastItem });
+        }
+
+        public event EventHandler<ScrollEventArgs> ScrollToItem;
+
+        public class ScrollEventArgs : EventArgs
+        {
+            public object Item { get; set; }
         }
     }
 }
