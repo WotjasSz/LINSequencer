@@ -5,32 +5,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SequencerUI.Views"
              xmlns:models="clr-namespace:LINSequencerLib.Sequence;assembly=LINSequencerLib"
-             xmlns:dt="clr-namespace:SequencerUI.Helpers"
+             xmlns:hlp="clr-namespace:SequencerUI.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>        
+    <UserControl.Resources>
+        <hlp:ListToPopupConverter x:Key="ListToVisConv"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisCoverter"/>
         <DataTemplate x:Key="BoolTemplate">
             <local:BoolOptionView/>
         </DataTemplate>
         <DataTemplate x:Key="BoolSwitchTemplate">
             <local:BoolSwitchOptionView/>
         </DataTemplate>
-        <dt:OptionDataTemplateSelector x:Key="TemplateSelector"
+        <hlp:OptionDataTemplateSelector x:Key="TemplateSelector"
                           BoolTemplate="{StaticResource BoolTemplate}"
                           BoolSwitchTemplate="{StaticResource BoolSwitchTemplate}"/>
+        
+
     </UserControl.Resources>
     <Border Style="{StaticResource SingleParameterArea}">
-        <StackPanel>
+        <StackPanel>            
             <Grid Margin="10 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="{Binding Name, FallbackValue=Name}"
+                </Grid.ColumnDefinitions>                
+                <Label Grid.Column="0" Content="{Binding StepParam.Name, FallbackValue=ParamName}"
                        Style="{StaticResource ParameterNameLabel}"/>
-                <TextBox Grid.Column="1" Text="{Binding ParamValue}"
-                         Style="{StaticResource NumberInputField}"
-                         MinWidth="75"/>
+                <TextBlock Grid.Column="1"
+                           Text="*"
+                           Visibility="{Binding IsRequired, Converter={StaticResource BoolToVisCoverter}}"
+                           Style="{StaticResource IsRequiredStyle}"/>                
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding ParamValue}"
+                             Style="{StaticResource NumberInputField}"
+                             MinWidth="75"/>
+                    <Popup IsOpen="{Binding IsPopupOpen}"
+                           StaysOpen="False">
+                        <ListBox ItemsSource="{Binding AvailableVariables}" 
+                                 SelectedItem="{Binding SelectedVariable}"/>
+                    </Popup>
+                    <TextBlock Grid.Column="1"
+                               Text="&#xf071;" 
+                               Visibility="{Binding IsValid, Converter={StaticResource BoolToVisCoverter}}"
+                               Style="{StaticResource InputWarningStyle}"/>
+                </Grid>                
             </Grid>
             <ItemsControl ItemsSource="{Binding ParamOptions}"
                           ItemTemplateSelector="{StaticResource TemplateSelector}"/>

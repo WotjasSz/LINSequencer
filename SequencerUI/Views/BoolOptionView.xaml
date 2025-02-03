@@ -10,7 +10,8 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="{Binding Name, FallbackValue=Name}"
                Style="{StaticResource OptionNameLabel}"/>
-            <CheckBox IsChecked="{Binding Value}" VerticalAlignment="Center"/>
+            <CheckBox IsChecked="{Binding Value}" VerticalAlignment="Center"
+                      Style="{StaticResource ToggleSwitchStyle}"/>
         </StackPanel>
     </Border>
 </UserControl>

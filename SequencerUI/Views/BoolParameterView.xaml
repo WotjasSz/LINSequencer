@@ -5,18 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SequencerUI.Views"
              xmlns:models="clr-namespace:LINSequencerLib.Sequence;assembly=LINSequencerLib"
-             xmlns:dt="clr-namespace:SequencerUI.Helpers"
+             xmlns:hlp="clr-namespace:SequencerUI.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <dt:StringToBoolCoverter x:Key="StringToBoolConverter"/>
+        <hlp:StringToBoolCoverter x:Key="StringToBoolConverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisCoverter"/>
         <DataTemplate x:Key="BoolTemplate">
             <local:BoolOptionView/>
         </DataTemplate>
         <DataTemplate x:Key="BoolSwitchTemplate">
             <local:BoolSwitchOptionView/>
         </DataTemplate>
-        <dt:OptionDataTemplateSelector x:Key="TemplateSelector"
+        <hlp:OptionDataTemplateSelector x:Key="TemplateSelector"
                           BoolTemplate="{StaticResource BoolTemplate}"
                           BoolSwitchTemplate="{StaticResource BoolSwitchTemplate}"/>
     </UserControl.Resources>
@@ -27,14 +28,14 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="{Binding Name, FallbackValue=ParamName}"
+                <Label Grid.Column="0" Content="{Binding StepParam.Name, FallbackValue=ParamName}"
                        Style="{StaticResource ParameterNameLabel}"/>
                 <CheckBox Grid.Column="1"
                           VerticalAlignment="Center"
-                          IsChecked="{Binding ParamValue, Converter={StaticResource StringToBoolConverter}}"
+                          IsChecked="{Binding StepParam.ParamValue, Converter={StaticResource StringToBoolConverter}}"
                           Style="{StaticResource ToggleSwitchStyle}"/>
             </Grid>
-            <ItemsControl ItemsSource="{Binding ParamOptions}"
+            <ItemsControl ItemsSource="{Binding StepParam.ParamOptions}"
                           ItemTemplateSelector="{StaticResource TemplateSelector}"/>
         </StackPanel>
     </Border>

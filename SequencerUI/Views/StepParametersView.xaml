@@ -19,10 +19,14 @@
         <DataTemplate x:Key="IntTemplate">
             <local:IntParameterView/>
         </DataTemplate>
+        <DataTemplate x:Key="ByteTemplate">
+            <local:ByteParameterView/>
+        </DataTemplate>
         <hlp:StepParameterDataTemplateSelector x:Key="TemplateSelector"
                                                BoolTemplate="{StaticResource BoolTemplate}"  
                                                StringTemplate="{StaticResource StringTemplate}"
-                                               IntTemplate="{StaticResource IntTemplate}"/>
+                                               IntTemplate="{StaticResource IntTemplate}"
+                                               ByteTemplate="{StaticResource ByteTemplate}"/>
     </UserControl.Resources>
     <Grid>
         <StackPanel>            
@@ -45,7 +49,7 @@
                               ItemTemplateSelector="{StaticResource TemplateSelector}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="1"/>
+                            <StackPanel/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>

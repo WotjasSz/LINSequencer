@@ -112,7 +112,7 @@ namespace SequencerUI.ViewModels
         {
             if (SelectedSeqenceStep != null)
             {
-                _stepParametersView.DataContext = new StepParametersViewModel(SelectedSeqenceStep);
+                _stepParametersView.DataContext = new StepParametersViewModel(SelectedSeqenceStep, _stepList);
                 CurrentStepParamView = _stepParametersView;
             }
         }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SequencerUI.Views.StringParameterView"
+﻿<UserControl x:Class="SequencerUI.Views.ByteParameterView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -26,8 +26,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>                    
-                </Grid.ColumnDefinitions>                
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="{Binding StepParam.Name, FallbackValue=ParamName}"
                        Style="{StaticResource ParameterNameLabel}"/>
                 <TextBlock Grid.Column="1"
@@ -42,7 +42,7 @@
                     <TextBox Text="{Binding ParamValue}"
                              Style="{StaticResource InputMultilineField}"
                              MinWidth="100"/>
-                    <Popup IsOpen="{Binding IsPopupOpen}" 
+                    <Popup IsOpen="{Binding AvailableVariables}" 
                            StaysOpen="False">
                         <ListBox ItemsSource="{Binding AvailableVariables}" 
                                  SelectedItem="{Binding SelectedVariable}"/>
@@ -51,7 +51,7 @@
                                Text="&#xf071;" 
                                Visibility="{Binding IsValid, Converter={StaticResource BoolToVisCoverter}}"
                                Style="{StaticResource InputWarningStyle}"/>
-                </Grid>                
+                </Grid>
             </Grid>
             <ItemsControl ItemsSource="{Binding StepParam.ParamOptions}"
                           ItemTemplateSelector="{StaticResource TemplateSelector}"/>

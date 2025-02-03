@@ -16,6 +16,23 @@
         <Setter Property="Margin" Value="0 0 0 5"/>
     </Style>
     <!--#endregion-->
+    
+    <!--#region TextBlocks-->
+    <Style TargetType="TextBlock" x:Key="InputWarningStyle">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"/>
+        <Setter Property="Foreground" Value="Orange"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="5 0"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="IsRequiredStyle">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="Orange"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <!--#endregion-->
 
     <!--#region Input text fields-->
     <Style TargetType="TextBox" x:Key="InputField" BasedOn="{StaticResource InputTextBox}">

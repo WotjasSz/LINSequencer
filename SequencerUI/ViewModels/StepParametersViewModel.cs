@@ -26,13 +26,10 @@ namespace SequencerUI.ViewModels
         private string? _comment;
 
         [ObservableProperty]
-        private ObservableCollection<SequenceStepParamModel>? _inputParameters;
-
-        [ObservableProperty]
-        private ObservableCollection<SequenceStepParamModel>? _outputParameters;
-
-        [ObservableProperty]
         private ObservableCollection<object>? _inputParametersVm;
+
+        [ObservableProperty]
+        private ObservableCollection<object>? _outputParametersVm;
 
         [ObservableProperty]
         private bool _isInputParamAvailable;
@@ -40,13 +37,20 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private bool _isOutputParamAvailable;
 
-        public StepParametersViewModel(SequenceStepModel sequenceStep)
+        private ObservableCollection<string> variablesList;
+
+        public StepParametersViewModel(SequenceStepModel sequenceStep, ObservableCollection<SequenceStepModel> stepList)
         {
             SequenceStep = sequenceStep;
             Comment = sequenceStep.Comment;
             InputParametersVm = new ObservableCollection<object>();
-            UpdateSequenceField();
+            OutputParametersVm = new ObservableCollection<object>();            
             //WeakReferenceMessenger.Default.Register<StepParameterMessage>(this);
+
+            variablesList = new ObservableCollection<string>(stepList.Where(s => s.Index < sequenceStep.Index)
+                                                                     .Select(s => s.GetStepName()).ToList());
+
+            UpdateSequenceField();
         }
 
         public void Receive(StepParameterMessage message)
@@ -57,37 +61,36 @@ namespace SequencerUI.ViewModels
 
         public void UpdateSequenceField()
         {
-            //Comment = SequenceStep.Comment;
-            InputParameters = new ObservableCollection<SequenceStepParamModel>(SequenceStep.InputParameterList);
-            OutputParameters = new ObservableCollection<SequenceStepParamModel>(SequenceStep.OutputParameterList);
-
-            foreach (var parameter in InputParameters)
+            foreach (var parameter in SequenceStep.InputParameterList)
             {
                 if (parameter.ParamType.Equals("System.Boolean"))
                 {
                     InputParametersVm.Add(new BoolParameterViewModel(parameter));
                 }
-                if (parameter.ParamType.Equals("System.String"))
+                else if (parameter.ParamType.Equals("System.String"))
                 {
-                    InputParametersVm.Add(new StringParameterViewModel(parameter));
+                    InputParametersVm.Add(new StringParameterViewModel(parameter, variablesList));
                 }
-                if (parameter.ParamType.Equals("System.Int32"))
+                else if (parameter.ParamType.Equals("System.Int32"))
                 {
-                    InputParametersVm.Add(new IntParameterViewModel(parameter));
+                    InputParametersVm.Add(new IntParameterViewModel(parameter, variablesList));
+                }
+                //else if (parameter.ParamType.Equals("System.Byte[]"))
+                //{
+                //    InputParametersVm.Add(new ByteParameterViewModel(parameter)); //Temporarly later add ArrayControl
+                //}
+                else
+                {
+                    InputParametersVm.Add(new StringParameterViewModel(parameter, variablesList));
                 }
             }
 
-
-            if (InputParameters.Count > 0) {IsInputParamAvailable = true;}
+            //TODO Add list with output parameters
+            if (InputParametersVm.Count > 0) {IsInputParamAvailable = true;}
             else {IsInputParamAvailable = false;}
 
-            if (OutputParameters.Count > 0) {IsOutputParamAvailable = true;}
+            if (_outputParametersVm.Count > 0) {IsOutputParamAvailable = true;}
             else{IsOutputParamAvailable = false;}
-        }
-
-        partial void OnCommentChanged(string? value)
-        {
-            SequenceStep.Comment = value;
         }
     }
 }

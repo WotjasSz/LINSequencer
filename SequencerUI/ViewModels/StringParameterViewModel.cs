@@ -10,31 +10,8 @@ using System.Threading.Tasks;
 
 namespace SequencerUI.ViewModels
 {
-    public partial class StringParameterViewModel : ObservableObject
+    public partial class StringParameterViewModel : ParentParameterViewModel
     {
-        [ObservableProperty]
-        private string? _name;
-
-        [ObservableProperty]
-        private string _paramType;
-
-        [ObservableProperty]
-        private string _paramValue;
-
-        [ObservableProperty]
-        private ObservableCollection<IParamOption> _paramOptions;
-
-        public StringParameterViewModel(SequenceStepParamModel paramModel)
-        {
-            Name = paramModel.Name;
-            ParamType = paramModel.ParamType;
-            ParamValue = paramModel.ParamValue;
-            ParamOptions = new ObservableCollection<IParamOption>(paramModel.ParamOptions);
-        }
-
-        partial void OnParamValueChanged(string value)
-        {
-            Debug.WriteLine(value);
-        }
+        public StringParameterViewModel(SequenceStepParamModel stepParam, ObservableCollection<string> stepList) : base(stepParam, stepList) { }
     }
 }

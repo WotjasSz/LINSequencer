@@ -15,6 +15,7 @@ namespace SequencerUI.Helpers
         public DataTemplate BoolTemplate { get; set; }
         public DataTemplate StringTemplate { get; set; }
         public DataTemplate IntTemplate { get; set; }        
+        public DataTemplate ByteTemplate { get; set; }        
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -38,13 +39,17 @@ namespace SequencerUI.Helpers
             {
                 return BoolTemplate;
             }
-            if (item is StringParameterViewModel)
+            else if (item is StringParameterViewModel)
             {
                 return StringTemplate;
             }
-            if (item is IntParameterViewModel)
+            else if (item is IntParameterViewModel)
             {
                 return IntTemplate;
+            }
+            else if (item is ByteParameterViewModel)
+            {
+                return ByteTemplate;
             }
 
             return base.SelectTemplate(item, container);
