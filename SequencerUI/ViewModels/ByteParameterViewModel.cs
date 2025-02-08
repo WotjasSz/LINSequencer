@@ -12,6 +12,7 @@ namespace SequencerUI.ViewModels
 {
     public partial class ByteParameterViewModel : ParentParameterViewModel
     {
-        public ByteParameterViewModel(SequenceStepParamModel stepParam, ObservableCollection<string> stepList) : base(stepParam, stepList) { }
+        public ByteParameterViewModel(SequenceStepParamModel stepParam, ObservableCollection<SequenceStepModel> stepList) 
+            : base(stepParam) { }
     }
 }

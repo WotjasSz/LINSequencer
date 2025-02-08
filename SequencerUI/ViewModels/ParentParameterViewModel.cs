@@ -1,5 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib.Sequence;
+using SequencerUI.Helpers;
+using SequencerUI.Resources.Controls;
+using SequencerUI.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,8 +14,10 @@ using System.Windows.Controls;
 
 namespace SequencerUI.ViewModels
 {
-    public partial class ParentParameterViewModel : ObservableObject
+    public partial class ParentParameterViewModel : ObservableRecipient
     {
+        private readonly IMessenger _messenger;
+
         [ObservableProperty]
         private SequenceStepParamModel _stepParam;
 
@@ -37,61 +43,45 @@ namespace SequencerUI.ViewModels
         private string _selectedVariable;
 
         [ObservableProperty]
-        private bool _isValid;
+        private bool _isInvalid;
 
         [ObservableProperty]
         private bool _isPopupOpen;
 
+        //TODO Add additional field for converted variables like dec and hex or byte array
+        //TODO Add addiitonal viewmodel for complex and simple string field or only simple text option
+
         public ParentParameterViewModel(SequenceStepParamModel stepParam)
         {
-            StepParam = stepParam;
-            Name = StepParam.Name;
-            ParamType = StepParam.ParamType;
-            ParamValue = StepParam.ParamValue;
-            IsRequired = StepParam.IsRequired;
-            ParamOptions = new ObservableCollection<IParamOption>(stepParam.ParamOptions);
-
-            IsValid = !IsTextValid(ParamValue);
-
-            AvailableVariables = new ObservableCollection<string> { "data(ddMMyyyy)", "data(dddyy)", "time(HHmmss)" };
-        }
-
-        public ParentParameterViewModel(SequenceStepParamModel stepParam, ObservableCollection<string> stepList)
-        {
-            StepParam = stepParam;
-            Name = StepParam.Name;
-            ParamType = StepParam.ParamType;
-            ParamValue = StepParam.ParamValue;
-            IsRequired = StepParam.IsRequired;
-            ParamOptions = new ObservableCollection<IParamOption>(stepParam.ParamOptions);
-
-            IsValid = !IsTextValid(ParamValue);
-
-            AvailableVariables = new ObservableCollection<string> { "data(ddMMyyyy)", "data(dddyy)", "time(HHmmss)" };
-            foreach(var step in stepList)
+            _messenger = ServiceLocator.GetService<IMessenger>();
+            _messenger.Register<GenericMessage<ControlMessage>>(this, (r, m) =>
             {
-                AvailableVariables.Add(step);
-            }
+                HandleReceiveMessage(r, m);
+            });
+
+            StepParam = stepParam;
+            Name = StepParam.Name;
+            ParamType = StepParam.ParamType;
+            ParamValue = StepParam.ParamValue;
+            IsRequired = StepParam.IsRequired;
+            ParamOptions = new ObservableCollection<IParamOption>(stepParam.ParamOptions);
+
+            IsInvalid = !IsTextValid(ParamValue) && IsRequired;
+
+            AvailableVariables = new ObservableCollection<string>();
         }
 
+        #region On properties change
         protected virtual void OnValueChanged(string? oldValue, string newValue)
-        {            
+        {
             ParamValue = newValue;
             StepParam.ParamValue = ParamValue;
-            IsValid = !IsTextValid(ParamValue);
-        }
-
-        protected virtual void OnValueChanging(string value)
-        {
-            if (value != string.Empty && value[value.Length - 1] == '<')
-            {
-                IsPopupOpen = true;
-            }
+            IsInvalid = !IsTextValid(ParamValue) && IsRequired;
         }
 
         protected virtual void OnSelectedVariable(string value)
         {
-            if(AvailableVariables != null)
+            if (AvailableVariables != null)
             {
                 IsPopupOpen = false;
             }
@@ -112,14 +102,28 @@ namespace SequencerUI.ViewModels
             OnValueChanged(oldValue, newValue);
         }
 
-        partial void OnParamValueChanging(string value)
-        {
-                OnValueChanging(value);
-        }
-
         partial void OnSelectedVariableChanged(string value)
         {
             OnSelectedVariable(value);
+        } 
+        #endregion
+
+        private void HandleReceiveMessage(object r, GenericMessage<ControlMessage> m)
+        {
+            if ((m.Content.ControlInstance as CustomTextBox).CustomName == Name)
+            {
+                switch (m.Content.CtrlMessage)
+                {
+                    case EControlMessage.ShowPopup:
+                        IsPopupOpen = true;
+                        break;
+                    case EControlMessage.HidePopup:
+                        IsPopupOpen = false;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

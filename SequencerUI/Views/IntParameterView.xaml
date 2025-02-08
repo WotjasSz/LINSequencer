@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SequencerUI.Views"
              xmlns:models="clr-namespace:LINSequencerLib.Sequence;assembly=LINSequencerLib"
              xmlns:hlp="clr-namespace:SequencerUI.Helpers"
+             xmlns:ctrls="clr-namespace:SequencerUI.Resources.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -42,9 +43,10 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding ParamValue}"
-                             Style="{StaticResource NumberInputField}"
-                             MinWidth="75"/>
+                    <ctrls:CustomTextBox Text="{Binding ParamValue}"
+                                         CustomName="{Binding Name}"
+                                         Style="{StaticResource NumberInputField}"
+                                         MinWidth="75"/>
                     <Popup IsOpen="{Binding IsPopupOpen}"
                            StaysOpen="False">
                         <ListBox ItemsSource="{Binding AvailableVariables}" 
@@ -52,7 +54,7 @@
                     </Popup>
                     <TextBlock Grid.Column="1"
                                Text="&#xf071;" 
-                               Visibility="{Binding IsValid, Converter={StaticResource BoolToVisCoverter}}"
+                               Visibility="{Binding IsInvalid, Converter={StaticResource BoolToVisCoverter}}"
                                Style="{StaticResource InputWarningStyle}"/>
                 </Grid>                
             </Grid>

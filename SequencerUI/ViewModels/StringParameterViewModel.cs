@@ -12,6 +12,16 @@ namespace SequencerUI.ViewModels
 {
     public partial class StringParameterViewModel : ParentParameterViewModel
     {
-        public StringParameterViewModel(SequenceStepParamModel stepParam, ObservableCollection<string> stepList) : base(stepParam, stepList) { }
+        public StringParameterViewModel(SequenceStepParamModel stepParam, ObservableCollection<SequenceStepModel> stepList) 
+            : base(stepParam) 
+        {
+            foreach (var step in stepList)
+            {
+                AvailableVariables.Add(step.GetStepName());
+            }
+            AvailableVariables.Add("data(ddMMyyyy)");
+            AvailableVariables.Add("data(dddyy)");
+            AvailableVariables.Add("time(HHmmss)");
+        }
     }
 }

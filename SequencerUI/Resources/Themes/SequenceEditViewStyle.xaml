@@ -54,6 +54,16 @@
     </Style>
     <!--#endregion-->
 
+    <!--#region Popup -->
+    <Style TargetType="Popup" x:Key="AvailableVariablePopup">
+        
+    </Style>
+
+    <Style TargetType="ListBox" x:Key="AvailableVariableList">
+        <Setter Property="Background" Value="{StaticResource Background_4}"/>
+    </Style>
+    <!--#endregion-->
+
     <!--#region Edit step list -->
 
     <!--ListView-->

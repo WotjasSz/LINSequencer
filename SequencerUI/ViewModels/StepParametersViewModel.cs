@@ -37,7 +37,7 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private bool _isOutputParamAvailable;
 
-        private ObservableCollection<string> variablesList;
+        private ObservableCollection<SequenceStepModel> _variablesList;
 
         public StepParametersViewModel(SequenceStepModel sequenceStep, ObservableCollection<SequenceStepModel> stepList)
         {
@@ -47,8 +47,7 @@ namespace SequencerUI.ViewModels
             OutputParametersVm = new ObservableCollection<object>();            
             //WeakReferenceMessenger.Default.Register<StepParameterMessage>(this);
 
-            variablesList = new ObservableCollection<string>(stepList.Where(s => s.Index < sequenceStep.Index)
-                                                                     .Select(s => s.GetStepName()).ToList());
+            _variablesList = new ObservableCollection<SequenceStepModel>(stepList.Where(s => s.Index < sequenceStep.Index).ToList());
 
             UpdateSequenceField();
         }
@@ -69,11 +68,11 @@ namespace SequencerUI.ViewModels
                 }
                 else if (parameter.ParamType.Equals("System.String"))
                 {
-                    InputParametersVm.Add(new StringParameterViewModel(parameter, variablesList));
+                    InputParametersVm.Add(new StringParameterViewModel(parameter, _variablesList));
                 }
                 else if (parameter.ParamType.Equals("System.Int32"))
                 {
-                    InputParametersVm.Add(new IntParameterViewModel(parameter, variablesList));
+                    InputParametersVm.Add(new IntParameterViewModel(parameter, _variablesList));
                 }
                 //else if (parameter.ParamType.Equals("System.Byte[]"))
                 //{
@@ -81,7 +80,7 @@ namespace SequencerUI.ViewModels
                 //}
                 else
                 {
-                    InputParametersVm.Add(new StringParameterViewModel(parameter, variablesList));
+                    InputParametersVm.Add(new StringParameterViewModel(parameter, _variablesList));
                 }
             }
 
