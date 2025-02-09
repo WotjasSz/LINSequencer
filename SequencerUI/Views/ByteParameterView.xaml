@@ -44,7 +44,7 @@
                                          CustomName="{Binding Name}"
                                          Style="{StaticResource InputMultilineField}"
                                          MinWidth="100"/>
-                    <Popup IsOpen="{Binding AvailableVariables}" 
+                    <Popup IsOpen="{Binding IsPopupOpen}" 
                            StaysOpen="False">
                         <ListBox ItemsSource="{Binding AvailableVariables}" 
                                  SelectedItem="{Binding SelectedVariable}"/>

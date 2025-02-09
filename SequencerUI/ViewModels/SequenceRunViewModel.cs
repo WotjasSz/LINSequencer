@@ -26,6 +26,7 @@ namespace SequencerUI.ViewModels
         private ObservableCollection<DeviceModel>? _devices;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(RunSequenceCommand))]
         private DeviceModel? _currentDevice;
 
         [ObservableProperty]
@@ -75,11 +76,11 @@ namespace SequencerUI.ViewModels
             Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);            
         }
 
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanExeuteRunSequence))]
         private void RunSequence()
         {
             Sequence.RunAsync(CurrentDevice, LinSequencer.FunctionList);
-        }
+        }        
         #endregion
 
         private void OnLogGenerated(object? sender, LogMessage? msg) 
@@ -109,6 +110,12 @@ namespace SequencerUI.ViewModels
         private void ScrollToLastItem(LogMessage lastItem)
         {
             ScrollToItem?.Invoke(this, new ScrollEventArgs { Item = lastItem });
+        }
+
+
+        private bool CanExeuteRunSequence()
+        {
+            return CurrentDevice != null ? true : false;
         }
 
         public event EventHandler<ScrollEventArgs> ScrollToItem;
