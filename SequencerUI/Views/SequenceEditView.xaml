@@ -227,37 +227,39 @@
                         <!--#endregion-->
 
                         <!--#region Function list view -->
-                        <StackPanel Grid.Row="1"
+                        <ScrollViewer Grid.Row="1">
+                            <StackPanel 
                                     Visibility="{Binding IsFunctionListVisible, Converter={StaticResource BoolToVisCoverter}}">
-                            <ListView ItemsSource="{Binding Source={StaticResource ResourceKey=FunctionListSource}}"
+                                <ListView ItemsSource="{Binding Source={StaticResource ResourceKey=FunctionListSource}}"
                                       SelectedItem="{Binding SelectedFunction}"
                                       Style="{StaticResource FunctionListStyle}"
                                       ItemContainerStyle="{StaticResource FunctionListItemStyle}"
                                       dd:DragDrop.IsDragSource="True"
                                       dd:DragDrop.IsDropTarget="False"
                                       dd:DragDrop.DropHandler="{Binding}">
-                                <ListView.GroupStyle>
-                                    <GroupStyle HidesIfEmpty="True">
-                                        <GroupStyle.HeaderTemplate>
-                                            <DataTemplate DataType="{x:Type collections:IReadOnlyObservableGroup}">
-                                                <!--<Expander Header="{Binding Name, FallbackValue=Group_name}" IsExpanded="True">
+                                    <ListView.GroupStyle>
+                                        <GroupStyle HidesIfEmpty="True">
+                                            <GroupStyle.HeaderTemplate>
+                                                <DataTemplate DataType="{x:Type collections:IReadOnlyObservableGroup}">
+                                                    <!--<Expander Header="{Binding Name, FallbackValue=Group_name}" IsExpanded="True">
                                                     <ItemsPresenter/>
                                                 </Expander>-->
-                                                <TextBlock FontSize="16"
+                                                    <TextBlock FontSize="16"
                                                            FontWeight="Bold"
                                                            Foreground="{StaticResource Accent_1}"
                                                            Text="{Binding Name, FallbackValue=Group_name}"/>
-                                            </DataTemplate>
-                                        </GroupStyle.HeaderTemplate>
-                                    </GroupStyle>
-                                </ListView.GroupStyle>
-                            </ListView>
-                            <Button Content="&#x2b;"
+                                                </DataTemplate>
+                                            </GroupStyle.HeaderTemplate>
+                                        </GroupStyle>
+                                    </ListView.GroupStyle>
+                                </ListView>
+                                <Button Content="&#x2b;"
                                 FontFamily="{StaticResource FontAwesome}"
                                 FontSize="30"
                                 Command="{Binding AddSeqStepCommand}"                        
                                 Style="{StaticResource GenericButton}"/>
-                        </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
                         <!--#endregion-->
                     </Grid>
                 </Border>
