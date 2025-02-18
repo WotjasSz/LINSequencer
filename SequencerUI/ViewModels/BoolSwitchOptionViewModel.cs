@@ -19,13 +19,18 @@ namespace SequencerUI.ViewModels
         private IParamOption _option;
 
         [ObservableProperty]
+        private string _groupName;
+
+        [ObservableProperty]
         private ObservableCollection<BoolSwitchOptionModel> _options;
 
         public BoolSwitchOptionViewModel(IParamOption data)
         {
-            Option = data;
+            Option = data;                        
+
             if (data is ParamOptionBoolSwitch)
             {
+                GroupName = (data as ParamOptionBoolSwitch).ParamName;
                 Options = new ObservableCollection<BoolSwitchOptionModel>();
 
                 //Fillup options from a data string list and checking which option is selected comparing
@@ -34,6 +39,7 @@ namespace SequencerUI.ViewModels
                 {
                     BoolSwitchOptionModel bsom = new BoolSwitchOptionModel();
                     bsom.Name = opt.value;
+                    bsom.GroupName = GroupName;
                     bsom.Index = opt.idx;
                     bsom.IsSelected = (Option as ParamOptionBoolSwitch).Value == opt.idx ? true : false;
                     Options.Add(bsom);

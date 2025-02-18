@@ -29,6 +29,9 @@ namespace SequencerUI.ViewModels
 
         [ObservableProperty]
         private string _paramValue;
+        
+        [ObservableProperty]
+        private string _paramRawValue;
 
         [ObservableProperty]
         private bool _isRequired;
@@ -61,8 +64,9 @@ namespace SequencerUI.ViewModels
 
             StepParam = stepParam;
             Name = StepParam.Name;
-            ParamType = StepParam.ParamType;
+            ParamType = StepParam.ParamType;            
             ParamValue = StepParam.ParamValue;
+            ParamRawValue = StepParam.ParamValue.Replace(" ", "");
             IsRequired = StepParam.IsRequired;
             ParamOptions = new ObservableCollection<IParamOption>(stepParam.ParamOptions);
 
@@ -85,7 +89,7 @@ namespace SequencerUI.ViewModels
             {
                 IsPopupOpen = false;
             }
-            ParamValue += $"{value}>";
+            ParamRawValue += $"{value}>";
         }
 
         protected virtual bool IsTextValid(string inputText)
@@ -97,7 +101,21 @@ namespace SequencerUI.ViewModels
             return true;
         }
 
-        partial void OnParamValueChanged(string? oldValue, string newValue)
+        protected virtual string GetInputTypeString()
+        {
+            if (ParamOptions == null)
+            {
+                return string.Empty;
+            }
+            var inputType = ParamOptions.Where(t => t.Name == "InputType").FirstOrDefault();
+            if (inputType != null && inputType is ParamOptionBoolSwitch)
+            {
+                return ((ParamOptionBoolSwitch)inputType).GetSelectedOptionString();
+            }
+            return string.Empty;
+        }
+
+        partial void OnParamRawValueChanged(string? oldValue, string newValue)
         {
             OnValueChanged(oldValue, newValue);
         }

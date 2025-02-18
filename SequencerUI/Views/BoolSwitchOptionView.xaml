@@ -18,7 +18,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <RadioButton GroupName="OptionsGroup" Content="{Binding Name}"
+                        <RadioButton GroupName="{Binding GroupName}" Content="{Binding Name}"
                                  IsChecked="{Binding IsSelected, Mode=TwoWay}"
                                  Command="{Binding DataContext.SelectOptionCommand, RelativeSource={RelativeSource AncestorType=UserControl} }"
                                  CommandParameter="{Binding}"

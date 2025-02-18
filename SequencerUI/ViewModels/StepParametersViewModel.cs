@@ -84,11 +84,16 @@ namespace SequencerUI.ViewModels
                 }
             }
 
+            foreach (var parameter in SequenceStep.OutputParameterList)
+            {
+                OutputParametersVm.Add(new OutputParameterViewModel(parameter));
+            }
+
             //TODO Add list with output parameters
             if (InputParametersVm.Count > 0) {IsInputParamAvailable = true;}
             else {IsInputParamAvailable = false;}
 
-            if (_outputParametersVm.Count > 0) {IsOutputParamAvailable = true;}
+            if (OutputParametersVm.Count > 0) {IsOutputParamAvailable = true;}
             else{IsOutputParamAvailable = false;}
         }
     }

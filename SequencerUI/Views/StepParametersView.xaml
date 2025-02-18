@@ -22,11 +22,15 @@
         <DataTemplate x:Key="ByteTemplate">
             <local:ByteParameterView/>
         </DataTemplate>
+        <DataTemplate x:Key="OutputTemplate">
+            <local:OutputParameterView/>
+        </DataTemplate>
         <hlp:StepParameterDataTemplateSelector x:Key="TemplateSelector"
                                                BoolTemplate="{StaticResource BoolTemplate}"  
                                                StringTemplate="{StaticResource StringTemplate}"
                                                IntTemplate="{StaticResource IntTemplate}"
-                                               ByteTemplate="{StaticResource ByteTemplate}"/>
+                                               ByteTemplate="{StaticResource ByteTemplate}"
+                                               OutputTemplate="{StaticResource OutputTemplate}"/>
     </UserControl.Resources>
     <Grid>
         <StackPanel>            
@@ -59,8 +63,14 @@
                 <Label Content="Output"
                        Target="{Binding ElementName=icOutputParamterList}"
                        Style="{StaticResource CommonFieldLabel}"/>
-                <ItemsControl x:Name="icOutputParamterList">
-
+                <ItemsControl x:Name="icOutputParamterList"
+                              ItemsSource="{Binding OutputParametersVm}"
+                              ItemTemplateSelector="{StaticResource TemplateSelector}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
         </StackPanel>

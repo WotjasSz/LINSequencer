@@ -27,20 +27,28 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>                    
-                </Grid.ColumnDefinitions>                
-                <Label Grid.Column="0" Content="{Binding StepParam.Name, FallbackValue=ParamName}"
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0"
+                       Content="{Binding StepParam.Name, FallbackValue=ParamName}"
                        Style="{StaticResource ParameterNameLabel}"/>
-                <TextBlock Grid.Column="1"
+                <TextBlock Grid.Column="0" Grid.Row="1"
+                           Text="Output value" 
+                           Style="{StaticResource OutputValueTitleStyle}"/>
+                <TextBlock Grid.Column="1" Grid.Row="0"
                            Text="*"
                            Visibility="{Binding IsRequired, Converter={StaticResource BoolToVisCoverter}}"
-                           Style="{StaticResource IsRequiredStyle}"/>                
-                <Grid Grid.Column="2">
+                           Style="{StaticResource IsRequiredStyle}"/>
+                <Grid Grid.Column="2" Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <ctrls:CustomTextBox Text="{Binding ParamValue}"
+                    <ctrls:CustomTextBox Text="{Binding ParamRawValue}"
                                          CustomName="{Binding Name}"
                                          Style="{StaticResource InputMultilineField}"
                                          MinWidth="100"/>
@@ -53,7 +61,19 @@
                                Text="&#xf071;" 
                                Visibility="{Binding IsInvalid, Converter={StaticResource BoolToVisCoverter}}"
                                Style="{StaticResource InputWarningStyle}"/>
-                </Grid>                
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <!--<TextBlock Grid.Column="0"
+                               Text="{Binding ParamValue, FallbackValue=ParameterValue}"
+                               Style="{StaticResource OutputValueStyle}"/>-->
+                    <TextBlock Grid.Column="1"
+                               Text="{Binding ParamType, FallbackValue=ParameterType}"
+                               Style="{StaticResource InputTypeStyle}"/>
+                </Grid>
             </Grid>
             <ItemsControl ItemsSource="{Binding StepParam.ParamOptions}"
                           ItemTemplateSelector="{StaticResource TemplateSelector}"/>

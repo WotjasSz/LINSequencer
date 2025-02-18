@@ -62,6 +62,15 @@
     <Compile Update="Views\ByteParameterView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\OutputParameterView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\OutputParameterView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

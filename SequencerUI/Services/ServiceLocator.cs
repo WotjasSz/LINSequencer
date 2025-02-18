@@ -77,7 +77,7 @@ namespace SequencerUI.Services
         private static void RegisterViewModels(IServiceCollection services, Assembly assembly)
         {
             var viewModelTypes = assembly.GetTypes()
-                .Where(t => t.IsClass && t.Namespace == "SequencerUI.ViewModels")
+                .Where(t => t.IsClass && t.Namespace == "SequencerUI.ViewModels" && !t.IsNestedPrivate)
                 .ToList();
             foreach (var viewModelType in viewModelTypes)
             {
