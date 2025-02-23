@@ -41,12 +41,13 @@ namespace SequencerUI.ViewModels
 
             Sequence = new SequenceModel();
             Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
-
-            Messages = new ObservableCollection<LogMessage>();            
+                       
             _logger = Sequence.Logger;
             _logger.SequenceLog += OnLogGenerated;
 
-            Messages.CollectionChanged += Messages_CollectionChanged;
+            Messages = new ObservableCollection<LogMessage>(); ;
+
+            //Messages.CollectionChanged += Messages_CollectionChanged;
         }       
 
         public SequenceRunViewModel(IMessenger messenger, SequenceModel sequence)
@@ -55,10 +56,11 @@ namespace SequencerUI.ViewModels
 
             Sequence = sequence;
             Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
+                        
+            _logger = Sequence.Logger;
+            _logger.SequenceLog += OnLogGenerated;
 
             Messages = new ObservableCollection<LogMessage>();
-            _logger = Sequence.Logger;
-            _logger.SequenceLog += OnLogGenerated;                   
         }
 
         public void UpdateSequence(ISequenceModel sequence)

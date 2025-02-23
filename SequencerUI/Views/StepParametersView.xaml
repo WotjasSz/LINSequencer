@@ -1,74 +1,83 @@
-﻿<UserControl x:Class="SequencerUI.Views.StepParametersView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SequencerUI.Views"
-             xmlns:models="clr-namespace:LINSequencerLib.Sequence;assembly=LINSequencerLib"
-             xmlns:hlp="clr-namespace:SequencerUI.Helpers"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="SequencerUI.Views.StepParametersView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hlp="clr-namespace:SequencerUI.Helpers"
+    xmlns:local="clr-namespace:SequencerUI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:LINSequencerLib.Sequence;assembly=LINSequencerLib"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <DataTemplate x:Key="BoolTemplate">
-            <local:BoolParameterView/>
+            <local:BoolParameterView />
         </DataTemplate>
         <DataTemplate x:Key="StringTemplate">
-            <local:StringParameterView/>
+            <local:StringParameterView />
         </DataTemplate>
         <DataTemplate x:Key="IntTemplate">
-            <local:IntParameterView/>
+            <local:IntParameterView />
         </DataTemplate>
         <DataTemplate x:Key="ByteTemplate">
-            <local:ByteParameterView/>
+            <local:ByteParameterView />
         </DataTemplate>
         <DataTemplate x:Key="OutputTemplate">
-            <local:OutputParameterView/>
+            <local:OutputParameterView />
         </DataTemplate>
-        <hlp:StepParameterDataTemplateSelector x:Key="TemplateSelector"
-                                               BoolTemplate="{StaticResource BoolTemplate}"  
-                                               StringTemplate="{StaticResource StringTemplate}"
-                                               IntTemplate="{StaticResource IntTemplate}"
-                                               ByteTemplate="{StaticResource ByteTemplate}"
-                                               OutputTemplate="{StaticResource OutputTemplate}"/>
+        <hlp:StepParameterDataTemplateSelector
+            x:Key="TemplateSelector"
+            BoolTemplate="{StaticResource BoolTemplate}"
+            ByteTemplate="{StaticResource ByteTemplate}"
+            IntTemplate="{StaticResource IntTemplate}"
+            OutputTemplate="{StaticResource OutputTemplate}"
+            StringTemplate="{StaticResource StringTemplate}" />
     </UserControl.Resources>
     <Grid>
-        <StackPanel>            
+        <StackPanel>
             <StackPanel Margin="5">
-                <Label Content="Comment"
-                       Target="{Binding ElementName=txtStepCommentField}"
-                       Style="{StaticResource CommonFieldLabel}"/>
-                <TextBox Text="{Binding SequenceStep.Comment}"
-                         x:Name="txtStepCommentField"
-                         Style="{StaticResource InputField}"/>
+                <Label
+                    Content="Comment"
+                    Style="{StaticResource CommonFieldLabel}"
+                    Target="{Binding ElementName=txtStepCommentField}" />
+                <TextBox
+                    x:Name="txtStepCommentField"
+                    Style="{StaticResource InputField}"
+                    Text="{Binding SequenceStep.Comment}" />
             </StackPanel>
-            <StackPanel Margin="5"
-                        Visibility="{Binding IsInputParamAvailable, Converter={StaticResource BoolToVis}}"
-                        HorizontalAlignment="Stretch">
-                <Label Content="Input"
-                       Target="{Binding ElementName=icInputParameterList}"
-                       Style="{StaticResource CommonFieldLabel}"/>
-                <ItemsControl x:Name="icInputParameterList"
-                              ItemsSource="{Binding InputParametersVm}"
-                              ItemTemplateSelector="{StaticResource TemplateSelector}">
+            <StackPanel
+                Margin="5"
+                HorizontalAlignment="Stretch"
+                Visibility="{Binding IsInputParamAvailable, Converter={StaticResource BoolToVis}}">
+                <Label
+                    Content="Input"
+                    Style="{StaticResource CommonFieldLabel}"
+                    Target="{Binding ElementName=icInputParameterList}" />
+                <ItemsControl
+                    x:Name="icInputParameterList"
+                    ItemTemplateSelector="{StaticResource TemplateSelector}"
+                    ItemsSource="{Binding InputParametersVm}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel/>
+                            <StackPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
-            <StackPanel Margin="5"
-                        Visibility="{Binding IsOutputParamAvailable, Converter={StaticResource BoolToVis}}">
-                <Label Content="Output"
-                       Target="{Binding ElementName=icOutputParamterList}"
-                       Style="{StaticResource CommonFieldLabel}"/>
-                <ItemsControl x:Name="icOutputParamterList"
-                              ItemsSource="{Binding OutputParametersVm}"
-                              ItemTemplateSelector="{StaticResource TemplateSelector}">
+            <StackPanel Margin="5" Visibility="{Binding IsOutputParamAvailable, Converter={StaticResource BoolToVis}}">
+                <Label
+                    Content="Output"
+                    Style="{StaticResource CommonFieldLabel}"
+                    Target="{Binding ElementName=icOutputParamterList}" />
+                <ItemsControl
+                    x:Name="icOutputParamterList"
+                    ItemTemplateSelector="{StaticResource TemplateSelector}"
+                    ItemsSource="{Binding OutputParametersVm}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel/>
+                            <StackPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>

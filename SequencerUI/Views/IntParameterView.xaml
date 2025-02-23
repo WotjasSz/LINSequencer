@@ -1,84 +1,93 @@
-﻿<UserControl x:Class="SequencerUI.Views.IntParameterView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SequencerUI.Views"
-             xmlns:models="clr-namespace:LINSequencerLib.Sequence;assembly=LINSequencerLib"
-             xmlns:hlp="clr-namespace:SequencerUI.Helpers"
-             xmlns:ctrls="clr-namespace:SequencerUI.Resources.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="SequencerUI.Views.IntParameterView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrls="clr-namespace:SequencerUI.Resources.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hlp="clr-namespace:SequencerUI.Helpers"
+    xmlns:local="clr-namespace:SequencerUI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:LINSequencerLib.Sequence;assembly=LINSequencerLib"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <UserControl.Resources>
-        <hlp:ListToPopupConverter x:Key="ListToVisConv"/>
-        <BooleanToVisibilityConverter x:Key="BoolToVisCoverter"/>
+        <hlp:ListToPopupConverter x:Key="ListToVisConv" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisCoverter" />
         <DataTemplate x:Key="BoolTemplate">
-            <local:BoolOptionView/>
+            <local:BoolOptionView />
         </DataTemplate>
         <DataTemplate x:Key="BoolSwitchTemplate">
-            <local:BoolSwitchOptionView/>
+            <local:BoolSwitchOptionView />
         </DataTemplate>
-        <hlp:OptionDataTemplateSelector x:Key="TemplateSelector"
-                          BoolTemplate="{StaticResource BoolTemplate}"
-                          BoolSwitchTemplate="{StaticResource BoolSwitchTemplate}"/>
-        
+        <hlp:OptionDataTemplateSelector
+            x:Key="TemplateSelector"
+            BoolSwitchTemplate="{StaticResource BoolSwitchTemplate}"
+            BoolTemplate="{StaticResource BoolTemplate}" />
+
 
     </UserControl.Resources>
     <Border Style="{StaticResource SingleParameterArea}">
-        <StackPanel>            
-            <Grid Margin="10 5">
+        <StackPanel>
+            <Grid Margin="10,5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Label Grid.Column="0" Content="{Binding StepParam.Name, FallbackValue=ParamName}"
-                       Style="{StaticResource ParameterNameLabel}"/>
-                <TextBlock Grid.Column="0" Grid.Row="1"
-                           Text="Output value" 
-                           Style="{StaticResource OutputValueTitleStyle}"/>
-                <TextBlock Grid.Column="1"
-                           Text="*"
-                           Visibility="{Binding IsRequired, Converter={StaticResource BoolToVisCoverter}}"
-                           Style="{StaticResource IsRequiredStyle}"/>
+                <Label
+                    Grid.Column="0"
+                    Content="{Binding StepParam.Name, FallbackValue=ParamName}"
+                    Style="{StaticResource ParameterNameLabel}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Style="{StaticResource OutputValueTitleStyle}"
+                    Text="Output value" />
+                <TextBlock
+                    Grid.Column="1"
+                    Style="{StaticResource IsRequiredStyle}"
+                    Text="*"
+                    Visibility="{Binding IsRequired, Converter={StaticResource BoolToVisCoverter}}" />
                 <Grid Grid.Column="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-                    <ctrls:CustomTextBox Text="{Binding ParamRawValue}"
-                                         CustomName="{Binding Name}"
-                                         Style="{StaticResource NumberInputField}"
-                                         MinWidth="75"/>
-                    <Popup IsOpen="{Binding IsPopupOpen}"
-                           StaysOpen="False">
-                        <ListBox ItemsSource="{Binding AvailableVariables}" 
-                                 SelectedItem="{Binding SelectedVariable}"/>
+                    <ctrls:CustomTextBox
+                        MinWidth="75"
+                        CustomName="{Binding Name}"
+                        Style="{StaticResource NumberInputField}"
+                        Text="{Binding ParamRawValue}" />
+                    <Popup IsOpen="{Binding IsPopupOpen}" StaysOpen="False">
+                        <ListBox ItemsSource="{Binding AvailableVariables}" SelectedItem="{Binding SelectedVariable}" />
                     </Popup>
-                    <TextBlock Grid.Column="1"
-                               Text="&#xf071;" 
-                               Visibility="{Binding IsInvalid, Converter={StaticResource BoolToVisCoverter}}"
-                               Style="{StaticResource InputWarningStyle}"/>
+                    <TextBlock
+                        Grid.Column="1"
+                        Style="{StaticResource InputWarningStyle}"
+                        Text="&#xf071;"
+                        Visibility="{Binding IsInvalid, Converter={StaticResource BoolToVisCoverter}}" />
                 </Grid>
-                <Grid Grid.Column="2" Grid.Row="1">
+                <Grid Grid.Row="1" Grid.Column="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"
-                               Text="{Binding ParamValue, FallbackValue=ParameterValue}"
-                               Style="{StaticResource OutputValueStyle}"/>
-                    <TextBlock Grid.Column="1"
-                               Text="{Binding ParamType, FallbackValue=ParameterType}"
-                               Style="{StaticResource InputTypeStyle}"/>
+                    <TextBlock
+                        Grid.Column="0"
+                        Style="{StaticResource OutputValueStyle}"
+                        Text="{Binding ParamValue, FallbackValue=ParameterValue}" />
+                    <TextBlock
+                        Grid.Column="1"
+                        Style="{StaticResource InputTypeStyle}"
+                        Text="{Binding ParamType, FallbackValue=ParameterType}" />
                 </Grid>
             </Grid>
-            <ItemsControl ItemsSource="{Binding StepParam.ParamOptions}"
-                          ItemTemplateSelector="{StaticResource TemplateSelector}"/>
+            <ItemsControl ItemTemplateSelector="{StaticResource TemplateSelector}" ItemsSource="{Binding StepParam.ParamOptions}" />
         </StackPanel>
     </Border>
 </UserControl>

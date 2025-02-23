@@ -1,118 +1,131 @@
-﻿<Window x:Class="SequencerUI.Views.MainWindowView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:toolkit="using:Microsoft.Toolkit.Mvvm.UI.Behaviors"
-        xmlns:local="clr-namespace:SequencerUI.Views"
-        xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-        xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
-        mc:Ignorable="d"    
-        Style="{StaticResource MainWindowStyle}"
-        WindowStartupLocation="CenterScreen">
+﻿<Window
+    x:Class="SequencerUI.Views.MainWindowView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SequencerUI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:Microsoft.Toolkit.Mvvm.UI.Behaviors"
+    Style="{StaticResource MainWindowStyle}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisCoverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisCoverter" />
     </Window.Resources>
     <Border Style="{StaticResource MainWindowBorder}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="55"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="55" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--#region Window bar -->
-            <Grid Grid.ColumnSpan="2"
-                  MouseDown="Border_MouseDown">                
+            <!--#region Window bar-->
+            <Grid Grid.ColumnSpan="2" MouseDown="Border_MouseDown">
                 <StackPanel HorizontalAlignment="Left">
-                    <!-- MENU -->
-                    <Button Content="&#xf0c9;"
-                            Style="{StaticResource FuncCallBtn}"
-                            Command="{Binding MenuToggleCommand}"/>
+                    <!--  MENU  -->
+                    <Button
+                        Command="{Binding MenuToggleCommand}"
+                        Content="&#xf0c9;"
+                        Style="{StaticResource FuncCallBtn}" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center">
-                        <Image Source="{StaticResource AppIcon}" Style="{StaticResource AppIconStyle}"/>
-                        <Label Content="{Binding Title, FallbackValue=AppTitle}" Style="{StaticResource TitleLabel}"/>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Image Source="{StaticResource AppIcon}" Style="{StaticResource AppIconStyle}" />
+                    <Label Content="{Binding Title, FallbackValue=AppTitle}" Style="{StaticResource TitleLabel}" />
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Right"
-                            VerticalAlignment="Stretch"
-                            Orientation="Horizontal">
-                    <Button Style="{StaticResource WindowStateBtn}" 
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Stretch"
+                    Orientation="Horizontal">
+                    <Button
                         x:Name="btnMinimize"
+                        Command="{Binding MinimizeWindowCommand}"
                         Content="&#xf2d1;"
-                        Command="{Binding MinimizeWindowCommand}"/>
-                    <Button Style="{StaticResource WindowStateBtn}" 
-                        x:Name="btnMaximize"    
-                        Content="&#xf065;"                            
-                        Command="{Binding MaximizeWindowCommand}"/>
-                    <Button Style="{StaticResource WindowStateCloseBtn}" 
+                        Style="{StaticResource WindowStateBtn}" />
+                    <Button
+                        x:Name="btnMaximize"
+                        Command="{Binding MaximizeWindowCommand}"
+                        Content="&#xf065;"
+                        Style="{StaticResource WindowStateBtn}" />
+                    <Button
                         x:Name="btnCloseWindow"
-                        Content="&#xf00d;"     
-                        Command="{Binding CloseWidnowCommand}"/>
+                        Command="{Binding CloseWidnowCommand}"
+                        Content="&#xf00d;"
+                        Style="{StaticResource WindowStateCloseBtn}" />
                 </StackPanel>
             </Grid>
             <!--#endregion-->
 
-            <!--#region Left side -->
-            <Grid Grid.Row="1" Grid.Column="0"
-                  Background="Transparent">
-                <!--#region Menu -->
-                <Border Style="{StaticResource MenuBorder}"
-                        Visibility="{Binding IsMenuVisible, Converter={StaticResource BoolToVisCoverter}}">
+            <!--#region Left side-->
+            <Grid
+                Grid.Row="1"
+                Grid.Column="0"
+                Background="Transparent">
+                <!--#region Menu-->
+                <Border Style="{StaticResource MenuBorder}" Visibility="{Binding IsMenuVisible, Converter={StaticResource BoolToVisCoverter}}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="*"/>                            
-                            <RowDefinition Height="auto"/>                            
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0">
-                            <Button Content="HOME"
-                                    Tag="&#xf015;"
-                                    Style="{StaticResource MenuButtonStyle}"/>
-                            <Button Content="SETTING"
-                                    Tag="&#xf1de;"
-                                    Style="{StaticResource MenuButtonStyle}"/>
-                            <Button Content="ABOUT"
-                                    Tag="&#xf129;"
-                                    Style="{StaticResource MenuButtonStyle}"
-                                    Command="{Binding ShowAboutControlCommand}"/>
+                            <Button
+                                Content="HOME"
+                                Style="{StaticResource MenuButtonStyle}"
+                                Tag="&#xf015;" />
+                            <Button
+                                Content="SETTING"
+                                Style="{StaticResource MenuButtonStyle}"
+                                Tag="&#xf1de;" />
+                            <Button
+                                Command="{Binding ShowAboutControlCommand}"
+                                Content="ABOUT"
+                                Style="{StaticResource MenuButtonStyle}"
+                                Tag="&#xf129;" />
                         </StackPanel>
                         <StackPanel Grid.Row="2">
-                            <Button Content="EXIT"
-                                    Tag="&#xf2f5;"
-                                    Style="{StaticResource MenuButtonStyle}"
-                                    Command="{Binding CloseWidnowCommand}"/>
+                            <Button
+                                Command="{Binding CloseWidnowCommand}"
+                                Content="EXIT"
+                                Style="{StaticResource MenuButtonStyle}"
+                                Tag="&#xf2f5;" />
                         </StackPanel>
                     </Grid>
                 </Border>
                 <!--#endregion-->
-                
+
                 <!--#region ContentControl-->
-                <ContentControl x:Name="NavigationContent"             
-                                Style="{StaticResource LeftContentStyle}"
-                                Visibility="{Binding IsLeftContentVisible, Converter={StaticResource BoolToVisCoverter}}"                                
-                                Content="{Binding NavigationContentView}"/>
+                <ContentControl
+                    x:Name="NavigationContent"
+                    Content="{Binding NavigationContentView}"
+                    Style="{StaticResource LeftContentStyle}"
+                    Visibility="{Binding IsLeftContentVisible, Converter={StaticResource BoolToVisCoverter}}" />
                 <!--#endregion-->
             </Grid>
             <!--#endregion-->
 
-            <!--region Main content -->
-            <Grid Grid.Column="1" Grid.Row="2"
-                  Background="Transparent">
-                <Image Source="{StaticResource AppIconLogo}"
-                       Width="500" Height="500"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Opacity="0.1"/>
-                <ContentControl x:Name="Pages"                                
-                                Content="{Binding CurrentView}"/>
+            <!--  region Main content  -->
+            <Grid
+                Grid.Row="2"
+                Grid.Column="1"
+                Background="Transparent">
+                <Image
+                    Width="500"
+                    Height="500"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Opacity="0.1"
+                    Source="{StaticResource AppIconLogo}" />
+                <ContentControl x:Name="Pages" Content="{Binding CurrentView}" />
             </Grid>
             <!--#endregion-->
-            
+
         </Grid>
     </Border>
 </Window>

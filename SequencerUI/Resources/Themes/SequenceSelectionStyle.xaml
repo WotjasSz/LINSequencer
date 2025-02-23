@@ -1,63 +1,72 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:hlp="clr-namespace:SequencerUI.Helpers">
-    
-    <BooleanToVisibilityConverter x:Key="BoolToVisCoverter"/>
-    
-    <!-- Label -->
-    <Style TargetType="Label" x:Key="ListLabel">
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Foreground" Value="{StaticResource Primary_5}"/>
-        <Setter Property="FontWeight" Value="Medium"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="10 0 10 0"/>
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:hlp="clr-namespace:SequencerUI.Helpers">
+
+    <BooleanToVisibilityConverter x:Key="BoolToVisCoverter" />
+
+    <!--  Label  -->
+    <Style x:Key="ListLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Foreground" Value="{StaticResource Primary_5}" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10,0,10,0" />
     </Style>
 
-    <!--#region Sequence slection -->
-    <Style TargetType="StackPanel" x:Key="SequenceSelector">
-        <Setter Property="Margin" Value="15 0 15 0"/>
+    <!--#region Sequence slection-->
+    <Style x:Key="SequenceSelector" TargetType="StackPanel">
+        <Setter Property="Margin" Value="15,0,15,0" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard Name="SlideInStoryboard">
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="250" Duration="0:0:0.4"/>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                From="0"
+                                To="250"
+                                Duration="0:0:0.4" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
-                    <StopStoryboard BeginStoryboardName="SlideInStoryboard"/>
+                    <StopStoryboard BeginStoryboardName="SlideInStoryboard" />
                 </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Trigger.EnterActions>
                     <BeginStoryboard Name="SlideOutStoryboard">
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Height" From="250" To="0" Duration="0:0:0.4"/>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                From="250"
+                                To="0"
+                                Duration="0:0:0.4" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
-                    <StopStoryboard BeginStoryboardName="SlideOutStoryboard"/>
+                    <StopStoryboard BeginStoryboardName="SlideOutStoryboard" />
                 </Trigger.ExitActions>
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="ComboBoxItem" x:Key="SequenceSelectorItem">
+    <Style x:Key="SequenceSelectorItem" TargetType="ComboBoxItem">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Border x:Name="brd"
-                        Background="{TemplateBinding Background}">
-                        <Label Content="{Binding Name}"
-                           Margin="5 2"
-                           Foreground="{StaticResource Foreground_2}"                           
-                           FontSize="18"/>
+                    <Border x:Name="brd" Background="{TemplateBinding Background}">
+                        <Label
+                            Margin="5,2"
+                            Content="{Binding Name}"
+                            FontSize="18"
+                            Foreground="{StaticResource Foreground_2}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="brd" Property="Background" Value="{StaticResource Background_5}"/>
+                            <Setter TargetName="brd" Property="Background" Value="{StaticResource Background_5}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -66,34 +75,36 @@
     </Style>
     <!--#endregion-->
 
-    <!--#region Add Button -->
-    <Style TargetType="Button" x:Key="GenericButton">
-        <Setter Property="Margin" Value="35 5 35 5"/>
-        <Setter Property="Foreground" Value="{StaticResource Background_3}"/>
+    <!--#region Add Button-->
+    <Style x:Key="GenericButton" TargetType="Button">
+        <Setter Property="Margin" Value="35,5,35,5" />
+        <Setter Property="Foreground" Value="{StaticResource Background_3}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="grid">
-                        <Border x:Name="border" 
-                            CornerRadius="8" 
-                            BorderBrush="Transparent" 
-                            BorderThickness="2"
+                        <Border
+                            x:Name="border"
+                            Padding="5,0"
                             Background="{StaticResource Primary_5}"
-                            Padding="5 0">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"
-                                          TextElement.FontWeight="Bold"/>
+                            BorderBrush="Transparent"
+                            BorderThickness="2"
+                            CornerRadius="8">
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                TextElement.FontWeight="Bold" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Primary_4}"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource Primary_4}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Secondary_1}"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource Secondary_1}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                            <Setter TargetName="grid" Property="Opacity" Value="0.25" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -101,35 +112,49 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Button" BasedOn="{StaticResource GenericButton}" x:Key="GenericButtonNarrow">
-        <Setter Property="Margin" Value="5 5"/>
+    <Style
+        x:Key="GenericButtonNarrow"
+        BasedOn="{StaticResource GenericButton}"
+        TargetType="Button">
+        <Setter Property="Margin" Value="5,5" />
     </Style>
 
-    <Style TargetType="Button" x:Key="CollapsingButton" BasedOn="{StaticResource GenericButton}">
-        <Setter Property="Margin" Value="35 5 35 15"/>
+    <Style
+        x:Key="CollapsingButton"
+        BasedOn="{StaticResource GenericButton}"
+        TargetType="Button">
+        <Setter Property="Margin" Value="35,5,35,15" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard Name="SlideInStoryboard">
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Height" From="0" To="60" Duration="0:0:0.4"/>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                From="0"
+                                To="60"
+                                Duration="0:0:0.4" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
-                    <StopStoryboard BeginStoryboardName="SlideInStoryboard"/>
+                    <StopStoryboard BeginStoryboardName="SlideInStoryboard" />
                 </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Trigger.EnterActions>
                     <BeginStoryboard Name="SlideOutStoryboard">
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Height" From="60" To="0" Duration="0:0:0.4"/>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                From="60"
+                                To="0"
+                                Duration="0:0:0.4" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
-                    <StopStoryboard BeginStoryboardName="SlideOutStoryboard"/>
+                    <StopStoryboard BeginStoryboardName="SlideOutStoryboard" />
                 </Trigger.ExitActions>
             </Trigger>
         </Style.Triggers>
@@ -137,61 +162,68 @@
 
     <!--#endregion-->
 
-    <!--#region Sequence list -->
-    <Style TargetType="ListView" x:Key="ActiveSequenceList">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+    <!--#region Sequence list-->
+    <Style x:Key="ActiveSequenceList" TargetType="ListView">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
     </Style>
-    <Style TargetType="ListViewItem" x:Key="SequenceListItem">
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    <Style x:Key="SequenceListItem" TargetType="ListViewItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
-                    <Border Background="{TemplateBinding Background}"                            
-                        CornerRadius="4"
-                        Margin="10 3 10 3"
-                        Padding="4">
+                    <Border
+                        Margin="10,3,10,3"
+                        Padding="4"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="4">
                         <Grid>
                             <StackPanel>
-                                <Label Content="{Binding Name}"
-                                   Foreground="{StaticResource Secondary_4}"
-                                   FontWeight="DemiBold"
-                                   FontSize="18"/>
-                                <Label Content="{Binding CreationDate}"
-                                   Foreground="#c4c4c7"
-                                   FontSize="14"/>
+                                <Label
+                                    Content="{Binding Name}"
+                                    FontSize="18"
+                                    FontWeight="DemiBold"
+                                    Foreground="{StaticResource Secondary_4}" />
+                                <Label
+                                    Content="{Binding CreationDate}"
+                                    FontSize="14"
+                                    Foreground="#c4c4c7" />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal"
-                                    VerticalAlignment="Top"
-                                    HorizontalAlignment="Right">
-                                <Button Content="&#xf24d;" 
-                                        FontFamily="{StaticResource FontAwesome}"
-                                        Style="{StaticResource SmallActionButton}"
-                                        Command="{Binding DataContext.DuplicateSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                        CommandParameter="{Binding}">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+                                <Button
+                                    Command="{Binding DataContext.DuplicateSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    CommandParameter="{Binding}"
+                                    Content="&#xf24d;"
+                                    FontFamily="{StaticResource FontAwesome}"
+                                    Style="{StaticResource SmallActionButton}">
                                     <Button.ToolTip>
                                         <StackPanel>
                                             <TextBlock>Duplicate</TextBlock>
                                         </StackPanel>
                                     </Button.ToolTip>
                                 </Button>
-                                <Button Content="&#xf044;" 
-                                        FontFamily="{StaticResource FontAwesome}"
-                                        Style="{StaticResource SmallActionButton}"
-                                        Command="{Binding DataContext.EditSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                        CommandParameter="{Binding}">
+                                <Button
+                                    Command="{Binding DataContext.EditSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    CommandParameter="{Binding}"
+                                    Content="&#xf044;"
+                                    FontFamily="{StaticResource FontAwesome}"
+                                    Style="{StaticResource SmallActionButton}">
                                     <Button.ToolTip>
                                         <StackPanel>
                                             <TextBlock>Edit</TextBlock>
                                         </StackPanel>
                                     </Button.ToolTip>
                                 </Button>
-                                <Button Content="&#xf00d;" 
-                                        FontFamily="{StaticResource FontAwesome}"
-                                        Style="{StaticResource SmallActionButton}"
-                                        Command="{Binding DataContext.RemoveSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                        CommandParameter="{Binding}">
+                                <Button
+                                    Command="{Binding DataContext.RemoveSequenceCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    CommandParameter="{Binding}"
+                                    Content="&#xf00d;"
+                                    FontFamily="{StaticResource FontAwesome}"
+                                    Style="{StaticResource SmallActionButton}">
                                     <Button.ToolTip>
                                         <StackPanel>
                                             <TextBlock>Close</TextBlock>
@@ -206,13 +238,13 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource Background_5}"/>
+                <Setter Property="Background" Value="{StaticResource Background_5}" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource Background_4}"/>
+                <Setter Property="Background" Value="{StaticResource Background_4}" />
             </Trigger>
         </Style.Triggers>
     </Style>
     <!--#endregion-->
-    
+
 </ResourceDictionary>
