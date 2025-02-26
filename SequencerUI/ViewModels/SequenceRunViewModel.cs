@@ -89,7 +89,7 @@ namespace SequencerUI.ViewModels
         {
             if (msg != null)
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.BeginInvoke(() =>
                     {
                         Messages.Add(msg);
                     }); 
