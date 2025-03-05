@@ -199,10 +199,19 @@
 
                 <!--#region Step properties-->
                 <Border Grid.Column="1" Style="{StaticResource GroupViewBorder}">
-                    <StackPanel Style="{StaticResource InputFieldEditViewStackPanel}">
-                        <TextBlock Style="{StaticResource H1HeaderCenter}" Text="Step properties" />
-                        <ContentControl x:Name="SelectedStep" Content="{Binding CurrentStepParamView}" />
-                    </StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            Style="{StaticResource H1HeaderCenter}"
+                            Text="Step properties" />
+                        <ScrollViewer Grid.Row="1">
+                            <ContentControl x:Name="SelectedStep" Content="{Binding CurrentStepParamView}" />
+                        </ScrollViewer>
+                    </Grid>
                 </Border>
                 <!--#endregion-->
 

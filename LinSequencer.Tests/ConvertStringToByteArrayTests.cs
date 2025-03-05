@@ -1,5 +1,6 @@
 ﻿using LINSequencerLib.Sequence;
 using LINSequencerLib.SequenceStep;
+using LINSequencerLib.SupportingFiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;

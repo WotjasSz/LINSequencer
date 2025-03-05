@@ -20,8 +20,10 @@ namespace SequencerUI.ViewModels
         {
             foreach (var step in stepList)
             {
-                //Filtering only int values
+                //TODO Rozważyć stworzenie widoku tylko dla bajtów.
+                //Filtering only byte array values
                 SequenceStepParamModel? outputParam = step.OutputParameterList.Where(o => o.Name == "Output").FirstOrDefault();
+                ParamRawValue = StepParam.ParamValue.Replace(" ", "");
                 if (outputParam != null && outputParam.ParamType.Equals("System.Byte[]"))
                 {
                     AvailableVariables.Add(step.GetStepName());

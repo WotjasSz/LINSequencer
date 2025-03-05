@@ -64,13 +64,16 @@ namespace SequencerUI.ViewModels
 
             StepParam = stepParam;
             Name = StepParam.Name;
-            ParamType = StepParam.ParamType;            
+            ParamOptions = new ObservableCollection<IParamOption>(StepParam.ParamOptions);
             ParamValue = StepParam.ParamValue;
-            ParamRawValue = StepParam.ParamValue.Replace(" ", "");
-            IsRequired = StepParam.IsRequired;
-            ParamOptions = new ObservableCollection<IParamOption>(stepParam.ParamOptions);
+            ParamRawValue = StepParam.ParamValue;
+            IsRequired = StepParam.IsRequired;            
 
-            IsInvalid = !IsTextValid(ParamValue) && IsRequired;
+            //Split full type name to get only type name
+            string[] typeParts = StepParam.ParamType.Split('.');
+            ParamType = typeParts[^1];
+
+            IsInvalid = !IsTextValid(ParamRawValue) && IsRequired;
 
             AvailableVariables = new ObservableCollection<string>();
         }

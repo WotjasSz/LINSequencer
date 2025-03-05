@@ -74,7 +74,7 @@ namespace SequencerUI.ViewModels
                 {
                     InputParametersVm.Add(new IntParameterViewModel(parameter, _variablesList));
                 }
-                else if (parameter.ParamType.Equals("System.Byte[]"))
+                else if (parameter.ParamType.Equals("System.Byte[]") || parameter.ParamType.Equals("System.Byte"))
                 {
                     InputParametersVm.Add(new ByteParameterViewModel(parameter, _variablesList)); //Temporarly later add ArrayControl
                 }
