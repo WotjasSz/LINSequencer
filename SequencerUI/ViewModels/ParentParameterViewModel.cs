@@ -66,7 +66,7 @@ namespace SequencerUI.ViewModels
             Name = StepParam.Name;
             ParamOptions = new ObservableCollection<IParamOption>(StepParam.ParamOptions);
             ParamValue = StepParam.ParamValue;
-            ParamRawValue = StepParam.ParamValue;
+            SetParamRawValue(StepParam.ParamValue);  //Set raw value to avoid calling OnValueChanged during initialization
             IsRequired = StepParam.IsRequired;            
 
             //Split full type name to get only type name
@@ -104,13 +104,23 @@ namespace SequencerUI.ViewModels
             return true;
         }
 
+        /// <summary>
+        /// Set raw value of the parameter.
+        /// Remark: Should be used only durign initialization to avoid calling OnValueChanged
+        /// </summary>
+        /// <param name="value"></param>
+        protected void SetParamRawValue(string value)
+        {
+            _paramRawValue = value;  //Use direct field assigment to avoid calling OnParamRawValueChanged during initialization
+        }
+
         protected virtual string GetInputTypeString()
         {
             if (ParamOptions == null)
             {
                 return string.Empty;
             }
-            var inputType = ParamOptions.Where(t => t.Name == "InputType").FirstOrDefault();
+            var inputType = ParamOptions.FirstOrDefault(t => t.Name == "InputType");
             if (inputType != null && inputType is ParamOptionBoolSwitch)
             {
                 return ((ParamOptionBoolSwitch)inputType).GetSelectedOptionString();

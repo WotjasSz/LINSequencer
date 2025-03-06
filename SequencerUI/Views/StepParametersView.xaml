@@ -24,12 +24,16 @@
         <DataTemplate x:Key="ByteTemplate">
             <local:ByteParameterView />
         </DataTemplate>
+        <DataTemplate x:Key="ByteArrayTemplate">
+            <local:ByteArrayParameterView />
+        </DataTemplate>
         <DataTemplate x:Key="OutputTemplate">
             <local:OutputParameterView />
         </DataTemplate>
         <hlp:StepParameterDataTemplateSelector
             x:Key="TemplateSelector"
             BoolTemplate="{StaticResource BoolTemplate}"
+            ByteArrayTemplate="{StaticResource ByteArrayTemplate}"
             ByteTemplate="{StaticResource ByteTemplate}"
             IntTemplate="{StaticResource IntTemplate}"
             OutputTemplate="{StaticResource OutputTemplate}"

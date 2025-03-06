@@ -13,18 +13,18 @@ using System.Windows.Markup;
 
 namespace SequencerUI.ViewModels
 {
-    public partial class ByteParameterViewModel : ParentParameterViewModel
+    public partial class ByteArrayParameterViewModel : ParentParameterViewModel
     {
-        public ByteParameterViewModel(SequenceStepParamModel stepParam, ObservableCollection<SequenceStepModel> stepList) 
+        public ByteArrayParameterViewModel(SequenceStepParamModel stepParam, ObservableCollection<SequenceStepModel> stepList) 
             : base(stepParam) 
         {
             foreach (var step in stepList)
             {
                 //TODO Rozważyć stworzenie widoku tylko dla bajtów.
                 //Filtering only byte array values
-                SequenceStepParamModel? outputParam = step.OutputParameterList.FirstOrDefault(o => o.Name == "Output");
-                InitParamRawValueSet(StepParam.ParamValue);
-                if (outputParam != null && outputParam.ParamType.Equals("System.Byte"))
+                SequenceStepParamModel? outputParam = step.OutputParameterList.Where(o => o.Name == "Output").FirstOrDefault();
+                ParamRawValue = StepParam.ParamValue.Replace(" ", "");
+                if (outputParam != null && outputParam.ParamType.Equals("System.Byte[]"))
                 {
                     AvailableVariables.Add(step.GetStepName());
                 }
@@ -33,9 +33,10 @@ namespace SequencerUI.ViewModels
 
         protected override void OnValueChanged(string? oldValue, string newValue)
         {
-            string _inputType = GetInputTypeString();
+
             if (IsTextValid(newValue))
             {
+                string _inputType = GetInputTypeString();
                 byte[] outArr;
                 string outString = string.Empty;
                 if (newValue.StartsWith('<') && newValue.EndsWith('>'))
@@ -47,12 +48,14 @@ namespace SequencerUI.ViewModels
                     outString = newValue;
                 }
                 else if (_inputType == "HEX")
-                {                    
-                    outString = newValue;
+                {
+                    outArr = newValue.HexStringToByteArray();
+                    outString = outArr.ByteArrayToHexString();
                 }
                 else if (_inputType == "DEC")
-                {   
-                    outString = $"{int.Parse(newValue):X2}";
+                {
+                    outArr = newValue.DecStringToByteArray();
+                    outString = outArr.ByteArrayToHexString();
                 }
 
                 ParamValue = outString;
@@ -67,22 +70,19 @@ namespace SequencerUI.ViewModels
 
         protected override bool IsTextValid(string inputText)
         {
-            string _inputType = GetInputTypeString();
+            string varType = GetInputTypeString();
+
             if (inputText.StartsWith('<') && inputText.EndsWith('>'))
             {
                 return true;
             }
-            else if (_inputType == "HEX" && inputText.Length <= 2 && inputText.All(c => "0123456789ABCDEFabcdef".Contains(c)))
+            else if (varType == "HEX" && inputText.All(c => "0123456789ABCDEFabcdef".Contains(c)))
             {
                 return true;
             }
-            else if (_inputType == "DEC" && inputText.All(char.IsDigit))
-            {                
-                if (int.TryParse(inputText, out int result) && result >= byte.MinValue && result <= byte.MaxValue)
-                {
-                    return true;
-                }
-                return false;
+            else if (varType == "DEC" && inputText.All(char.IsDigit))
+            {
+                return true;
             }
             else if (inputText == string.Empty && !IsRequired)
             {
@@ -91,13 +91,17 @@ namespace SequencerUI.ViewModels
             return false;
         }
 
-        private void InitParamRawValueSet(string value)
+        
+
+        private byte[] HexToByteArray(string inputString)
         {
-            string _inputType = GetInputTypeString();
-            if (_inputType == "DEC")
-            {
-                SetParamRawValue(Convert.ToInt32(value, 16).ToString());
-            }
+            string hexStr = inputString.Length % 2 > 0 ? string.Concat("0", inputString) : hexStr = inputString;
+            byte[] outArr= Enumerable.Range(0, hexStr.Length)
+                   .Where(x => x % 2 == 0)
+                   .Select(x => Convert.ToByte(hexStr.Substring(x, 2), 16))
+                   .ToArray();
+
+            return outArr;
         }
     }
 }

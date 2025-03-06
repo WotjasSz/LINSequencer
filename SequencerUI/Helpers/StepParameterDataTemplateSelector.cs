@@ -12,10 +12,11 @@ namespace SequencerUI.Helpers
 {
     class StepParameterDataTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate BoolTemplate { get; set; }
+        public DataTemplate BoolTemplate { get; set; }        
         public DataTemplate StringTemplate { get; set; }
         public DataTemplate IntTemplate { get; set; }        
         public DataTemplate ByteTemplate { get; set; }
+        public DataTemplate ByteArrayTemplate { get; set; }
         public DataTemplate OutputTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
@@ -51,6 +52,10 @@ namespace SequencerUI.Helpers
             else if (item is ByteParameterViewModel)
             {
                 return ByteTemplate;
+            }
+            else if (item is ByteArrayParameterViewModel)
+            {
+                return ByteArrayTemplate;
             }
             else if (item is OutputParameterViewModel)
             {
