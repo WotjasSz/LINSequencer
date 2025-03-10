@@ -26,11 +26,14 @@ namespace SequencerUI.ViewModels
         private ObservableCollection<DeviceModel>? _devices;
 
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(RunSequenceCommand))]
+        [NotifyCanExecuteChangedFor(nameof(ConnectDeviceCommand))]
         private DeviceModel? _currentDevice;
-
+        
         [ObservableProperty]
         private ObservableCollection<LogMessage> _messages;
+
+        [ObservableProperty]
+        private bool _isPopupOpen;
 
         private readonly IMessenger _messenger;
         private readonly LoggerModel _logger;
@@ -45,8 +48,9 @@ namespace SequencerUI.ViewModels
             _logger = Sequence.Logger;
             _logger.SequenceLog += OnLogGenerated;
 
-            Messages = new ObservableCollection<LogMessage>(); ;
+            Messages = new ObservableCollection<LogMessage>();
 
+            IsPopupOpen = false;
             //Messages.CollectionChanged += Messages_CollectionChanged;
         }       
 
@@ -61,6 +65,7 @@ namespace SequencerUI.ViewModels
             _logger.SequenceLog += OnLogGenerated;
 
             Messages = new ObservableCollection<LogMessage>();
+            IsPopupOpen = false;
         }
 
         public void UpdateSequence(ISequenceModel sequence)
@@ -70,6 +75,12 @@ namespace SequencerUI.ViewModels
 
         #region Commands
         [RelayCommand]
+        private void ShowDescription()
+        {
+            IsPopupOpen = !IsPopupOpen;
+        }
+
+        [RelayCommand]
         private void ReloadDeviceList()
         {
             LinSequencer.CheckAvailableDevice();
@@ -78,10 +89,22 @@ namespace SequencerUI.ViewModels
             Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);            
         }
 
-        [RelayCommand(CanExecute = nameof(CanExeuteRunSequence))]
+        [RelayCommand(CanExecute = nameof(CanExecuteConnectDevice))]
+        private void ConnectDevice()
+        {
+            Sequence.ConnectDevice(CurrentDevice);
+        }
+
+        [RelayCommand]
+        private void DisconnectDevice()
+        {
+            Sequence.DisconnectDevice();
+        }
+
+        [RelayCommand]
         private void RunSequence()
         {
-            Sequence.RunAsync(CurrentDevice, LinSequencer.FunctionList);
+            Sequence.RunAsync(LinSequencer.FunctionList);
         }        
         #endregion
 
@@ -116,6 +139,11 @@ namespace SequencerUI.ViewModels
 
 
         private bool CanExeuteRunSequence()
+        {
+            return Sequence.IsConnected;
+        }
+
+        private bool CanExecuteConnectDevice()
         {
             return CurrentDevice != null ? true : false;
         }

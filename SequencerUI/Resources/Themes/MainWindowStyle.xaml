@@ -1,181 +1,213 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">   
-    
-    <!-- Font Awesome definition -->
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  Font Awesome definition  -->
     <FontFamily x:Key="FontAwesome">pack://application:,,,/Resources/Fonts/#Font Awesome 6 Free Solid</FontFamily>
 
     <!--#region MainWindow-->
-    <Style TargetType="Window" x:Key="MainWindowStyle">
-        <Setter Property="WindowStyle" Value="None"/>
-        <Setter Property="Height" Value="900"/>
-        <Setter Property="MinHeight" Value="650"/>
-        <Setter Property="Width" Value="1300"/>
-        <Setter Property="MinWidth" Value="850"/>
-        <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
-        <Setter Property="AllowsTransparency" Value="True"/>
-        <Setter Property="FontFamily" Value="/Resources/Fonts/#Poppins"/>
-        <Setter Property="Background" Value="Transparent"/>
+    <Style x:Key="MainWindowStyle" TargetType="Window">
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="Height" Value="900" />
+        <Setter Property="MinHeight" Value="650" />
+        <Setter Property="Width" Value="1300" />
+        <Setter Property="MinWidth" Value="850" />
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="FontFamily" Value="/Resources/Fonts/#Poppins" />
+        <Setter Property="Background" Value="Transparent" />
     </Style>
 
-    <Style TargetType="Border" x:Key="MainWindowBorder">
-        <Setter Property="CornerRadius" Value="10"/>
+    <Style x:Key="MainWindowBorder" TargetType="Border">
+        <Setter Property="CornerRadius" Value="10" />
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="{StaticResource Background_2_Color}" Offset="0"/>
-                    <GradientStop Color="{StaticResource Background_3_Color}" Offset="1"/>
+                    <GradientStop Offset="0" Color="{StaticResource Background_2_Color}" />
+                    <GradientStop Offset="1" Color="{StaticResource Background_3_Color}" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
     </Style>
     <!--#endregion-->
-    
-    <!--#region Common components -->
-    
-    <!--#region ViewBorder -->
-    <Style TargetType="Border" x:Key="ViewBorder">
-        <Setter Property="Margin" Value="10"/>
-        <Setter Property="CornerRadius" Value="10"/>        
+
+    <!--#region Common components-->
+
+    <!--#region ViewBorder-->
+    <Style x:Key="ViewBorder" TargetType="Border">
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="CornerRadius" Value="10" />
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="{StaticResource Background_5_Color}" Offset="0"/>
-                    <GradientStop Color="{StaticResource Background_4_Color}" Offset="1"/>
+                    <GradientStop Offset="0" Color="{StaticResource Background_5_Color}" />
+                    <GradientStop Offset="1" Color="{StaticResource Background_4_Color}" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="Border" x:Key="ViewWithGroupBorder">
-        <Setter Property="Margin" Value="10 10 0 0"/>
-        <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="Background" Value="Transparent"/>
+    <Style x:Key="ViewWithGroupBorder" TargetType="Border">
+        <Setter Property="Margin" Value="10,10,0,0" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Background" Value="Transparent" />
     </Style>
 
-    <Style TargetType="Border" x:Key="GroupViewBorder">
-        <Setter Property="Margin" Value="0 0 10 10"/>
-        <Setter Property="CornerRadius" Value="10"/>
+    <Style x:Key="GroupViewBorder" TargetType="Border">
+        <Setter Property="Margin" Value="0,0,10,10" />
+        <Setter Property="CornerRadius" Value="10" />
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="{StaticResource Background_5_Color}" Offset="0"/>
-                    <GradientStop Color="{StaticResource Background_4_Color}" Offset="1"/>
+                    <GradientStop Offset="0" Color="{StaticResource Background_5_Color}" />
+                    <GradientStop Offset="1" Color="{StaticResource Background_4_Color}" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
     </Style>
-    <!--#endregion-->
-    
-    <!--#region Labels -->
-    <Style TargetType="Label" x:Key="HeaderLabel">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_4}"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Margin" Value="0 0 0 0"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>          
-    </Style>
-    <Style TargetType="Label" x:Key="CommonFieldLabel">
-        <Setter Property="Foreground" Value="{StaticResource Accent_1}"/>
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Margin" Value="0 5 0 0"/>
-    </Style>
-    <Style TargetType="Label" x:Key="LessImportantFieldLabel">
-        <Setter Property="Foreground" Value="{StaticResource Accent_2}"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+
+    <Style x:Key="PopupBorder" TargetType="Border">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Background" Value="{StaticResource PopupBackGroundGradient}" />
     </Style>
     <!--#endregion-->
 
-    <!--#region TextBlocks -->
-    <Style TargetType="TextBlock" x:Key="H1TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_4}"/>
-        <Setter Property="FontSize" Value="20"/>
+    <!--#region Labels-->
+    <Style x:Key="HeaderLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_4}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="SmallHeaderLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource Accent_1}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="CommonFieldLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource Accent_1}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+    </Style>
+    <Style x:Key="LessImportantFieldLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource Accent_2}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region TextBlocks-->
+    <Style x:Key="H0TextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24" />
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="H1HeaderCenter" BasedOn="{StaticResource H1TextBlock}">
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Style x:Key="H1TextBlock" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_4}" />
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+
+    <Style
+        x:Key="H0HeaderLeft"
+        BasedOn="{StaticResource H0TextBlock}"
+        TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style
+        x:Key="H1HeaderCenter"
+        BasedOn="{StaticResource H1TextBlock}"
+        TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
         <!--<Setter Property="TextDecorations" Value="Underline"/>-->
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="SingleLineTextBlock">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+    <Style x:Key="SingleLineTextBlock" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="MultilineTextBlock" BasedOn="{StaticResource SingleLineTextBlock}">
-        <Setter Property="TextWrapping" Value="Wrap"/>
+    <Style
+        x:Key="MultilineTextBlock"
+        BasedOn="{StaticResource SingleLineTextBlock}"
+        TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
-    
-    
-    
-    <Style TargetType="TextBlock" x:Key="LessImportantFieldValue">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_5}"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>        
+
+    <Style x:Key="LessImportantFieldValue" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_5}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-    <Style TargetType="TextBlock" x:Key="BiggerFieldValue">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
-        <Setter Property="FontSize" Value="22"/>
-        <Setter Property="Margin" Value="0 0 0 15"/>
-        <Setter Property="Padding" Value="10 0 0 0"/>
+    <Style x:Key="BiggerFieldValue" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="Margin" Value="0,0,0,15" />
+        <Setter Property="Padding" Value="10,0,0,0" />
     </Style>
-    <Style TargetType="TextBlock" x:Key="ShortFieldValue">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Padding" Value="12 0 0 0"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+    <Style x:Key="ShortFieldValue" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="Padding" Value="12,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-    <Style TargetType="TextBlock" x:Key="LongTextFieldValue" BasedOn="{StaticResource ShortFieldValue}">
-        <Setter Property="TextWrapping" Value="Wrap"/>
+    <Style
+        x:Key="LongTextFieldValue"
+        BasedOn="{StaticResource ShortFieldValue}"
+        TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
+
+
     <!--#endregion-->
 
     <!--#region TextBox-->
-    <Style TargetType="TextBox" x:Key="DefaultTextBox">
-        <Setter Property="Foreground" Value="{StaticResource Foreground_1}"/>
-        <Setter Property="Background" Value="Transparent"/>
+    <Style x:Key="DefaultTextBox" TargetType="TextBox">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}" />
+        <Setter Property="Background" Value="Transparent" />
     </Style>
-    
-    <Style TargetType="{x:Type TextBox}" x:Key="InputTextBox">
+
+    <Style x:Key="InputTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Border CornerRadius="5"
-                            Background="{StaticResource Background_4}">
+                    <Border Background="{StaticResource Background_4}" CornerRadius="5">
                         <Grid>
-                            <Rectangle StrokeThickness="1"/>
-                            <TextBox Margin="1"
-                                     Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}"
-                                     CaretBrush="{StaticResource Foreground_1}"
-                                     BorderThickness="0"
-                                     VerticalContentAlignment="Center"
-                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                     MinWidth="{TemplateBinding MinWidth}"
-                                     Padding="5"
-                                     Background="Transparent"
-                                     Foreground="{StaticResource Foreground_1}"
-                                     x:Name="InputBox"/>
-                            <TextBlock IsHitTestVisible="False"
-                                       Text="{Binding RelativeSource={RelativeSource AncestorType=TextBox}, Path=Tag}"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Margin="10 0 0 0"
-                                       FontSize="{TemplateBinding FontSize}"
-                                       Foreground="{StaticResource Foreground_5}"
-                                       Grid.Column="0">
+                            <Rectangle StrokeThickness="1" />
+                            <TextBox
+                                x:Name="InputBox"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                Margin="1"
+                                Padding="5"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                CaretBrush="{StaticResource Foreground_1}"
+                                Foreground="{StaticResource Foreground_1}"
+                                Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="{StaticResource Foreground_5}"
+                                IsHitTestVisible="False"
+                                Text="{Binding RelativeSource={RelativeSource AncestorType=TextBox}, Path=Tag}">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
-                                        <Setter Property="Visibility" Value="Hidden"/>
+                                        <Setter Property="Visibility" Value="Hidden" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Text, ElementName=InputBox}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Setter Property="Visibility" Value="Visible" />
                                             </DataTrigger>
-                                        </Style.Triggers>                                        
+                                        </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
@@ -186,41 +218,42 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type TextBox}" x:Key="InputMultilineTextBox">
+    <Style x:Key="InputMultilineTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Border CornerRadius="5"
-                        Background="{StaticResource Background_4}">
+                    <Border Background="{StaticResource Background_4}" CornerRadius="5">
                         <Grid>
-                            <Rectangle StrokeThickness="1"/>
-                            <TextBox Margin="1" 
-                                     Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}"
-                                     CaretBrush="{StaticResource Foreground_1}"
-                                     BorderThickness="0"
-                                     VerticalContentAlignment="Top"
-                                     Padding="5"
-                                     Background="Transparent"
-                                     Foreground="{StaticResource Foreground_1}"
-                                     x:Name="InputBox"
-                                     AcceptsReturn="False"
-                                     TextWrapping="Wrap"
-                                     VerticalScrollBarVisibility="Auto"
-                                     HorizontalScrollBarVisibility="Auto"/>
-                            <TextBlock IsHitTestVisible="False"
-                                   Text="{Binding RelativeSource={RelativeSource AncestorType=TextBox}, Path=Tag}"
-                                   VerticalAlignment="Top"
-                                   HorizontalAlignment="Left"
-                                   Margin="10 5 0 0"
-                                   FontSize="{TemplateBinding FontSize}"
-                                   Foreground="{StaticResource Foreground_5}"
-                                   Grid.Column="0">
+                            <Rectangle StrokeThickness="1" />
+                            <TextBox
+                                x:Name="InputBox"
+                                Margin="1"
+                                Padding="5"
+                                VerticalContentAlignment="Top"
+                                AcceptsReturn="False"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                CaretBrush="{StaticResource Foreground_1}"
+                                Foreground="{StaticResource Foreground_1}"
+                                HorizontalScrollBarVisibility="Auto"
+                                Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto" />
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="10,5,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="{StaticResource Foreground_5}"
+                                IsHitTestVisible="False"
+                                Text="{Binding RelativeSource={RelativeSource AncestorType=TextBox}, Path=Tag}">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
-                                        <Setter Property="Visibility" Value="Hidden"/>
+                                        <Setter Property="Visibility" Value="Hidden" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Text, ElementName=InputBox}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Setter Property="Visibility" Value="Visible" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -233,111 +266,151 @@
         </Setter>
     </Style>
     <!--#endregion-->
-    
+
     <!--#region Buttons-->
-    <Style TargetType="Button" x:Key="SmallActionButton">
-        <Setter Property="Width" Value="20"/>
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="{StaticResource Accent_1}"/>
-        <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="FontSize" Value="15"/>
-        <Setter Property="Opacity" Value="0.25"/>
+    <Style x:Key="SmallActionButton" TargetType="Button">
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{StaticResource Accent_1}" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Opacity" Value="0.25" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Opacity" Value="1"/>
+                <Setter Property="Opacity" Value="1" />
             </Trigger>
         </Style.Triggers>
     </Style>
     <!--#endregion-->
-    
+
     <!--#region  CheckBox-->
-    <Style TargetType="CheckBox" x:Key="ToggleSwitchStyle">
-        <!-- Override the default template for CheckBox -->
+    <Style x:Key="ToggleSwitchStyle" TargetType="CheckBox">
+        <!--  Override the default template for CheckBox  -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
-                    <!-- The main container consists of two columns: for the switch and the text label. -->
+                    <!--  The main container consists of two columns: for the switch and the text label.  -->
                     <Grid>
-                        <!-- Defining two columns -->
+                        <!--  Defining two columns  -->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <!-- Border around the switch -->
-                        <Border x:Name="SwitchBorder" Grid.Column="0" 
-                                Width="44" Height="24" 
-                                BorderBrush="Transparent" 
-                                BorderThickness="1" 
-                                CornerRadius="12" 
-                                Background="{StaticResource Background_3}">
-                            <!-- The rectangle that acts as the switch itself -->
-                            <Rectangle x:Name="Switch" 
-                                       Width="20" Height="20" 
-                                       Fill="{StaticResource Background_5}" 
-                                       Stroke="{StaticResource Background_5}" 
-                                       StrokeThickness="0" 
-                                       RadiusX="10" RadiusY="10" 
-                                       VerticalAlignment="Center" 
-                                       HorizontalAlignment="Left"
-                                       Margin="1">
-                                <!-- Transform is used to animate the movement of the switch. -->
+                        <!--  Border around the switch  -->
+                        <Border
+                            x:Name="SwitchBorder"
+                            Grid.Column="0"
+                            Width="44"
+                            Height="24"
+                            Background="{StaticResource Background_3}"
+                            BorderBrush="Transparent"
+                            BorderThickness="1"
+                            CornerRadius="12">
+                            <!--  The rectangle that acts as the switch itself  -->
+                            <Rectangle
+                                x:Name="Switch"
+                                Width="20"
+                                Height="20"
+                                Margin="1"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Fill="{StaticResource Background_5}"
+                                RadiusX="10"
+                                RadiusY="10"
+                                Stroke="{StaticResource Background_5}"
+                                StrokeThickness="0">
+                                <!--  Transform is used to animate the movement of the switch.  -->
                                 <Rectangle.RenderTransform>
-                                    <TranslateTransform x:Name="SwitchTranslateTransform"/>
+                                    <TranslateTransform x:Name="SwitchTranslateTransform" />
                                 </Rectangle.RenderTransform>
                             </Rectangle>
                         </Border>
-                        <!-- A text label indicating the current state of the switch. -->
-                        <TextBlock Grid.Column="1" x:Name="StateLabel" 
-                                   Text="Off" 
-                                   VerticalAlignment="Center" 
-                                   Margin="5,0,0,0"/>
-                        <!-- State groups that define animations for the different states of a CheckBox -->
+                        <!--  A text label indicating the current state of the switch.  -->
+                        <TextBlock
+                            x:Name="StateLabel"
+                            Grid.Column="1"
+                            Margin="5,0,0,0"
+                            VerticalAlignment="Center"
+                            Text="Off" />
+                        <!--  State groups that define animations for the different states of a CheckBox  -->
                         <VisualStateManager.VisualStateGroups>
-                            <!-- State group for on and off states -->
+                            <!--  State group for on and off states  -->
                             <VisualStateGroup x:Name="CheckStates">
-                                <!-- Animations for the enabled state -->
+                                <!--  Animations for the enabled state  -->
                                 <VisualState x:Name="Checked">
                                     <Storyboard>
-                                        <!-- Moves the switch to the right -->
-                                        <DoubleAnimation Storyboard.TargetName="SwitchTranslateTransform" Storyboard.TargetProperty="X" To="20" Duration="0:0:0.2"/>
-                                        <!-- Changes the text to "Enabled" -->
+                                        <!--  Moves the switch to the right  -->
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="SwitchTranslateTransform"
+                                            Storyboard.TargetProperty="X"
+                                            To="20"
+                                            Duration="0:0:0.2" />
+                                        <!--  Changes the text to "Enabled"  -->
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLabel" Storyboard.TargetProperty="Text">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="On"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="On" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <!-- Changes the switch color to SkyBlue -->
-                                        <ColorAnimation Storyboard.TargetName="Switch" Storyboard.TargetProperty="Fill.Color" To="{StaticResource Accent_2_Color}" Duration="0:0:0.2"/>
-                                        <!-- Changes the toggle border color to SkyBlue -->
-                                        <ColorAnimation Storyboard.TargetName="Switch" Storyboard.TargetProperty="Stroke.Color" To="{StaticResource Accent_2_Color}" Duration="0:0:0.2"/>
-                                        <!-- Changes the border color to SkyBlue -->
-                                        <ColorAnimation Storyboard.TargetName="SwitchBorder" Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource Accent_2_Color}" Duration="0:0:0.2"/>
+                                        <!--  Changes the switch color to SkyBlue  -->
+                                        <ColorAnimation
+                                            Storyboard.TargetName="Switch"
+                                            Storyboard.TargetProperty="Fill.Color"
+                                            To="{StaticResource Accent_2_Color}"
+                                            Duration="0:0:0.2" />
+                                        <!--  Changes the toggle border color to SkyBlue  -->
+                                        <ColorAnimation
+                                            Storyboard.TargetName="Switch"
+                                            Storyboard.TargetProperty="Stroke.Color"
+                                            To="{StaticResource Accent_2_Color}"
+                                            Duration="0:0:0.2" />
+                                        <!--  Changes the border color to SkyBlue  -->
+                                        <ColorAnimation
+                                            Storyboard.TargetName="SwitchBorder"
+                                            Storyboard.TargetProperty="BorderBrush.Color"
+                                            To="{StaticResource Accent_2_Color}"
+                                            Duration="0:0:0.2" />
                                     </Storyboard>
                                 </VisualState>
-                                <!-- Animations for off state -->
+                                <!--  Animations for off state  -->
                                 <VisualState x:Name="Unchecked">
                                     <Storyboard>
-                                        <!-- Returns the switch back to the left -->
-                                        <DoubleAnimation Storyboard.TargetName="SwitchTranslateTransform" Storyboard.TargetProperty="X" To="0" Duration="0:0:0.2"/>
-                                        <!-- Changes the text to "Disabled" -->
+                                        <!--  Returns the switch back to the left  -->
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="SwitchTranslateTransform"
+                                            Storyboard.TargetProperty="X"
+                                            To="0"
+                                            Duration="0:0:0.2" />
+                                        <!--  Changes the text to "Disabled"  -->
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StateLabel" Storyboard.TargetProperty="Text">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Off"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Off" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <!-- Resets the switch color to DarkGray -->
-                                        <ColorAnimation Storyboard.TargetName="Switch" Storyboard.TargetProperty="Fill.Color" To="{StaticResource Background_5_Color}" Duration="0:0:0.2"/>
-                                        <!-- Resets the border color of the toggle to its initial value. -->
-                                        <ColorAnimation Storyboard.TargetName="Switch" Storyboard.TargetProperty="Stroke.Color" To="{StaticResource Background_5_Color}" Duration="0:0:0.2"/>
-                                        <!-- Resets the border color to its initial value.-->
-                                        <ColorAnimation Storyboard.TargetName="SwitchBorder" Storyboard.TargetProperty="BorderBrush.Color" To="Transparent" Duration="0:0:0.2"/>
+                                        <!--  Resets the switch color to DarkGray  -->
+                                        <ColorAnimation
+                                            Storyboard.TargetName="Switch"
+                                            Storyboard.TargetProperty="Fill.Color"
+                                            To="{StaticResource Background_5_Color}"
+                                            Duration="0:0:0.2" />
+                                        <!--  Resets the border color of the toggle to its initial value.  -->
+                                        <ColorAnimation
+                                            Storyboard.TargetName="Switch"
+                                            Storyboard.TargetProperty="Stroke.Color"
+                                            To="{StaticResource Background_5_Color}"
+                                            Duration="0:0:0.2" />
+                                        <!--  Resets the border color to its initial value.  -->
+                                        <ColorAnimation
+                                            Storyboard.TargetName="SwitchBorder"
+                                            Storyboard.TargetProperty="BorderBrush.Color"
+                                            To="Transparent"
+                                            Duration="0:0:0.2" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>

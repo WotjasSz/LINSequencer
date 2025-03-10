@@ -23,6 +23,14 @@
 
     <!--#region Text fields-->
     <Style
+        x:Key="NameField"
+        BasedOn="{StaticResource H0HeaderLeft}"
+        TargetType="TextBlock">
+        <Setter Property="Margin" Value="5,0" />
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}" />
+    </Style>
+
+    <Style
         x:Key="SingleLineField"
         BasedOn="{StaticResource SingleLineTextBlock}"
         TargetType="TextBlock">
@@ -42,6 +50,23 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
     </Style>
+
+    <Style
+        x:Key="PopupMultilineTextBlock"
+        BasedOn="{StaticResource MultilineTextBlock}"
+        TargetType="TextBlock">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Foreground" Value="{StaticResource Background_1}" />
+    </Style>
+
+    <Style x:Key="ResultTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
     <!--#endregion-->
 
     <!--#region List-->

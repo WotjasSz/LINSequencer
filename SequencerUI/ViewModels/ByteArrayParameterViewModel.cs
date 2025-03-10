@@ -47,14 +47,9 @@ namespace SequencerUI.ViewModels
                 {
                     outString = newValue;
                 }
-                else if (_inputType == "HEX")
+                else
                 {
                     outArr = newValue.HexStringToByteArray();
-                    outString = outArr.ByteArrayToHexString();
-                }
-                else if (_inputType == "DEC")
-                {
-                    outArr = newValue.DecStringToByteArray();
                     outString = outArr.ByteArrayToHexString();
                 }
 
@@ -76,11 +71,7 @@ namespace SequencerUI.ViewModels
             {
                 return true;
             }
-            else if (varType == "HEX" && inputText.All(c => "0123456789ABCDEFabcdef".Contains(c)))
-            {
-                return true;
-            }
-            else if (varType == "DEC" && inputText.All(char.IsDigit))
+            else if (inputText.All(c => "0123456789ABCDEFabcdef".Contains(c)))
             {
                 return true;
             }

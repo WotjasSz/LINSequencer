@@ -49,25 +49,53 @@
 
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
                             <!--#region Single line fields-->
                             <StackPanel Grid.Column="0">
                                 <StackPanel Style="{StaticResource SingleLineFieldsRunViewStackPanel}">
-                                    <Label
-                                        Content="Name"
-                                        Style="{StaticResource CommonFieldLabel}"
-                                        Target="{Binding ElementName=txtNameField}" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label
+                                            Content="Name"
+                                            Style="{StaticResource SmallHeaderLabel}"
+                                            Target="{Binding ElementName=txtNameField}" />
+                                        <Button
+                                            x:Name="btnShowDescription"
+                                            Command="{Binding ShowDescriptionCommand}"
+                                            Content="&#xf129;"
+                                            FontFamily="{StaticResource FontAwesome}"
+                                            Style="{StaticResource SmallActionButton}">
+                                            <Button.ToolTip>
+                                                <StackPanel>
+                                                    <TextBlock>Description</TextBlock>
+                                                </StackPanel>
+                                            </Button.ToolTip>
+                                        </Button>
+                                        <Popup
+                                            AllowsTransparency="True"
+                                            IsOpen="{Binding IsPopupOpen}"
+                                            Placement="Right"
+                                            PlacementTarget="{Binding ElementName=btnShowDescription}"
+                                            StaysOpen="False">
+                                            <Border
+                                                MaxWidth="450"
+                                                MaxHeight="300"
+                                                Style="{StaticResource PopupBorder}">
+                                                <TextBlock Style="{StaticResource PopupMultilineTextBlock}" Text="{Binding Sequence.Description}" />
+                                            </Border>
+                                        </Popup>
+                                    </StackPanel>
                                     <TextBlock
                                         x:Name="txtNameField"
-                                        Style="{StaticResource SingleLineField}"
+                                        Style="{StaticResource NameField}"
                                         Text="{Binding Sequence.Name, FallbackValue=NameTb}" />
                                 </StackPanel>
                                 <StackPanel Style="{StaticResource SingleLineFieldsRunViewStackPanel}">
                                     <Label
                                         Content="SDF"
-                                        Style="{StaticResource CommonFieldLabel}"
+                                        Style="{StaticResource SmallHeaderLabel}"
                                         Target="{Binding ElementName=txtSdfField}" />
                                     <TextBlock
                                         x:Name="txtSdfField"
@@ -75,19 +103,38 @@
                                         Text="{Binding Sequence.SdfName, FallbackValue=SDFName}" />
                                 </StackPanel>
                             </StackPanel>
-                            <!--#endregion-->
-
-                            <!--#region Description field-->
-                            <StackPanel Grid.Column="1" Style="{StaticResource MultilineFieldsRunViewStackPanel}">
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0">
+                                    <Label Content="Current step" Style="{StaticResource SmallHeaderLabel}" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource SingleLineField}" Text="{Binding Sequence.CurrentStep, FallbackValue=XXX}" />
+                                        <TextBlock Style="{StaticResource SingleLineField}" Text="/" />
+                                        <TextBlock Style="{StaticResource SingleLineField}" Text="{Binding Sequence.StepCount, FallbackValue=XXX}" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1">
+                                    <Label Content="State" Style="{StaticResource SmallHeaderLabel}" />
+                                    <TextBlock Style="{StaticResource SingleLineField}" Text="{Binding Sequence.CurrentStep, FallbackValue=State}" />
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Column="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
                                 <Label
-                                    Content="Description"
-                                    Style="{StaticResource CommonFieldLabel}"
-                                    Target="{Binding ElementName=txbDescriptionField}" />
-                                <TextBox
-                                    x:Name="txbDescriptionField"
-                                    Style="{StaticResource MultilineReadField}"
-                                    Text="{Binding Sequence.Description, FallbackValue=Description}" />
-                            </StackPanel>
+                                    Grid.Row="0"
+                                    Content="Result"
+                                    Style="{StaticResource SmallHeaderLabel}" />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Style="{StaticResource ResultTextBlockStyle}"
+                                    Text="{Binding Sequence.Result, FallbackValue=Result}" />
+                            </Grid>
                             <!--#endregion-->
                         </Grid>
                     </Grid>
@@ -164,6 +211,11 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                             <Button
+                                Command="{Binding ConnectDeviceCommand}"
+                                Content="Connect"
+                                FontSize="25"
+                                Style="{StaticResource GenericButton}" />
+                            <Button
                                 Command="{Binding RunSequenceCommand}"
                                 Content="Run"
                                 FontSize="25"
@@ -190,6 +242,7 @@
                         <TextBlock Style="{StaticResource H1HeaderCenter}" Text="StepList" />
                         <ListView
                             Grid.Row="1"
+                            d:ItemsSource="{d:SampleData ItemCount=5}"
                             ItemContainerStyle="{StaticResource StepListItemRunView}"
                             ItemsSource="{Binding Sequence.StepList}"
                             Style="{StaticResource StepListRunView}" />

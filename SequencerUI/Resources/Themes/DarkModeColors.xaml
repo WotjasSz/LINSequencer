@@ -38,6 +38,9 @@
     <Color x:Key="ListItemSeparator_1_Color">#50F5F5F5</Color>
     <Color x:Key="ListItemSeparator_2_Color">#965A5E5A</Color>
 
+    <Color x:Key="PopUp_1_Color">#F0A3AAA3</Color>
+    <Color x:Key="PopUp_2_Color">#FFC7D0C7</Color>
+
     <!--#endregion-->
 
     <!--#region SolidBrushColors-->
@@ -90,6 +93,11 @@
         <GradientStop Offset="0.25" Color="{StaticResource ListItemSeparator_1_Color}" />
         <GradientStop Offset="0.75" Color="{StaticResource ListItemSeparator_1_Color}" />
         <GradientStop Offset="1" Color="{StaticResource ListItemSeparator_2_Color}" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="PopupBackGroundGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="{StaticResource PopUp_1_Color}" />
+        <GradientStop Offset="1" Color="{StaticResource PopUp_2_Color}" />
     </LinearGradientBrush>
 
 
