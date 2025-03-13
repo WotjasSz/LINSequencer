@@ -86,7 +86,7 @@
                         <ContentPresenter
                             Name="ContentSite"
                             Margin="8,3,30,3"
-                            HorizontalAlignment="Left"
+                            HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding ComboBox.SelectionBoxItem}"
                             ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}"

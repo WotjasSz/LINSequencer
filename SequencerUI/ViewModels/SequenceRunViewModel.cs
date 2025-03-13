@@ -48,7 +48,9 @@ namespace SequencerUI.ViewModels
         private bool _isPopupOpen;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CurrentDevice))]
         [NotifyCanExecuteChangedFor(nameof(RunSequenceCommand))]
+        [NotifyCanExecuteChangedFor(nameof(ReloadDeviceListCommand))]
         private bool _isConnected;
         
         [ObservableProperty]
@@ -118,14 +120,10 @@ namespace SequencerUI.ViewModels
             IsPopupOpen = !IsPopupOpen;
         }
 
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanExecuteReloadDevice))]
         private void ReloadDeviceList()
         {
             LinSequencer.CheckAvailableDevice();
-            //if (Devices != null)
-            //{
-            //    Devices.Clear(); 
-            //}
             Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
         }
 
@@ -213,6 +211,11 @@ namespace SequencerUI.ViewModels
         {
             IsRunning = Sequence.IsRunning;
             IsStopped = !IsRunning;
+        }
+
+        private bool CanExecuteReloadDevice()
+        {
+            return !IsConnected;
         }
 
         private bool CanExeuteRunSequence()
