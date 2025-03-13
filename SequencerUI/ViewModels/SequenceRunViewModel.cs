@@ -21,6 +21,18 @@ namespace SequencerUI.ViewModels
     {
         [ObservableProperty]
         private ISequenceModel _sequence;
+        
+        [ObservableProperty]
+        private int _currentStep;
+
+        [ObservableProperty]
+        private int _stepCount;
+
+        [ObservableProperty]
+        private ESequenceState _sequenceState;
+        
+        [ObservableProperty]
+        private ESequenceResult _sequenceResult;
 
         [ObservableProperty]
         private ObservableCollection<DeviceModel>? _devices;
@@ -35,6 +47,19 @@ namespace SequencerUI.ViewModels
         [ObservableProperty]
         private bool _isPopupOpen;
 
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(RunSequenceCommand))]
+        private bool _isConnected;
+        
+        [ObservableProperty]
+        private bool _isDisconnected;
+        
+        [ObservableProperty]
+        private bool _isRunning;
+
+        [ObservableProperty]
+        private bool _isStopped;
+
         private readonly IMessenger _messenger;
         private readonly LoggerModel _logger;
 
@@ -43,30 +68,43 @@ namespace SequencerUI.ViewModels
             _messenger = messenger;
 
             Sequence = new SequenceModel();
-            Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
-                       
+            StatusFieldUpdate();
+            Sequence.SequenceStatusChanged += Sequence_SequenceStatusChanged;
+            ReloadDeviceList();
+
             _logger = Sequence.Logger;
             _logger.SequenceLog += OnLogGenerated;
 
             Messages = new ObservableCollection<LogMessage>();
 
             IsPopupOpen = false;
+            ConnectionUpdate();
+            StatusUpdate();
             //Messages.CollectionChanged += Messages_CollectionChanged;
-        }       
+        }
+
+        private void Sequence_SequenceStatusChanged(object? sender, ESequenceState e)
+        {
+            throw new NotImplementedException();
+        }
 
         public SequenceRunViewModel(IMessenger messenger, SequenceModel sequence)
         {
             _messenger = messenger;
 
             Sequence = sequence;
-            Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
-                        
+            StatusFieldUpdate();
+            Sequence.SequenceStatusChanged += Sequence_SequenceStatusChanged;
+            ReloadDeviceList();
+
             _logger = Sequence.Logger;
             _logger.SequenceLog += OnLogGenerated;
 
             Messages = new ObservableCollection<LogMessage>();
             IsPopupOpen = false;
-        }
+            ConnectionUpdate();
+            StatusUpdate();
+        }        
 
         public void UpdateSequence(ISequenceModel sequence)
         {
@@ -84,39 +122,58 @@ namespace SequencerUI.ViewModels
         private void ReloadDeviceList()
         {
             LinSequencer.CheckAvailableDevice();
-            CurrentDevice = null;
-            Devices.Clear();
-            Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);            
+            //if (Devices != null)
+            //{
+            //    Devices.Clear(); 
+            //}
+            Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
         }
 
         [RelayCommand(CanExecute = nameof(CanExecuteConnectDevice))]
         private void ConnectDevice()
         {
             Sequence.ConnectDevice(CurrentDevice);
+            ConnectionUpdate();
         }
 
         [RelayCommand]
         private void DisconnectDevice()
         {
             Sequence.DisconnectDevice();
+            ConnectionUpdate();
         }
 
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanExeuteRunSequence))]
         private void RunSequence()
         {
             Sequence.RunAsync(LinSequencer.FunctionList);
-        }        
+            StatusUpdate();
+        }   
+        
+        [RelayCommand]
+        private void CancelSequence()
+        {
+            Sequence.CancelSequence();
+            StatusUpdate();
+        }
         #endregion
 
-        private void OnLogGenerated(object? sender, LogMessage? msg) 
+        #region Events handling
+        private void OnLogGenerated(object? sender, LogMessage? msg)
         {
             if (msg != null)
             {
                 Application.Current.Dispatcher.BeginInvoke(() =>
                     {
                         Messages.Add(msg);
-                    }); 
+                    });
             }
+        }
+
+        private void Sequence_SequenceStatusChanged(object? sender, EventArgs e)
+        {
+            StatusFieldUpdate();
+            StatusUpdate();
         }
 
         //TODO Sprawdzić i rozwinąć przewijanie listy do ostatniego elementu
@@ -135,12 +192,32 @@ namespace SequencerUI.ViewModels
         private void ScrollToLastItem(LogMessage lastItem)
         {
             ScrollToItem?.Invoke(this, new ScrollEventArgs { Item = lastItem });
+        } 
+        #endregion
+
+        private void ConnectionUpdate()
+        {
+            IsConnected = Sequence.IsConnected;
+            IsDisconnected = !IsConnected;
         }
 
+        private void StatusFieldUpdate()
+        {
+            CurrentStep = Sequence.CurrentStep;
+            StepCount = Sequence.StepCount;
+            SequenceState = Sequence.State;
+            SequenceResult = Sequence.Result;
+        }
+
+        private void StatusUpdate()
+        {
+            IsRunning = Sequence.IsRunning;
+            IsStopped = !IsRunning;
+        }
 
         private bool CanExeuteRunSequence()
         {
-            return Sequence.IsConnected;
+            return IsConnected;
         }
 
         private bool CanExecuteConnectDevice()

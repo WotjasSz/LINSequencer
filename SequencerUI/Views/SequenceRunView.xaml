@@ -10,6 +10,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
     <Border Style="{StaticResource ViewWithGroupBorder}">
         <Grid>
             <Grid.RowDefinitions>
@@ -111,14 +112,14 @@
                                 <StackPanel Grid.Row="0">
                                     <Label Content="Current step" Style="{StaticResource SmallHeaderLabel}" />
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Style="{StaticResource SingleLineField}" Text="{Binding Sequence.CurrentStep, FallbackValue=XXX}" />
+                                        <TextBlock Style="{StaticResource SingleLineField}" Text="{Binding CurrentStep, FallbackValue=XXX}" />
                                         <TextBlock Style="{StaticResource SingleLineField}" Text="/" />
-                                        <TextBlock Style="{StaticResource SingleLineField}" Text="{Binding Sequence.StepCount, FallbackValue=XXX}" />
+                                        <TextBlock Style="{StaticResource SingleLineField}" Text="{Binding StepCount, FallbackValue=XXX}" />
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Grid.Row="1">
                                     <Label Content="State" Style="{StaticResource SmallHeaderLabel}" />
-                                    <TextBlock Style="{StaticResource SingleLineField}" Text="{Binding Sequence.CurrentStep, FallbackValue=State}" />
+                                    <TextBlock Style="{StaticResource SingleLineField}" Text="{Binding SequenceState, FallbackValue=State}" />
                                 </StackPanel>
                             </Grid>
                             <Grid Grid.Column="2">
@@ -133,7 +134,7 @@
                                 <TextBlock
                                     Grid.Row="1"
                                     Style="{StaticResource ResultTextBlockStyle}"
-                                    Text="{Binding Sequence.Result, FallbackValue=Result}" />
+                                    Text="{Binding SequenceResult, FallbackValue=Result}" />
                             </Grid>
                             <!--#endregion-->
                         </Grid>
@@ -150,19 +151,46 @@
                                     Content="Select device"
                                     Style="{StaticResource CommonFieldLabel}"
                                     Target="{Binding ElementName=cbxDeviceSelection}" />
-                                <Button
-                                    Margin="0,0,10,0"
-                                    HorizontalAlignment="Right"
-                                    Command="{Binding ReloadDeviceListCommand}"
-                                    Content="&#xf021;"
-                                    FontFamily="{StaticResource FontAwesome}"
-                                    Style="{StaticResource SmallActionButton}">
-                                    <Button.ToolTip>
-                                        <StackPanel>
-                                            <TextBlock>Refresh</TextBlock>
-                                        </StackPanel>
-                                    </Button.ToolTip>
-                                </Button>
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <Button
+                                        Margin="0,0,10,0"
+                                        Command="{Binding ReloadDeviceListCommand}"
+                                        Content="&#xf021;"
+                                        FontFamily="{StaticResource FontAwesome}"
+                                        Style="{StaticResource SmallActionButton}">
+                                        <Button.ToolTip>
+                                            <StackPanel>
+                                                <TextBlock>Refresh</TextBlock>
+                                            </StackPanel>
+                                        </Button.ToolTip>
+                                    </Button>
+                                    <Button
+                                        Margin="0,0,10,0"
+                                        Command="{Binding ConnectDeviceCommand}"
+                                        Content="&#xf0c1;"
+                                        FontFamily="{StaticResource FontAwesome}"
+                                        Style="{StaticResource SmallActionButton}"
+                                        Visibility="{Binding IsDisconnected, Converter={StaticResource BoolToVisCoverter}}">
+                                        <Button.ToolTip>
+                                            <StackPanel>
+                                                <TextBlock>Connect</TextBlock>
+                                            </StackPanel>
+                                        </Button.ToolTip>
+                                    </Button>
+                                    <Button
+                                        Margin="0,0,10,0"
+                                        Command="{Binding DisconnectDeviceCommand}"
+                                        Content="&#xf127;"
+                                        FontFamily="{StaticResource FontAwesome}"
+                                        Style="{StaticResource SmallActionButton}"
+                                        Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisCoverter}}">
+                                        <Button.ToolTip>
+                                            <StackPanel>
+                                                <TextBlock>Disconnect</TextBlock>
+                                            </StackPanel>
+                                        </Button.ToolTip>
+                                    </Button>
+                                </StackPanel>
                             </Grid>
                             <ComboBox
                                 x:Name="cbxDeviceSelection"
@@ -211,15 +239,17 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                             <Button
-                                Command="{Binding ConnectDeviceCommand}"
-                                Content="Connect"
+                                Command="{Binding CancelSequenceCommand}"
+                                Content="Cancel"
                                 FontSize="25"
-                                Style="{StaticResource GenericButton}" />
+                                Style="{StaticResource GenericButton}"
+                                Visibility="{Binding IsRunning, Converter={StaticResource BoolToVisCoverter}}" />
                             <Button
                                 Command="{Binding RunSequenceCommand}"
                                 Content="Run"
                                 FontSize="25"
-                                Style="{StaticResource GenericButton}" />
+                                Style="{StaticResource GenericButton}"
+                                Visibility="{Binding IsStopped, Converter={StaticResource BoolToVisCoverter}}" />
                         </StackPanel>
                     </Grid>
                 </Border>
