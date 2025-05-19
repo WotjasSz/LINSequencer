@@ -48,7 +48,6 @@ namespace SequencerUI.ViewModels
         private bool _isPopupOpen;
 
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(CurrentDevice))]
         [NotifyCanExecuteChangedFor(nameof(RunSequenceCommand))]
         [NotifyCanExecuteChangedFor(nameof(ReloadDeviceListCommand))]
         private bool _isConnected;
@@ -123,6 +122,8 @@ namespace SequencerUI.ViewModels
         [RelayCommand(CanExecute = nameof(CanExecuteReloadDevice))]
         private void ReloadDeviceList()
         {
+            //TODO solve issue with device scanning. Each time when device is connecting data inside are changed.
+            // Add kind of device managing to select device which where selected before connection afte connection.
             LinSequencer.CheckAvailableDevice();
             Devices = new ObservableCollection<DeviceModel>(LinSequencer.DeviceList);
         }

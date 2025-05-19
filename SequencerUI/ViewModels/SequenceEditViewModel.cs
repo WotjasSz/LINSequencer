@@ -181,6 +181,7 @@ namespace SequencerUI.ViewModels
             var newStep = step.DeepCloneJson();
             newStep.Index = StepList.Count + 1;
             StepList.Add(newStep);
+            UpdateIndex();
         }
 
         [RelayCommand]
