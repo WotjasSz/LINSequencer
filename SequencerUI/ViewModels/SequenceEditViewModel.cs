@@ -180,6 +180,7 @@ namespace SequencerUI.ViewModels
         {
             var newStep = step.DeepCloneJson();
             newStep.Index = StepList.Count + 1;
+            newStep.SetStepName(StepList.ToList());
             StepList.Add(newStep);
             UpdateIndex();
         }

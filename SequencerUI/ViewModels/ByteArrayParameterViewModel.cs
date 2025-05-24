@@ -39,7 +39,7 @@ namespace SequencerUI.ViewModels
                 string _inputType = GetInputTypeString();
                 byte[] outArr;
                 string outString = string.Empty;
-                if (newValue.StartsWith('<') && newValue.EndsWith('>'))
+                if (newValue.Contains('<') && newValue.Contains('>'))
                 {
                     outString = newValue;
                 }
@@ -63,11 +63,12 @@ namespace SequencerUI.ViewModels
             }
         }
 
+        //TODO Przemyśleć sprawę walidacji wprowadzanego teksty. Być może lepiej będzie użyć Regexa do walidacji lub utworzyć metody walidacyjne w DynamiValueParser
         protected override bool IsTextValid(string inputText)
         {
             string varType = GetInputTypeString();
 
-            if (inputText.StartsWith('<') && inputText.EndsWith('>'))
+            if (inputText.Contains('<') && inputText.Contains('>'))
             {
                 return true;
             }
