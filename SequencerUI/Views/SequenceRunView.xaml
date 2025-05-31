@@ -11,6 +11,14 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        <DataTemplate x:Key="SingleStepTemplate">
+            <local:StepListItemView />
+        </DataTemplate>
+        <hlp:StepTemplateSelector x:Key="StepTemplateSelector" SingleStepTemplate="{StaticResource SingleStepTemplate}" />
+
+    </UserControl.Resources>
     <Border Style="{StaticResource ViewWithGroupBorder}">
         <Grid>
             <Grid.RowDefinitions>
@@ -270,12 +278,21 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource H1HeaderCenter}" Text="StepList" />
-                        <ListView
+                        <ScrollViewer Grid.Row="1">
+                            <ItemsControl ItemTemplateSelector="{StaticResource StepTemplateSelector}" ItemsSource="{Binding SequenceSteps}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </ScrollViewer>
+                        <!--<ListView
                             Grid.Row="1"
                             d:ItemsSource="{d:SampleData ItemCount=5}"
                             ItemContainerStyle="{StaticResource StepListItemRunView}"
                             ItemsSource="{Binding Sequence.StepList}"
-                            Style="{StaticResource StepListRunView}" />
+                            Style="{StaticResource StepListRunView}" />-->
                     </Grid>
                 </Border>
                 <!--#endregion-->

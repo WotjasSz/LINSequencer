@@ -5,6 +5,7 @@ using LINSequencerLib;
 using LINSequencerLib.BabyLinWrapper;
 using LINSequencerLib.Log;
 using LINSequencerLib.Sequence;
+using LINSequencerLib.SequenceStep;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,7 +22,10 @@ namespace SequencerUI.ViewModels
     {
         [ObservableProperty]
         private ISequenceModel _sequence;
-        
+
+        [ObservableProperty]
+        private List<ISeqStep<object>> _sequenceSteps;
+
         [ObservableProperty]
         private int _currentStep;
 
@@ -146,6 +150,7 @@ namespace SequencerUI.ViewModels
         private void RunSequence()
         {
             Sequence.RunAsync(LinSequencer.FunctionList);
+            SequenceSteps = Sequence.SequenceSteps;
             StatusUpdate();
         }   
         

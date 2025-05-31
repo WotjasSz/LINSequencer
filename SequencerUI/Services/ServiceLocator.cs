@@ -22,6 +22,7 @@ namespace SequencerUI.Services
 
             //Services registration
             serviceCollection.AddSingleton<IMessenger, WeakReferenceMessenger>();
+            serviceCollection.AddSingleton<IFileDialogService, FileDialogService>();
 
             //Main View registration 
             serviceCollection.AddTransient<MainWindowView>();
