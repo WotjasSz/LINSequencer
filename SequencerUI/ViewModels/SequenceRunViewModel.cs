@@ -24,7 +24,10 @@ namespace SequencerUI.ViewModels
         private ISequenceModel _sequence;
 
         [ObservableProperty]
-        private List<ISeqStep<object>> _sequenceSteps;
+        private ObservableCollection<ISeqStep<object>> _sequenceSteps;
+
+        [ObservableProperty]
+        private ObservableCollection<StepListItemViewModel> _stepListItems = new ObservableCollection<StepListItemViewModel>();
 
         [ObservableProperty]
         private int _currentStep;
@@ -150,7 +153,9 @@ namespace SequencerUI.ViewModels
         private void RunSequence()
         {
             Sequence.RunAsync(LinSequencer.FunctionList);
-            SequenceSteps = Sequence.SequenceSteps;
+            SequenceSteps = new ObservableCollection<ISeqStep<object>>(Sequence.SequenceSteps);
+            StepListItems.Clear();
+            StepListItems = new ObservableCollection<StepListItemViewModel>(SequenceSteps.Select(step => new StepListItemViewModel(_messenger, step)));
             StatusUpdate();
         }   
         

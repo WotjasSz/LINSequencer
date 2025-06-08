@@ -1,11 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib.Sequence;
+using LINSequencerLib.SequenceStep;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SequencerUI.ViewModels
 {
@@ -14,27 +17,40 @@ namespace SequencerUI.ViewModels
         private readonly IMessenger _messenger;
 
         [ObservableProperty]
-        private SequenceStepModel? _sequenceStep;
+        private ISeqStep<object>? _sequenceStep;
 
         [ObservableProperty]
-        private int _index;
+        private int _id;
 
         [ObservableProperty]
         private string _name;
 
         [ObservableProperty]
-        private string _description;
+        private EStepResult _result;
 
         [ObservableProperty]
-        private string _userStepName;
+        private string _stepName;
 
-        public StepListItemViewModel(SequenceStepModel sequenceStep)
+        public StepListItemViewModel(IMessenger messenger, ISeqStep<object> sequenceStep)
         {
             SequenceStep = sequenceStep;
-            Index = sequenceStep.Index;
+            Id = sequenceStep.Id;
             Name = sequenceStep.Name;
-            Description = sequenceStep.Comment;
-            UserStepName = sequenceStep.GetStepName();
+            StepName = sequenceStep.StepName;
+            Result = sequenceStep.Result;
+
+            sequenceStep.StepResultChanged += OnStepResultChanged;
+        }
+
+        private void OnStepResultChanged(object? sender, EventArgs e)
+        {
+            Application.Current.Dispatcher.BeginInvoke(() =>
+            {
+                if (sender is ISeqStep<object> step)
+                {
+                    Result = step.Result;
+                }
+            });
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SequencerUI.Helpers
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is ISeqStep<object>)
+            if (item is StepListItemViewModel)
             {
                 return SingleStepTemplate;
             }

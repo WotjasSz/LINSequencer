@@ -279,7 +279,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource H1HeaderCenter}" Text="StepList" />
                         <ScrollViewer Grid.Row="1">
-                            <ItemsControl ItemTemplateSelector="{StaticResource StepTemplateSelector}" ItemsSource="{Binding SequenceSteps}">
+                            <ItemsControl ItemTemplateSelector="{StaticResource StepTemplateSelector}" ItemsSource="{Binding StepListItems}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel />
