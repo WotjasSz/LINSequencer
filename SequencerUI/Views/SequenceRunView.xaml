@@ -282,7 +282,7 @@
                             <ItemsControl ItemTemplateSelector="{StaticResource StepTemplateSelector}" ItemsSource="{Binding StepListItems}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <StackPanel />
+                                        <VirtualizingStackPanel />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>

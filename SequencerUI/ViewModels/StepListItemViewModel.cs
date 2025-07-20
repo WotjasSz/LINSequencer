@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Messaging;
 using LINSequencerLib.Sequence;
 using LINSequencerLib.SequenceStep;
+using LINSequencerLib.SupportingFiles;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,6 +27,9 @@ namespace SequencerUI.ViewModels
         private string _name;
 
         [ObservableProperty]
+        private string? _output;
+
+        [ObservableProperty]
         private EStepResult _result;
 
         [ObservableProperty]
@@ -38,6 +42,7 @@ namespace SequencerUI.ViewModels
             Name = sequenceStep.Name;
             StepName = sequenceStep.StepName;
             Result = sequenceStep.Result;
+            Output = "";
 
             sequenceStep.StepResultChanged += OnStepResultChanged;
         }
@@ -49,6 +54,14 @@ namespace SequencerUI.ViewModels
                 if (sender is ISeqStep<object> step)
                 {
                     Result = step.Result;
+                    if (step.Output is byte[] bytes)
+                    {
+                        Output = bytes.ByteArrayToHexString();
+                    }
+                    else
+                    {
+                        Output = step.Output?.ToString() ?? string.Empty;
+                    }
                 }
             });
         }

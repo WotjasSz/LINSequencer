@@ -100,12 +100,24 @@
 
     <!--#region TextBlocks-->
     <Style x:Key="H0TextBlock" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontSize" Value="40" />
     </Style>
 
     <Style x:Key="H1TextBlock" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource Foreground_4}" />
+        <Setter Property="FontSize" Value="24" />
+    </Style>
+
+    <Style x:Key="H2TextBlock" TargetType="TextBlock">
         <Setter Property="FontSize" Value="20" />
+    </Style>
+
+    <Style x:Key="H5TextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style x:Key="H6TextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12" />
     </Style>
 
     <Style
@@ -121,6 +133,13 @@
         TargetType="TextBlock">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <!--<Setter Property="TextDecorations" Value="Underline"/>-->
+    </Style>
+
+    <Style
+        x:Key="H6Left"
+        BasedOn="{StaticResource H6TextBlock}"
+        TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
 
     <Style x:Key="SingleLineTextBlock" TargetType="TextBlock">

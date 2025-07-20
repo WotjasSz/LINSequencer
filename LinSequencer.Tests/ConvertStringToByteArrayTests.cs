@@ -17,7 +17,7 @@ namespace LinSequencer.Tests
         {
             // Arrange
             var sequence = new SequenceModel(); // Assuming you have a SequenceModel class
-            var step = new ConvertStringToByteArray(sequence)
+            var step = new ConvertHexStringToByteArrayStep(sequence)
             {
                 InputString = "4A6F686E"
             };
@@ -27,7 +27,7 @@ namespace LinSequencer.Tests
 
             // Assert
             Assert.Equal(EStepResult.Success, result);
-            Assert.Equal("4A 6F 68 6E", ConvertStringToByteArray.ByteArrayToHexString(step.Output));
+            Assert.Equal("4A 6F 68 6E", ConvertHexStringToByteArrayStep.ByteArrayToHexString(step.Output));
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace LinSequencer.Tests
         {
             // Arrange
             var sequence = new SequenceModel(); // Assuming you have a SequenceModel class
-            var step = new ConvertStringToByteArray(sequence)
+            var step = new ConvertHexStringToByteArrayStep(sequence)
             {
                 InputString = "4A6F68E"
             };
@@ -45,7 +45,7 @@ namespace LinSequencer.Tests
 
             // Assert
             Assert.Equal(EStepResult.Success, result);
-            Assert.Equal("04 A6 F6 8E", ConvertStringToByteArray.ByteArrayToHexString(step.Output));
+            Assert.Equal("04 A6 F6 8E", ConvertHexStringToByteArrayStep.ByteArrayToHexString(step.Output));
         }
     }
 }

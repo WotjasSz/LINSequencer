@@ -23,6 +23,45 @@
 
     <!--#region Text fields-->
     <Style
+        x:Key="SequenceStepIndex"
+        BasedOn="{StaticResource H0TextBlock}"
+        TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Foreground" Value="{StaticResource Accent_1}" />
+    </Style>
+    <Style
+        x:Key="SequenceStepTypeName"
+        BasedOn="{StaticResource H6Left}"
+        TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Accent_1}" />
+    </Style>
+
+    <Style
+        x:Key="SequenceStepName"
+        BasedOn="{StaticResource H2TextBlock}"
+        TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}" />
+        <Setter Property="Margin" Value="10,0" />
+    </Style>
+
+    <Style
+        x:Key="SequenceOutputTitle"
+        BasedOn="{StaticResource H5TextBlock}"
+        TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Accent_1}" />
+    </Style>
+
+    <Style
+        x:Key="SequenceOutputValue"
+        BasedOn="{StaticResource H5TextBlock}"
+        TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Foreground_1}" />
+        <Setter Property="Margin" Value="10,0" />
+    </Style>
+
+    <Style
         x:Key="NameField"
         BasedOn="{StaticResource H0HeaderLeft}"
         TargetType="TextBlock">
