@@ -104,16 +104,19 @@ namespace SequencerUI.ViewModels
         private void RemoveSequence(SequenceModel seq)
         {
             if (CurrentSequence == seq)
-            {
+            {                
                 ViewMessage message = new ViewMessage(EViewMode.DeleteMode, seq);
                 _messenger.Send(new GenericMessage<ViewMessage>(message));
             }
+            seq.DisconnectDevice();
             ActiveSequences.Remove(seq);
         }
 
         [RelayCommand(CanExecute = nameof(CanExecuteEditSequence))]
         private void EditSequence(SequenceModel seq)
         {
+            if (seq.State == ESequenceState.Running) return;
+            seq.DisconnectDevice();
             ViewMessage message = new ViewMessage(EViewMode.EditMode, seq);
             _messenger.Send(new GenericMessage<ViewMessage>(message));
         }

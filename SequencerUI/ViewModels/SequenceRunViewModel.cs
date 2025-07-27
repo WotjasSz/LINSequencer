@@ -152,6 +152,7 @@ namespace SequencerUI.ViewModels
         [RelayCommand(CanExecute = nameof(CanExeuteRunSequence))]
         private void RunSequence()
         {
+            Messages.Clear();
             Sequence.RunAsync(LinSequencer.FunctionList);
             SequenceSteps = new ObservableCollection<ISeqStep<object>>(Sequence.SequenceSteps);
             StepListItems.Clear();
